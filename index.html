@@ -1,397 +1,1046 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Périmètre</title>
+<title>Périmètre 2000</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap">
 <style>
-/* Layout : colonne éditoriale alignée à gauche, encadrée par un filet continu (le périmètre),
-   sections séparées par des règles pleine largeur, pas de centrage décoratif. */
+/* Layout : page perso 2003 saturée (fond animé, bandeaux arc-en-ciel, pluie d'émojis),
+   contenu RH sérieux dans des encadrés colorés, 5 pièges jouables et désactivables. */
 :root{
-  --paper:#F4F3EF;
-  --surface:#FFFFFF;
-  --ink:#14181A;
-  --muted:#5A6166;
-  --line:#D7D3C9;
-  --rule:#B9B4A8;
-  --accent:#1C4F46;
-  --accent-soft:#E2EAE6;
-  --chip:#ECE9E0;
-  --font-display:'Newsreader',Georgia,'Times New Roman',serif;
-  --font-body:'Libre Franklin',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+  --navy:#07005c;
+  --paper:#ffffff;
+  --ink:#111111;
+  --link:#0000ee;
+  --vlink:#551a8b;
+  --red:#e00000;
+  --green:#007a3d;
+  --yellow:#ffff33;
+  --lime:#39e639;
+  --pink:#ff2d95;
+  --cyan:#00d9ff;
+  --purple:#9d3cff;
+  --orange:#ff8a00;
+  --silver:#c0c0c0;
+  --steel:#808080;
+  --cream:#fffdf0;
+  --f-comic:'Comic Sans MS','Comic Neue',cursive,sans-serif;
+  --f-serif:'Times New Roman',Times,Georgia,serif;
+  --f-mono:'Courier New',Courier,monospace;
   color-scheme:light;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --paper:#121517;
-    --surface:#191D20;
-    --ink:#ECEAE4;
-    --muted:#9BA4A8;
-    --line:#2B3135;
-    --rule:#3A4247;
-    --accent:#7CC0B0;
-    --accent-soft:#1A2A27;
-    --chip:#20262A;
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#121517;
-  --surface:#191D20;
-  --ink:#ECEAE4;
-  --muted:#9BA4A8;
-  --line:#2B3135;
-  --rule:#3A4247;
-  --accent:#7CC0B0;
-  --accent-soft:#1A2A27;
-  --chip:#20262A;
-  color-scheme:dark;
 }
 *{box-sizing:border-box}
 body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--font-body);
-  font-size:16px;
-  line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  margin:0;background-color:var(--navy);color:var(--ink);
+  background-image:
+    radial-gradient(circle at 9px 9px,rgba(255,255,255,.65) 1.1px,transparent 1.9px),
+    radial-gradient(circle at 36px 27px,rgba(255,110,220,.55) 1.2px,transparent 2px),
+    radial-gradient(circle at 21px 46px,rgba(255,255,100,.6) 1.3px,transparent 2.1px),
+    radial-gradient(circle at 48px 12px,rgba(0,230,255,.5) 1.1px,transparent 1.9px);
+  background-size:62px 62px;
+  animation:drift 24s linear infinite;
+  font-family:var(--f-serif);font-size:17px;line-height:1.55;overflow-x:hidden;
 }
+@keyframes drift{to{background-position:62px 62px,-62px 62px,62px -62px,-62px -62px}}
 p{margin:0}
-a{color:inherit}
+a{color:var(--link)}a:visited{color:var(--vlink)}
+.shell{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px 26px}
+.frame{border:6px ridge var(--pink);background:var(--paper);box-shadow:0 0 0 3px var(--yellow),8px 8px 0 rgba(0,0,0,.5)}
+:focus-visible{outline:3px dashed var(--red);outline-offset:2px}
 
-.wrap{
-  max-width:1060px;
-  margin:0 auto;
-  padding-left:max(16px,env(safe-area-inset-left,0px));
-  padding-right:max(16px,env(safe-area-inset-right,0px));
-}
-.frame{border-left:1px solid var(--line);border-right:1px solid var(--line)}
-@media(max-width:1092px){.frame{border-left:0;border-right:0}}
+/* ---------- bandeaux ---------- */
+.ticker{overflow:hidden;white-space:nowrap;border-block:3px double #000}
+.ticker.a{background:linear-gradient(90deg,#ffff33,#ff8a00,#ffff33);background-size:200% 100%;animation:shift 4s linear infinite}
+.ticker.b{background:linear-gradient(90deg,#00d9ff,#39e639,#00d9ff);background-size:200% 100%;animation:shift 5s linear infinite}
+.ticker span{display:inline-block;padding-block:6px;font-family:var(--f-comic);font-weight:700;font-size:14px;color:#000;animation:slide 26s linear infinite}
+.ticker.b span{animation-direction:reverse}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes shift{to{background-position:200% 0}}
 
-/* ---------- bandeau supérieur ---------- */
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--paper)}
-.masthead{
-  position:sticky;top:env(safe-area-inset-top,0px);z-index:30;
-  background:var(--paper);border-bottom:1px solid var(--rule);
-}
-.masthead .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;padding-block:12px}
-.wordmark{font-family:var(--font-display);font-size:21px;font-weight:600;letter-spacing:-.01em;text-decoration:none}
-.wordmark .dot{color:var(--accent)}
-.masthead nav{margin-left:auto}
-.masthead ul{display:flex;flex-wrap:wrap;gap:4px 20px;list-style:none;margin:0;padding:0}
-.masthead a{
-  font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;padding-block:3px;border-bottom:1px solid transparent;
-}
-.masthead a:hover{color:var(--ink);border-bottom-color:var(--accent)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.rainbow{height:9px;background:linear-gradient(90deg,#f00,#f90,#ff0,#0c0,#09f,#60f,#f09,#f00);background-size:200% 100%;animation:shift 3s linear infinite;border-block:1px solid #000}
 
-/* ---------- une ---------- */
-.hero{padding-block:52px 40px;border-bottom:1px solid var(--rule)}
-.eyebrow{
-  font-family:var(--font-mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);
+.banner{background:radial-gradient(circle at 50% 120%,#3b007a,#000040 70%);text-align:center;padding:18px 12px;border-bottom:5px ridge var(--cyan)}
+.banner h1{
+  margin:0;font-family:var(--f-comic);font-size:clamp(28px,6.6vw,54px);color:#fff;
+  text-shadow:0 0 6px #ff2d95,3px 3px 0 #ff2d95,6px 6px 0 #00d9ff,9px 9px 0 #000;
+  animation:hue 6s linear infinite;
 }
-.hero h1{
-  font-family:var(--font-display);font-weight:500;letter-spacing:-.018em;line-height:1.08;
-  font-size:clamp(33px,5.6vw,58px);margin:16px 0 0;max-width:19ch;text-wrap:balance;
-}
-.hero .dek{margin-top:20px;max-width:58ch;font-size:19px;color:var(--muted);line-height:1.55}
-.facts{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:1px;
-  margin-top:38px;background:var(--line);border:1px solid var(--line);
-}
-.facts div{background:var(--paper);padding:14px 16px;min-width:0}
-.facts dt{font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
-.facts dd{margin:6px 0 0;font-size:15px;font-weight:500}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+.banner .sub{color:#aef;font-family:var(--f-comic);font-size:15px;margin-top:9px}
+.banner .gifs{margin-top:9px;font-size:23px;letter-spacing:6px}
+.banner .gifs span{display:inline-block;animation:bounce 1.6s ease-in-out infinite}
+.banner .gifs span:nth-child(2){animation-delay:.2s}
+.banner .gifs span:nth-child(3){animation-delay:.4s}
+.banner .gifs span:nth-child(4){animation-delay:.6s}
+.banner .gifs span:nth-child(5){animation-delay:.8s}
+.banner .gifs span:nth-child(6){animation-delay:1s}
+@keyframes bounce{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-9px) rotate(6deg)}}
 
-/* ---------- sections ---------- */
-section{padding-block:46px;border-bottom:1px solid var(--rule)}
-.sec-head{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;margin-bottom:26px}
+.cols{display:grid;grid-template-columns:200px 1fr}
+@media(max-width:800px){.cols{grid-template-columns:1fr}}
+.side{background:linear-gradient(#ffe9fb,#e3f4ff);border-right:4px ridge var(--purple);padding:13px;min-width:0}
+@media(max-width:800px){.side{border-right:0;border-bottom:4px ridge var(--purple)}}
+.side h3{font-family:var(--f-comic);font-size:13px;margin:0 0 7px;color:#fff;text-transform:uppercase;background:var(--purple);padding:4px 6px;border:2px outset #fff;text-shadow:1px 1px 0 #000}
+.menu{list-style:none;margin:0 0 15px;padding:0;font-family:var(--f-comic);font-size:14px}
+.menu li{margin-bottom:5px}
+.menu a{display:block;background:linear-gradient(#fff,#d9d9ff);border:2px outset #fff;padding:4px 7px;color:#0000aa;text-decoration:none;font-weight:700}
+.menu a:hover{background:var(--yellow);border-style:inset;transform:translateX(3px)}
+.odo{background:#000;border:3px inset var(--silver);padding:5px;text-align:center;font-family:var(--f-mono);font-size:19px;color:#0f0;letter-spacing:3px;text-shadow:0 0 6px #0f0}
+.side small{display:block;font-family:var(--f-comic);font-size:11px;color:#222;margin-top:8px;line-height:1.4}
+.badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.badge{font-family:var(--f-mono);font-size:9px;font-weight:700;padding:4px;border:2px outset #fff;background:#000;color:#0f0;text-align:center;line-height:1.2}
+.badge.b{background:#fff;color:#0000aa;border-color:var(--silver)}
+.badge.c{background:var(--red);color:#fff}
+.badge.d{background:var(--pink);color:#fff}
+.opt{display:grid;gap:6px;margin-top:4px}
+.opt .btn{width:100%;font-size:12px;padding:6px 8px}
+
+.main{padding:16px;min-width:0;background:
+  repeating-linear-gradient(180deg,transparent 0 38px,rgba(255,45,149,.04) 38px 39px)}
+
 h2{
-  font-family:var(--font-display);font-weight:600;font-size:clamp(23px,3.3vw,31px);
-  letter-spacing:-.012em;line-height:1.15;margin:0;text-wrap:balance;
+  font-family:var(--f-comic);font-size:clamp(19px,3.6vw,27px);margin:0;color:#fff;
+  padding:7px 10px;border:3px outset #fff;text-shadow:2px 2px 0 #000;text-wrap:balance;
 }
-h3{font-family:var(--font-display);font-weight:600;font-size:19px;line-height:1.25;margin:0;letter-spacing:-.008em}
-.prose{max-width:64ch;display:grid;gap:15px}
-.prose p{font-size:17px}
-.lede{font-size:19px !important;font-family:var(--font-display);line-height:1.5}
+h2.c1{background:linear-gradient(90deg,#ff2d95,#ff8a00)}
+h2.c2{background:linear-gradient(90deg,#9d3cff,#00d9ff)}
+h2.c3{background:linear-gradient(90deg,#007a3d,#39e639)}
+h2.c4{background:linear-gradient(90deg,#e00000,#ff8a00)}
+h2.c5{background:linear-gradient(90deg,#0000aa,#00d9ff)}
+h2.c6{background:linear-gradient(90deg,#ff8a00,#ffff33);color:#4a2500;text-shadow:1px 1px 0 #fff}
+h3{font-family:var(--f-comic);font-size:17px;margin:0;color:#aa0066}
+section{padding-block:10px 20px}
+section+section{border-top:4px dashed var(--cyan);padding-top:16px}
+.lead{margin-top:10px;max-width:62ch}
+.blink{animation:blink 1s steps(1,end) infinite;color:var(--red);font-weight:700}
+@keyframes blink{50%{opacity:0}}
+.neon{animation:hue 5s linear infinite;font-weight:700;color:var(--pink)}
+.new{background:var(--red);color:#fff;font-family:var(--f-mono);font-size:10px;font-weight:700;padding:1px 4px;vertical-align:middle;animation:blink 1.4s steps(1,end) infinite}
 
-/* ---------- article ---------- */
-.article-title{
-  font-family:var(--font-display);font-weight:500;font-size:clamp(26px,4.1vw,40px);
-  line-height:1.14;letter-spacing:-.016em;margin:0 0 18px;max-width:22ch;text-wrap:balance;
-}
-.byline{
-  font-family:var(--font-mono);font-size:12px;color:var(--muted);letter-spacing:.03em;
-  padding-bottom:18px;margin-bottom:22px;border-bottom:1px solid var(--line);
-}
-.article-body{max-width:64ch;display:grid;gap:17px;font-family:var(--font-display);font-size:19px;line-height:1.62}
-.article-body p:first-of-type::first-letter{
-  float:left;font-size:58px;line-height:.82;padding:4px 9px 0 0;font-weight:600;color:var(--accent);
-}
-.glossaire{
-  margin-top:30px;max-width:64ch;background:var(--surface);border:1px solid var(--line);
-  border-top:3px solid var(--accent);padding:20px;
-}
-.glossaire h3{font-size:16px;margin-bottom:12px}
-.glossaire dl{margin:0;display:grid;gap:11px}
-.glossaire dt{font-weight:600;font-size:15px}
-.glossaire dd{margin:2px 0 0;font-size:15px;color:var(--muted)}
+.btn{font-family:var(--f-comic);font-weight:700;font-size:14px;background:linear-gradient(#fff,var(--silver));border:3px outset #fff;padding:6px 12px;color:#000;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:hover{background:linear-gradient(#ffffcc,var(--yellow))}
+.btn:active{border-style:inset}
+.btn.big{font-size:17px;padding:10px 17px;background:linear-gradient(#9bff9b,var(--lime));color:#003300;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+.btn.red{background:linear-gradient(#ff8080,var(--red));color:#fff}
+.btn.blue{background:linear-gradient(#80c8ff,#3366cc);color:#fff}
+.btn.pink{background:linear-gradient(#ff9fd4,var(--pink));color:#fff}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
 
-/* ---------- rubriques ---------- */
-.rubriques{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);grid-template-columns:repeat(auto-fit,minmax(252px,1fr))}
-.rubrique{background:var(--surface);padding:22px 20px 20px;min-width:0;display:flex;flex-direction:column;gap:10px}
-.rubrique .num{font-family:var(--font-mono);font-size:12px;color:var(--muted);letter-spacing:.06em}
-.rubrique p{font-size:15px;color:var(--muted)}
-.chip{
-  align-self:flex-start;margin-top:auto;font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;
-  text-transform:uppercase;background:var(--chip);color:var(--muted);padding:4px 9px;
-}
+/* ---------- défi ---------- */
+.defi{border:5px ridge var(--lime);background:linear-gradient(#f0fff2,#e4fff8);padding:14px;margin-top:12px}
+.defi ol{margin:10px 0 0;padding-left:20px;font-size:15px}
+.jauge{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
+.pastille{width:32px;height:32px;border:3px outset #fff;background:var(--silver);font-family:var(--f-mono);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.pastille.ok{background:linear-gradient(#9bff9b,var(--lime));color:#003300}
+.pastille.ko{background:linear-gradient(#ff8080,var(--red));color:#fff}
 
-/* ---------- plan éditorial ---------- */
-.plan{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.plan li{
-  display:grid;grid-template-columns:52px 1fr;gap:4px 18px;align-items:start;
-  padding-block:18px;border-bottom:1px solid var(--line);
-}
-.plan .idx{
-  font-family:var(--font-mono);font-size:13px;color:var(--accent);padding-top:4px;
-  font-variant-numeric:tabular-nums;
-}
-.plan p{font-size:15px;color:var(--muted);max-width:62ch;margin-top:5px}
-@media(max-width:520px){
-  .plan li{grid-template-columns:1fr;gap:6px}
-  .plan .idx{padding-top:0}
-}
+/* ---------- décodeur ---------- */
+.deck{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:12px}
+.term{border:4px outset var(--cyan);background:var(--cream);padding:11px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.term:nth-child(2n){border-color:var(--pink)}
+.term:nth-child(3n){border-color:var(--lime)}
+.term:nth-child(5n){border-color:var(--orange)}
+.term .w{font-family:var(--f-comic);font-weight:700;font-size:19px;color:#0000aa}
+.term .w small{display:block;font-size:11px;color:var(--steel);font-weight:400}
+.term .tr{font-size:15px}
+.term .ask{background:var(--yellow);border:3px dashed var(--red);padding:9px;font-size:14px}
+.term .ask b{display:block;font-family:var(--f-comic);font-size:12px;color:var(--red)}
+.term .btn{align-self:flex-start;margin-top:auto;font-size:12px;padding:4px 9px}
 
-/* ---------- ligne éditoriale ---------- */
-.ligne{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
-.ligne .row{background:var(--surface);display:grid;grid-template-columns:200px 1fr;gap:4px 24px;padding:16px 20px;min-width:0}
-.ligne dt{font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding-top:3px}
-.ligne dd{margin:0;font-size:16px;min-width:0}
-.ligne ol{margin:0;padding-left:20px;display:grid;gap:4px;font-size:16px}
-@media(max-width:620px){.ligne .row{grid-template-columns:1fr}}
+/* ---------- encadrés ---------- */
+.essentiel{border:4px dashed var(--red);background:linear-gradient(#ffff99,#ffffcc);padding:13px;margin:12px 0 16px;max-width:64ch}
+.essentiel b{font-family:var(--f-comic);font-size:14px;color:var(--red)}
+.essentiel ul{margin:8px 0 0;padding-left:20px;font-size:16px;display:grid;gap:5px}
+.art{max-width:64ch;display:grid;gap:13px;margin-top:10px}
+.pull{max-width:64ch;margin:4px 0;border-block:4px double var(--pink);padding:11px 0;font-family:var(--f-comic);font-size:18px;color:#aa0066}
+.tbl-wrap{overflow-x:auto;margin-top:12px}
+table.retro{border-collapse:collapse;width:100%;min-width:420px;background:#fff}
+table.retro th,table.retro td{border:2px solid var(--steel);padding:7px 9px;text-align:left;vertical-align:top;font-size:15px}
+table.retro th{background:linear-gradient(#5a00b0,#9d3cff);color:var(--yellow);font-family:var(--f-comic);font-size:14px;text-shadow:1px 1px 0 #000}
+table.retro tr:nth-child(even) td{background:#f2f0ff}
+table.retro td.h{font-family:var(--f-comic);font-weight:700;color:#aa0066}
 
-/* ---------- pied ---------- */
-footer{padding-block:34px 44px}
-footer .wrap{display:grid;gap:14px}
-footer p{font-size:14px;color:var(--muted);max-width:62ch}
-footer .fm{font-family:var(--font-display);font-size:19px;font-weight:600;color:var(--ink)}
+.rubs{display:grid;gap:9px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin-top:12px}
+.rub{border:4px outset var(--yellow);background:linear-gradient(#fff,#f2f2ff);padding:11px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rub:nth-child(2n){border-color:var(--cyan)}
+.rub:nth-child(3n){border-color:var(--pink)}
+.rub p{font-size:14px}
+.soon{align-self:flex-start;margin-top:auto;font-family:var(--f-mono);font-size:10px;background:var(--red);color:#fff;padding:3px 6px;animation:blink 1.8s steps(1,end) infinite}
+
+details{border:4px outset var(--purple);background:var(--cream);margin-top:14px}
+summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:700;font-size:15px;color:#5a00b0}
+.dt{padding:0 12px 12px}
+.dt .r{display:grid;grid-template-columns:150px 1fr;gap:3px 16px;padding:8px 0;border-top:2px dotted var(--steel);min-width:0}
+.dt dt{font-family:var(--f-comic);font-size:13px;color:var(--red)}
+.dt dd{margin:0;font-size:15px;min-width:0}
+.dt ol{margin:0;padding-left:18px}
+@media(max-width:560px){.dt .r{grid-template-columns:1fr}}
+
+.foot{background:radial-gradient(circle at 50% -20%,#3b007a,#000040 70%);color:#cde;padding:16px;text-align:center;font-size:13px;border-top:5px ridge var(--cyan)}
+.foot a{color:#9ff}
+.webring{font-family:var(--f-comic);font-size:12px;background:#000;border:3px outset var(--lime);display:inline-block;padding:6px 10px;margin-bottom:10px;color:#0f0;text-shadow:0 0 5px #0f0}
+.works{font-family:var(--f-comic);font-size:15px;color:var(--yellow);margin-bottom:8px}
+.works span{display:inline-block;animation:wob 1.3s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+
+/* ---------- barres d'outils parasites ---------- */
+.tb-stack{display:grid}
+.tbbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:5px 8px;border-bottom:2px ridge var(--silver);font-family:var(--f-comic);font-size:12px}
+.tbbar.a{background:linear-gradient(#ffd9a0,#ffb347)}
+.tbbar.b{background:linear-gradient(#d8c8ff,#b39ddb)}
+.tbbar.c{background:linear-gradient(#bfe8ff,#81d4fa)}
+.tbbar input{border:2px inset var(--silver);padding:3px 5px;font-family:var(--f-mono);font-size:12px;flex:1 1 110px;min-width:0}
+.tbbar .btn{font-size:11px;padding:3px 7px;border-width:2px}
+
+/* ---------- pubs ---------- */
+.ad{border:5px ridge var(--pink);background:linear-gradient(90deg,#fff0f8,#e8f8ff,#fff8e0);background-size:200% 100%;animation:shift 4s linear infinite;padding:9px;margin:12px 0;text-align:center;font-family:var(--f-comic);font-size:14px;color:#aa0066}
+.ad .btn{font-size:11px;padding:3px 8px;margin-top:5px}
+
+/* ---------- fenêtres ---------- */
+.win{position:fixed;z-index:70;width:min(360px,calc(100vw - 24px));background:var(--silver);border:3px outset #fff;box-shadow:5px 5px 0 rgba(0,0,0,.5);font-family:var(--f-comic);font-size:14px}
+.win .tb{display:flex;align-items:center;gap:6px;background:linear-gradient(90deg,#000080,#1084d0);color:#fff;font-weight:700;font-size:13px;padding:4px 5px}
+.win .tb .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.win .tb button{width:19px;height:18px;flex:none;background:var(--silver);border:2px outset #fff;font-family:var(--f-mono);font-size:11px;font-weight:700;cursor:pointer;padding:0;line-height:1}
+.win .ct{padding:12px}
+.win .ct p+p{margin-top:8px}
+.win .ico{font-size:26px;float:left;margin:0 8px 3px 0}
+.win .acts{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.win .bar{height:15px;border:2px inset var(--silver);background:#fff;margin-top:9px}
+.win .bar i{display:block;height:100%;width:0;background:#000080;transition:width .25s linear}
+.win .note{font-size:12px;color:#333;border-top:2px dotted var(--steel);padding-top:7px;margin-top:9px}
+.w1{top:9%;left:6%}.w2{top:17%;left:26%}.w3{top:27%;left:11%}.w4{top:35%;left:31%}.w5{top:44%;left:16%}.w6{top:20%;left:20%}
+@media(max-width:800px){
+  .w1,.w2,.w3,.w4,.w5,.w6{left:50%;right:auto;transform:translateX(-50%)}
+  .w1{top:7%}.w2{top:13%}.w3{top:19%}.w4{top:25%}.w5{top:31%}.w6{top:10%}
+}
+.lecon{border:4px ridge var(--lime)}
+.lecon .tb{background:linear-gradient(90deg,#006633,#33aa66)}
+.lecon .ct{background:linear-gradient(#f0fff6,#e6fff0)}
+.lecon ul{margin:8px 0 0;padding-left:19px;font-size:13px;display:grid;gap:5px}
+.verdict{font-family:var(--f-comic);font-weight:700;font-size:15px;padding:6px 8px;border:3px solid}
+.verdict.ko{background:#ffe8e8;border-color:var(--red);color:var(--red)}
+.verdict.ok{background:#e8ffe8;border-color:var(--green);color:var(--green)}
+
+/* ---------- plein écran ---------- */
+.overlay{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:18px}
+.overlay .inner{max-width:520px;width:100%;text-align:center}
+.ov-ranson{background:#0a0a0a;color:#ff3b3b;font-family:var(--f-mono)}
+.ov-ranson h3{font-family:var(--f-mono);color:#ff3b3b;font-size:clamp(21px,5vw,34px);margin:0 0 12px;text-shadow:0 0 12px #f00}
+.ov-ranson .cd{font-size:46px;font-weight:700;color:#fff}
+.ov-remote{background:#001a33;color:#9fd;font-family:var(--f-mono)}
+.ov-remote h3{font-family:var(--f-mono);color:#9fd;font-size:clamp(19px,4.4vw,28px);margin:0 0 12px}
+.ov-remote .log{text-align:left;background:#000;border:2px solid #2a6;padding:10px;font-size:13px;min-height:120px;max-height:190px;overflow:auto;color:#6f6}
+.fakecursor{position:fixed;z-index:95;font-size:22px;pointer-events:none;transition:left .55s ease,top .55s ease}
+
+/* ---------- score ---------- */
+.score{
+  position:fixed;z-index:60;left:max(10px,env(safe-area-inset-left,0px));
+  bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  width:196px;background:var(--silver);border:3px outset #fff;font-family:var(--f-comic);font-size:12px;
+  box-shadow:4px 4px 0 rgba(0,0,0,.4);
+}
+.score .tb{background:linear-gradient(90deg,#aa0066,#ff2d95);color:#fff;font-weight:700;padding:3px 6px;font-size:12px;display:flex;gap:6px}
+.score .tb button{margin-left:auto;background:var(--silver);border:2px outset #fff;font-family:var(--f-mono);font-size:10px;cursor:pointer;padding:0 4px}
+.score .ct{padding:8px;background:linear-gradient(#fff,#ffe9f6)}
+.score .jauge{margin-top:7px;gap:4px}
+.score .pastille{width:25px;height:25px;font-size:12px;border-width:2px}
+.score .btn{width:100%;margin-top:7px;font-size:11px;padding:5px}
+@media(max-width:480px){.score{width:168px}}
+
+/* ---------- certificat ---------- */
+.cert{position:fixed;z-index:92;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,calc(100vw - 24px));max-height:86vh;overflow:auto;background:var(--cream);border:10px ridge #ffcf33;padding:18px;box-shadow:0 0 0 9999px rgba(0,0,0,.7)}
+.cert h3{font-family:var(--f-comic);font-size:23px;color:var(--red);text-align:center;text-shadow:2px 2px 0 var(--yellow)}
+.cert .seal{text-align:center;font-size:36px;margin:6px 0}
+.cert .close{display:block;margin:14px auto 0}
+
+/* ---------- émojis ---------- */
+.sparkle{position:fixed;pointer-events:none;z-index:85;font-size:17px;animation:fade .85s ease-out forwards}
+@keyframes fade{to{opacity:0;transform:translateY(-26px) rotate(22deg) scale(.5)}}
+.drop{position:fixed;top:-30px;pointer-events:none;z-index:1;font-size:19px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(260deg)}}
+
+@media (prefers-reduced-motion:reduce){
+  body,.ticker span,.ticker,.rainbow,.banner h1,.banner .gifs span,.btn.big,.blink,.neon,.new,.soon,.ad,.works span{animation:none !important}
+  .sparkle,.drop{display:none}
+}
 </style>
 
-<div class="masthead">
-  <div class="wrap">
-    <a class="wordmark" href="#haut">Périmètre<span class="dot">.</span></a>
-    <nav aria-label="Sections du site">
-      <ul>
-        <li><a href="#apropos">À propos</a></li>
-        <li><a href="#article">L'article</a></li>
-        <li><a href="#rubriques">Rubriques</a></li>
-        <li><a href="#paraitre">À paraître</a></li>
-        <li><a href="#ligne">Ligne éditoriale</a></li>
-      </ul>
-    </nav>
-  </div>
-</div>
+<div class="shell">
+<div class="frame" id="page">
 
-<div class="frame">
-<div class="wrap">
+  <div class="ticker a" aria-hidden="true"><span>★彡 BIENVENU SUR PÉRIMÈTRE 2000 !!! 彡★ · 🔥 LE SITE QUI EXPLIQUE LA CYBERSÉCURITÉ AUX RH !!! 🔥 · ⚡ NOUVO : LE DÉCODEUR DE SIGLES ⚡ · 💥 5 PIÈGES VOUS ATTENDENT !!! 💥 · 🎉 SIGNEZ LE LIVRE D'OR 🎉 · ★彡 BIENVENU SUR PÉRIMÈTRE 2000 !!! 彡★ · 🔥 LE SITE QUI EXPLIQUE LA CYBERSÉCURITÉ AUX RH !!! 🔥 · ⚡ NOUVO : LE DÉCODEUR DE SIGLES ⚡ · 💥 5 PIÈGES VOUS ATTENDENT !!! 💥 · 🎉 SIGNEZ LE LIVRE D'OR 🎉 · </span></div>
 
-  <header class="hero" id="haut">
-    <p class="eyebrow">Site média · Sécurité des infrastructures</p>
-    <h1>La sécurité des infrastructures, traduite pour celles et ceux qui recrutent.</h1>
-    <p class="dek">Périmètre explique les métiers de la sécurité des infrastructures aux professionnels des ressources humaines qui recrutent ces profils.</p>
-    <dl class="facts">
-      <div><dt>Public</dt><dd>DRH et chargés de recrutement</dd></div>
-      <div><dt>Thématique</dt><dd>Sécurité des infrastructures</dd></div>
-      <div><dt>Rythme</dt><dd>Un article par semaine</dd></div>
-      <div><dt>Promesse</dt><dd>Aucun sigle sans traduction</dd></div>
-    </dl>
+  <div class="tb-stack" id="tbStack"></div>
+
+  <header class="banner" id="haut">
+    <h1>~*~ Périmètre 2000 ~*~</h1>
+    <p class="sub">★ La sécurité des infrastructures expliquée aux ressources humaines ★</p>
+    <p class="gifs" aria-hidden="true"><span>💾</span><span>🛡️</span><span>📠</span><span>💿</span><span>🔐</span><span>📡</span></p>
+    <p class="sub"><span class="blink">!!! MISE A JOUR : 21/10/2026 !!!</span> <span class="new">NEW</span></p>
   </header>
+  <div class="rainbow" aria-hidden="true"></div>
+  <div class="ticker b" aria-hidden="true"><span>🎀 OPTIMISÉ POUR INTERNET EXPLORER 6 EN 800x600 🎀 · 😎 MEILLEUR SITE RH DE L'ANNEAU WEB 😎 · 🌟 CLIQUEZ PARTOUT, ÇA BOUGE !!! 🌟 · 🎀 OPTIMISÉ POUR INTERNET EXPLORER 6 EN 800x600 🎀 · 😎 MEILLEUR SITE RH DE L'ANNEAU WEB 😎 · 🌟 CLIQUEZ PARTOUT, ÇA BOUGE !!! 🌟 · </span></div>
 
-  <section id="apropos">
-    <div class="sec-head">
-      <p class="eyebrow">À propos</p>
-      <h2>Pourquoi ce site existe</h2>
-    </div>
-    <div class="prose">
-      <p class="lede">Périmètre s'adresse aux responsables des ressources humaines et aux chargés de recrutement. Vous recrutez des profils en sécurité des infrastructures. Vous lisez des fiches de poste remplies de sigles. Vous hésitez entre deux candidats dont vous ne mesurez pas l'écart réel.</p>
-      <p>Ce site traduit. Nous expliquons les métiers, les compétences et les certifications du domaine, en français courant. Chaque terme technique reçoit sa définition dès sa première apparition.</p>
-      <p>Nous ne formons pas des experts en sécurité. Nous donnons aux RH de quoi rédiger une annonce juste, mener un entretien utile et comprendre un parcours.</p>
-      <p>L'équipe réunit des profils techniques et des profils recrutement. Un relecteur de chaque côté valide le contenu avant publication. Nous publions un nouvel article chaque semaine.</p>
-    </div>
-  </section>
+  <div class="cols">
 
-  <section id="article">
-    <div class="sec-head">
-      <p class="eyebrow">Article de présentation</p>
-    </div>
-    <h2 class="article-title">Six jours d'arrêt, et un poste que personne n'avait ouvert</h2>
-    <p class="byline">Publié le 21 octobre 2026 · Lecture : 2 minutes</p>
+    <aside class="side">
+      <h3>★ Menu ★</h3>
+      <ul class="menu">
+        <li><a href="#defi">🎮 Le défi vigilance</a></li>
+        <li><a href="#decodeur">🔎 Le décodeur</a></li>
+        <li><a href="#article">📰 L'article</a></li>
+        <li><a href="#rubriques">📁 Rubriques</a></li>
+        <li><a href="#paraitre">📅 À paraître</a></li>
+        <li><a href="#apropos">👋 À propos</a></li>
+      </ul>
 
-    <div class="article-body">
-      <p>Un lundi matin, une petite entreprise de quarante salariés ne peut plus ouvrir un seul fichier. Un message réclame une rançon. L'activité redémarre six jours plus tard. Personne, au service des ressources humaines, n'avait entendu parler du poste qui aurait pu éviter cela.</p>
+      <h3>★ Options ★</h3>
+      <div class="opt">
+        <button class="btn pink" id="popToggle" type="button">🚫 Couper les pop-up</button>
+        <button class="btn" id="fxToggle" type="button">✨ Couper les émojis</button>
+      </div>
+      <small id="optState">Pop-up activées, émojis activés.</small>
 
-      <p>La sécurité des infrastructures protège les machines et les réseaux qui font tourner une entreprise. Elle couvre les serveurs, les postes de travail, les liaisons internet et les sauvegardes. Elle poursuit trois objectifs simples. Les données restent accessibles, exactes et confidentielles.</p>
+      <h3 style="margin-top:14px">★ Visiteurs ★</h3>
+      <div class="odo" id="odo">000000</div>
+      <small>compteur remis à zéro 11 fois depuis 1999 !!</small>
 
-      <p>Les attaques visent aujourd'hui toutes les tailles d'entreprise. Un rançongiciel chiffre les fichiers d'une société, puis réclame un paiement pour les rendre. Il frappe une PME de quarante personnes comme un groupe de dix mille. Les profils capables d'anticiper ces incidents manquent sur le marché. Les recruteurs les cherchent donc avec des annonces qu'ils maîtrisent mal.</p>
+      <h3 style="margin-top:14px">★ Certifié ★</h3>
+      <div class="badges" aria-hidden="true">
+        <span class="badge">NETSCAPE<br>NOW!</span>
+        <span class="badge b">800x600<br>RECOMMANDÉ</span>
+        <span class="badge c">0 VIRUS<br>(promis)</span>
+        <span class="badge d">100%<br>RH FRIENDLY</span>
+      </div>
 
-      <p>Prenons une formulation courante : « administrateur sécurité, maîtrise du SIEM exigée ». Ce sigle désigne un système de gestion des informations et des événements de sécurité. L'outil rassemble les journaux techniques de tout le parc, puis signale les comportements anormaux. Un candidat peut l'avoir utilisé trois ans sans jamais l'avoir installé. Les deux profils ne couvrent pas les mêmes besoins. Une seule question en entretien suffit à les distinguer.</p>
-
-      <p>Périmètre publie des fiches métier, des repères de salaires et des explications sur les certifications. Chaque article part d'une situation de recrutement réelle. Nous proposons aussi des grilles de questions à poser en entretien. Vous repartez avec de quoi arbitrer, pas avec un cours technique.</p>
-    </div>
-
-    <aside class="glossaire">
-      <h3>Trois mots lus dans les annonces</h3>
-      <dl>
-        <dt>Rançongiciel</dt>
-        <dd>Programme qui chiffre les fichiers d'une entreprise et exige un paiement pour les restituer.</dd>
-        <dt>Durcissement</dt>
-        <dd>Travail de configuration qui réduit les possibilités d'entrée sur une machine ou un service.</dd>
-        <dt>Moindre privilège</dt>
-        <dd>Règle qui accorde à chaque personne les seuls accès nécessaires à son travail.</dd>
-      </dl>
+      <h3 style="margin-top:14px">★ Le saviez-vous ★</h3>
+      <small>Un salarié met quelques secondes à cliquer sur un lien piégé. La sensibilisation fait partie du travail de l'administrateur sécurité !</small>
     </aside>
-  </section>
 
-  <section id="rubriques">
-    <div class="sec-head">
-      <p class="eyebrow">Rubriques</p>
-      <h2>Cinq entrées, une par question de recrutement</h2>
-    </div>
-    <div class="rubriques">
-      <article class="rubrique">
-        <p class="num">01</p>
-        <h3>Les métiers décryptés</h3>
-        <p>Une fiche par poste : missions réelles, niveau d'entrée, place dans l'organisation.</p>
-        <span class="chip">À venir</span>
-      </article>
-      <article class="rubrique">
-        <p class="num">02</p>
-        <h3>Bien recruter un profil sécurité</h3>
-        <p>Rédiger l'annonce, lire un parcours, conduire l'entretien sans être technique.</p>
-        <span class="chip">À venir</span>
-      </article>
-      <article class="rubrique">
-        <p class="num">03</p>
-        <h3>Compétences et certifications</h3>
-        <p>Ce que chaque certification valide, et ce qu'elle ne garantit pas.</p>
-        <span class="chip">À venir</span>
-      </article>
-      <article class="rubrique">
-        <p class="num">04</p>
-        <h3>Salaires et marché de l'emploi</h3>
-        <p>Fourchettes par niveau, tensions du marché, délais de recrutement observés.</p>
-        <span class="chip">À venir</span>
-      </article>
-      <article class="rubrique">
-        <p class="num">05</p>
-        <h3>Former et fidéliser</h3>
-        <p>Faire monter une équipe en compétences et limiter les départs.</p>
-        <span class="chip">À venir</span>
-      </article>
-    </div>
-  </section>
+    <main class="main">
 
-  <section id="paraitre">
-    <div class="sec-head">
-      <p class="eyebrow">Plan éditorial</p>
-      <h2>Les six prochains articles</h2>
-    </div>
-    <ol class="plan">
-      <li>
-        <span class="idx">01</span>
-        <div>
-          <h3>Responsable sécurité, administrateur, testeur d'intrusion : qui fait quoi ?</h3>
-          <p>Trois postes que les annonces confondent, avec leurs missions et leur niveau d'entrée.</p>
-        </div>
-      </li>
-      <li>
-        <span class="idx">02</span>
-        <div>
-          <h3>Lire une fiche de poste en sécurité sans se tromper</h3>
-          <p>Les sigles les plus fréquents dans les annonces, traduits un par un.</p>
-        </div>
-      </li>
-      <li>
-        <span class="idx">03</span>
-        <div>
-          <h3>Cinq questions à poser quand on n'est pas technique</h3>
-          <p>Des questions ouvertes qui révèlent l'expérience réelle, et les réponses qui doivent alerter.</p>
-        </div>
-      </li>
-      <li>
-        <span class="idx">04</span>
-        <div>
-          <h3>Certifications : lesquelles comptent vraiment ?</h3>
-          <p>Ce que valide chaque certification du domaine, et ce qu'elle ne prouve pas.</p>
-        </div>
-      </li>
-      <li>
-        <span class="idx">05</span>
-        <div>
-          <h3>Ce que coûte un profil sécurité</h3>
-          <p>Les fourchettes par niveau et par région, et les écarts entre PME et grands comptes.</p>
-        </div>
-      </li>
-      <li>
-        <span class="idx">06</span>
-        <div>
-          <h3>Garder un expert sécurité plus de trois ans</h3>
-          <p>Les raisons de départ les plus citées, et les leviers qui ne passent pas par le salaire.</p>
-        </div>
-      </li>
-    </ol>
-  </section>
-
-  <section id="ligne">
-    <div class="sec-head">
-      <p class="eyebrow">Ligne éditoriale</p>
-      <h2>Notre cadre de travail</h2>
-    </div>
-    <dl class="ligne">
-      <div class="row">
-        <dt>Public cible</dt>
-        <dd>Des DRH et des chargés de recrutement de PME et d'entreprises de taille intermédiaire. Ils recrutent des profils en sécurité des infrastructures sans en maîtriser le vocabulaire.</dd>
-      </div>
-      <div class="row">
-        <dt>Thématique</dt>
-        <dd>La sécurité des infrastructures : pare-feu, durcissement, gestion des accès, sauvegardes, métiers d'administrateur sécurité et de responsable de la sécurité des systèmes d'information.</dd>
-      </div>
-      <div class="row">
-        <dt>Promesse</dt>
-        <dd>Périmètre explique les métiers de la sécurité des infrastructures aux professionnels des ressources humaines qui recrutent ces profils.</dd>
-      </div>
-      <div class="row">
-        <dt>Ton</dt>
-        <dd>Professionnel et pédagogique. Voix active, phrases courtes, aucun sigle employé sans sa traduction.</dd>
-      </div>
-      <div class="row">
-        <dt>Rubriques</dt>
-        <dd>
+      <section id="defi">
+        <h2 class="c1">🎮 LE DÉFI VIGILANCE !!! 🎮</h2>
+        <p class="lead">Ce site est volontairement horrible. Il imite les pages qui piègent vos collaborateurs tous les jours.</p>
+        <div class="defi">
+          <h3>★ Règle du jeu ★</h3>
           <ol>
-            <li>Les métiers décryptés</li>
-            <li>Bien recruter un profil sécurité</li>
-            <li>Compétences et certifications</li>
-            <li>Salaires et marché de l'emploi</li>
-            <li>Former et fidéliser</li>
+            <li>Cinq fenêtres vont s'ouvrir pendant votre visite.</li>
+            <li>Chacune propose un bon choix et un mauvais choix.</li>
+            <li>Si vous tombez dans le piège, le site en subit vraiment les conséquences.</li>
+            <li>Chaque piège se termine par une fiche à réutiliser en entretien de recrutement.</li>
           </ol>
-        </dd>
-      </div>
-    </dl>
-  </section>
+          <div class="row">
+            <button class="btn big" id="startBtn" type="button">▶ LANCER LE PREMIER PIÈGE !!</button>
+            <button class="btn blue" id="skipBtn" type="button">piège suivant</button>
+          </div>
+          <div class="jauge" id="jaugeMain" aria-label="Progression du défi"></div>
+          <p style="margin-top:9px;font-size:14px" id="jaugeTxt">Aucun piège déclenché pour le moment.</p>
+          <p style="margin-top:6px;font-size:13px;color:#444">Les fenêtres vous dérangent ? Le bouton « Couper les pop-up » est dans le menu de gauche.</p>
+        </div>
+      </section>
 
-</div>
-</div>
+      <section id="decodeur">
+        <h2 class="c2">🔎 LE DÉCODEUR DE SIGLES <span class="new">NEW</span></h2>
+        <p class="lead">Huit mots qui traînent dans vos annonces, leur traduction, et la question à poser au candidat !</p>
+        <div class="deck">
 
-<footer>
-  <div class="wrap">
-    <p class="fm">Périmètre<span style="color:var(--accent)">.</span></p>
-    <p>Site média de vulgarisation consacré à la sécurité des infrastructures. Les contenus s'adressent aux professionnels du recrutement.</p>
-    <p>Contact rédaction : remplacez-ceci@par-votre-email.fr</p>
+          <article class="term">
+            <p class="w">SIEM<small>prononcer « sim »</small></p>
+            <p class="tr">Un logiciel qui rassemble les journaux techniques de tout le parc, puis signale ce qui sort de l'ordinaire.</p>
+            <button class="btn" type="button" data-ask>La question à poser</button>
+            <p class="ask" hidden><b>En entretien</b>« Vous l'avez utilisé au quotidien ou vous l'avez installé ? » Les deux réponses désignent deux métiers.</p>
+          </article>
+
+          <article class="term">
+            <p class="w">EDR<small>détection sur les postes</small></p>
+            <p class="tr">Un agent installé sur chaque ordinateur. Il repère un comportement suspect et isole la machine du réseau.</p>
+            <button class="btn" type="button" data-ask>La question à poser</button>
+            <p class="ask" hidden><b>En entretien</b>« Combien de postes couvriez-vous ? » Le chiffre situe la taille du parc, donc le niveau réel.</p>
+          </article>
+
+          <article class="term">
+            <p class="w">Pentest<small>test d'intrusion</small></p>
+            <p class="tr">Un spécialiste attaque le système avec l'accord écrit de l'entreprise, puis remet un rapport de failles.</p>
+            <button class="btn" type="button" data-ask>La question à poser</button>
+            <p class="ask" hidden><b>En entretien</b>« Qui corrigeait les failles que vous trouviez ? » Attaquer et réparer sont deux postes distincts.</p>
+          </article>
+
+          <article class="term">
+            <p class="w">PRA<small>plan de reprise d'activité</small></p>
+            <p class="tr">La procédure qui remet l'entreprise en marche après un sinistre : incendie, panne majeure ou attaque.</p>
+            <button class="btn" type="button" data-ask>La question à poser</button>
+            <p class="ask" hidden><b>En entretien</b>« Vous l'avez écrit, ou vous l'avez testé ? » Seul le test prouve que le plan fonctionne.</p>
+          </article>
+
+          <article class="term">
+            <p class="w">SOC<small>centre de supervision</small></p>
+            <p class="tr">L'équipe qui surveille les alertes en continu et déclenche la réaction dès qu'une attaque commence.</p>
+            <button class="btn" type="button" data-ask>La question à poser</button>
+            <p class="ask" hidden><b>En entretien</b>« Travailliez-vous en horaires décalés ? » Beaucoup de ces postes tournent la nuit. L'annonce doit le dire.</p>
+          </article>
+
+          <article class="term">
+            <p class="w">Durcissement<small>hardening</small></p>
+            <p class="tr">Le réglage qui ferme tout ce dont une machine n'a pas besoin : comptes, services et ports inutiles.</p>
+            <button class="btn" type="button" data-ask>La question à poser</button>
+            <p class="ask" hidden><b>En entretien</b>« Sur quel référentiel vous appuyiez-vous ? » Un profil méthodique cite un guide officiel.</p>
+          </article>
+
+          <article class="term">
+            <p class="w">MFA<small>double authentification</small></p>
+            <p class="tr">Un mot de passe, plus un second élément : code temporaire, application mobile ou clé physique.</p>
+            <button class="btn" type="button" data-ask>La question à poser</button>
+            <p class="ask" hidden><b>En entretien</b>« Comment avez-vous convaincu les utilisateurs ? » Ce déploiement échoue rarement pour des raisons techniques.</p>
+          </article>
+
+          <article class="term">
+            <p class="w">CVE<small>faille référencée</small></p>
+            <p class="tr">Le numéro public attribué à une faille connue. Chaque faille publiée reçoit sa référence unique.</p>
+            <button class="btn" type="button" data-ask>La question à poser</button>
+            <p class="ask" hidden><b>En entretien</b>Un CV qui cite des CVE signale un candidat qui a publié ou corrigé des failles réelles.</p>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="article">
+        <h2 class="c3">📰 SIX JOURS D'ARRÊT, ET UN POSTE QUE PERSONNE N'AVAIT OUVERT</h2>
+        <p style="font-family:var(--f-mono);font-size:13px;color:#555;margin-top:7px">Publié le 21/10/2026 · lecture 2 minutes</p>
+
+        <div class="essentiel">
+          <b>⚡⚡ L'ESSENTIEL EN 3 POINTS ⚡⚡</b>
+          <ul>
+            <li>La sécurité des infrastructures protège les serveurs, les réseaux et les sauvegardes.</li>
+            <li>Les attaques visent toutes les tailles de société, pas seulement les grands groupes.</li>
+            <li>Deux candidats au même sigle sur le CV ne font pas le même métier.</li>
+          </ul>
+        </div>
+
+        <div class="art">
+          <p>Un lundi matin, une petite entreprise de quarante salariés ne peut plus ouvrir un seul fichier. Un message réclame une rançon. L'activité redémarre six jours plus tard. Personne, au service des ressources humaines, n'avait entendu parler du poste qui aurait pu éviter cela.</p>
+          <p>La sécurité des infrastructures protège les machines et les réseaux qui font tourner une entreprise. Elle couvre les serveurs, les postes de travail, les liaisons internet et les sauvegardes. Elle poursuit trois objectifs simples. Les données restent accessibles, exactes et confidentielles.</p>
+          <p>Les attaques visent aujourd'hui toutes les tailles d'entreprise. Un rançongiciel chiffre les fichiers d'une société, puis réclame un paiement pour les rendre. Il frappe une PME de quarante personnes comme un groupe de dix mille. Les profils capables d'anticiper ces incidents manquent sur le marché. Les recruteurs les cherchent donc avec des annonces qu'ils maîtrisent mal.</p>
+        </div>
+
+        <p class="pull">« Maîtrise du SIEM exigée » : un candidat peut avoir utilisé cet outil trois ans sans jamais l'avoir installé !</p>
+
+        <div class="art">
+          <p>Ce sigle désigne un système de gestion des informations et des événements de sécurité. L'outil rassemble les journaux techniques de tout le parc, puis signale les comportements anormaux. Les deux profils ne couvrent pas les mêmes besoins. Une seule question en entretien suffit à les distinguer.</p>
+          <p>Périmètre publie des fiches métier, des repères de salaires et des explications sur les certifications. Chaque article part d'une situation de recrutement réelle. Vous repartez avec de quoi arbitrer, pas avec un cours technique.</p>
+        </div>
+      </section>
+
+      <section id="rubriques">
+        <h2 class="c4">📁 NOS RUBRIQUES !!!</h2>
+        <div class="rubs">
+          <article class="rub"><h3>1. Les métiers décryptés</h3><p>Une fiche par poste : missions réelles, niveau d'entrée, place dans l'organisation.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
+          <article class="rub"><h3>2. Bien recruter un profil sécurité</h3><p>Rédiger l'annonce, lire un parcours, mener l'entretien sans être technique.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
+          <article class="rub"><h3>3. Compétences et certifications</h3><p>Ce que chaque certification valide, et ce qu'elle ne garantit pas.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
+          <article class="rub"><h3>4. Salaires et marché</h3><p>Fourchettes par niveau, tensions du marché, délais de recrutement observés.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
+          <article class="rub"><h3>5. Former et fidéliser</h3><p>Faire monter une équipe en compétences et limiter les départs.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
+        </div>
+      </section>
+
+      <section id="paraitre">
+        <h2 class="c5">📅 LES SIX PROCHAINS ARTICLES</h2>
+        <div class="tbl-wrap">
+          <table class="retro">
+            <thead><tr><th>N°</th><th>Titre</th><th>Ce que l'article apporte</th></tr></thead>
+            <tbody>
+              <tr><td class="h">01</td><td class="h">Responsable sécurité, administrateur, testeur d'intrusion : qui fait quoi ?</td><td>Trois postes que les annonces confondent, avec leurs missions et leur niveau d'entrée.</td></tr>
+              <tr><td class="h">02</td><td class="h">Lire une fiche de poste en sécurité sans se tromper</td><td>Les sigles les plus fréquents dans les annonces, traduits un par un.</td></tr>
+              <tr><td class="h">03</td><td class="h">Cinq questions à poser quand on n'est pas technique</td><td>Des questions ouvertes qui révèlent l'expérience réelle, et les réponses qui alertent.</td></tr>
+              <tr><td class="h">04</td><td class="h">Certifications : lesquelles comptent vraiment ?</td><td>Ce que valide chaque certification du domaine, et ce qu'elle ne prouve pas.</td></tr>
+              <tr><td class="h">05</td><td class="h">Ce que coûte un profil sécurité</td><td>Les fourchettes par niveau et par région, et les écarts entre PME et grands comptes.</td></tr>
+              <tr><td class="h">06</td><td class="h">Garder un expert sécurité plus de trois ans</td><td>Les raisons de départ les plus citées, et les leviers qui ne passent pas par le salaire.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="apropos">
+        <h2 class="c6">👋 À PROPOS DE NOUS !</h2>
+        <div class="art">
+          <p>Vous recrutez un profil sécurité. L'annonce vient du service technique. Elle contient huit sigles. Vous devez trier des candidatures sur des mots que personne ne vous a expliqués.</p>
+          <p>Périmètre règle ce problème. Nous traduisons les métiers, les compétences et les certifications de la sécurité des infrastructures en français courant.</p>
+          <p>Nous ne faisons pas de vous un expert. Nous vous donnons de quoi écrire une annonce juste, poser trois bonnes questions en entretien et comparer deux parcours.</p>
+          <p>Un administrateur systèmes et une chargée de recrutement écrivent ce site à deux. L'un vérifie la technique. L'autre vérifie qu'on comprend. Un article paraît chaque semaine, et il se lit en moins de trois minutes.</p>
+        </div>
+
+        <details>
+          <summary>▸ Notre ligne éditoriale</summary>
+          <div class="dt">
+            <dl>
+              <div class="r"><dt>Public cible</dt><dd>Des DRH et des chargés de recrutement de PME et d'entreprises de taille intermédiaire. Ils recrutent des profils en sécurité des infrastructures sans en maîtriser le vocabulaire.</dd></div>
+              <div class="r"><dt>Thématique</dt><dd>La sécurité des infrastructures : pare-feu, durcissement, gestion des accès, sauvegardes, métiers d'administrateur sécurité et de responsable de la sécurité des systèmes d'information.</dd></div>
+              <div class="r"><dt>Promesse</dt><dd>Périmètre explique les métiers de la sécurité des infrastructures aux professionnels des ressources humaines qui recrutent ces profils.</dd></div>
+              <div class="r"><dt>Ton</dt><dd>Professionnel et pédagogique, sous une forme volontairement datée. Voix active, phrases courtes, aucun sigle employé sans sa traduction.</dd></div>
+              <div class="r"><dt>Rubriques</dt><dd><ol><li>Les métiers décryptés</li><li>Bien recruter un profil sécurité</li><li>Compétences et certifications</li><li>Salaires et marché de l'emploi</li><li>Former et fidéliser</li></ol></dd></div>
+            </dl>
+          </div>
+        </details>
+      </section>
+
+    </main>
   </div>
-</footer>
+
+  <div class="rainbow" aria-hidden="true"></div>
+  <footer class="foot">
+    <p class="works">🚧 <span>👷</span> SITE EN CONSTRUCTION PERMANENTE <span>👷</span> 🚧</p>
+    <div class="webring">◀ PRÉCÉDENT · [ ANNEAU WEB DES MÉTIERS DE LA SÉCURITÉ ] · SUIVANT ▶</div>
+    <p>© 2026 Périmètre 2000 · site média de vulgarisation destiné aux professionnels du recrutement</p>
+    <p style="margin-top:6px;font-size:12px">Les fenêtres de ce site sont des simulations pédagogiques. Aucune donnée n'est collectée, aucun fichier n'est modifié.</p>
+    <p style="margin-top:6px;font-family:var(--f-mono);color:#9ff">remplacez-ceci@par-votre-email.fr</p>
+  </footer>
+
+</div>
+</div>
+
+<div class="score" id="score">
+  <div class="tb"><span>★ Défi vigilance</span><button type="button" id="scoreToggle" aria-expanded="true">_</button></div>
+  <div class="ct" id="scoreBody">
+    <p id="scoreTxt">0 piège sur 5 traité</p>
+    <div class="jauge" id="jaugeMini"></div>
+    <button class="btn" type="button" id="popToggle2">🚫 Couper les pop-up</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ============ Décodeur ============ */
+  Array.prototype.forEach.call(document.querySelectorAll('.term'), function (card) {
+    var button = card.querySelector('[data-ask]');
+    var panel = card.querySelector('.ask');
+    button.addEventListener('click', function () {
+      var open = panel.hidden;
+      panel.hidden = !open;
+      button.textContent = open ? 'Masquer' : 'La question à poser';
+    });
+  });
+
+  /* ============ Compteur ============ */
+  var odo = document.getElementById('odo');
+  var n = 0;
+  var odoTimer = window.setInterval(function () {
+    n += Math.floor(Math.random() * 4) + 1;
+    if (n >= 47) { n = 47; window.clearInterval(odoTimer); }
+    odo.textContent = String(n).padStart(6, '0');
+  }, 170);
+
+  /* ============ Émojis ============ */
+  var EMO = ['✨', '🌟', '💖', '🔥', '⭐', '💫', '😎', '💾', '🎉', '🛡️'];
+  var fxOn = !reduced;
+  var lastMove = 0;
+  var rainTimer = null;
+
+  function pick() { return EMO[Math.floor(Math.random() * EMO.length)]; }
+
+  function sparkle(x, y) {
+    var node = document.createElement('span');
+    node.className = 'sparkle';
+    node.setAttribute('aria-hidden', 'true');
+    node.textContent = pick();
+    node.style.left = (x - 8) + 'px';
+    node.style.top = (y - 8) + 'px';
+    document.body.appendChild(node);
+    window.setTimeout(function () { node.remove(); }, 900);
+  }
+
+  document.addEventListener('mousemove', function (event) {
+    if (!fxOn) { return; }
+    var now = Date.now();
+    if (now - lastMove < 45) { return; }
+    lastMove = now;
+    sparkle(event.clientX, event.clientY);
+  });
+  document.addEventListener('touchmove', function (event) {
+    if (!fxOn || !event.touches[0]) { return; }
+    var now = Date.now();
+    if (now - lastMove < 90) { return; }
+    lastMove = now;
+    sparkle(event.touches[0].clientX, event.touches[0].clientY);
+  }, { passive: true });
+
+  function startRain() {
+    if (rainTimer || !fxOn) { return; }
+    rainTimer = window.setInterval(function () {
+      var node = document.createElement('span');
+      node.className = 'drop';
+      node.setAttribute('aria-hidden', 'true');
+      node.textContent = pick();
+      node.style.left = Math.random() * 94 + 'vw';
+      var dur = 5 + Math.random() * 4;
+      node.style.animationDuration = dur + 's';
+      document.body.appendChild(node);
+      window.setTimeout(function () { node.remove(); }, dur * 1000 + 200);
+    }, 1100);
+  }
+  function stopRain() {
+    if (rainTimer) { window.clearInterval(rainTimer); rainTimer = null; }
+    Array.prototype.forEach.call(document.querySelectorAll('.drop,.sparkle'), function (node) { node.remove(); });
+  }
+  if (fxOn) { startRain(); }
+
+  var fxToggle = document.getElementById('fxToggle');
+  var optState = document.getElementById('optState');
+
+  /* ============ État du défi ============ */
+  var TRAPS = ['antivirus', 'toolbar', 'cookies', 'phishing', 'support'];
+  var LABELS = { antivirus: 'Faux antivirus', toolbar: 'Barre d’outils', cookies: 'Cookies', phishing: 'Hameçonnage', support: 'Faux support' };
+  var results = {};
+  var order = 0;
+  var popupsOn = true;
+  var pending = null;
+
+  function makeJauge(host) {
+    host.textContent = '';
+    TRAPS.forEach(function (id, i) {
+      var cell = document.createElement('span');
+      cell.className = 'pastille' + (results[id] === 'evite' ? ' ok' : results[id] === 'piege' ? ' ko' : '');
+      cell.textContent = results[id] === 'evite' ? '✓' : results[id] === 'piege' ? '✗' : String(i + 1);
+      cell.title = LABELS[id];
+      host.appendChild(cell);
+    });
+  }
+
+  function refresh() {
+    var done = Object.keys(results).length;
+    var good = TRAPS.filter(function (id) { return results[id] === 'evite'; }).length;
+    makeJauge(document.getElementById('jaugeMain'));
+    makeJauge(document.getElementById('jaugeMini'));
+    document.getElementById('scoreTxt').textContent = done + ' piège(s) sur 5 · ' + good + ' évité(s)';
+    document.getElementById('jaugeTxt').textContent = done === 0
+      ? 'Aucun piège déclenché pour le moment.'
+      : done + ' piège(s) traité(s) sur 5. Vous en avez évité ' + good + '.';
+    if (done === TRAPS.length) { window.setTimeout(showCert, 900); }
+  }
+
+  /* ============ Fenêtres ============ */
+  function win(options) {
+    var box = document.createElement('div');
+    box.className = 'win ' + (options.pos || 'w6') + (options.lecon ? ' lecon' : '');
+    var bar = document.createElement('div');
+    bar.className = 'tb';
+    var title = document.createElement('span');
+    title.className = 't';
+    title.textContent = options.title;
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'X';
+    close.setAttribute('aria-label', 'Fermer');
+    close.addEventListener('click', function () { box.remove(); if (options.onClose) { options.onClose(); } });
+    bar.appendChild(title);
+    bar.appendChild(close);
+    var body = document.createElement('div');
+    body.className = 'ct';
+    body.appendChild(options.content);
+    box.appendChild(bar);
+    box.appendChild(body);
+    document.body.appendChild(box);
+    return box;
+  }
+
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) { node.className = cls; }
+    if (text) { node.textContent = text; }
+    return node;
+  }
+
+  function actions(pairs) {
+    var wrapper = el('div', 'acts');
+    pairs.forEach(function (pair) {
+      var button = el('button', 'btn' + (pair.style ? ' ' + pair.style : ''), pair.label);
+      button.type = 'button';
+      button.addEventListener('click', pair.run);
+      wrapper.appendChild(button);
+    });
+    return wrapper;
+  }
+
+  /* ============ Leçons ============ */
+  var LESSONS = {
+    antivirus: {
+      title: 'Faux antivirus (scareware)',
+      points: [
+        'Aucune page web ne peut analyser votre ordinateur. Le chiffre de virus est inventé.',
+        'La bonne réaction tient en un geste : fermer l’onglet, sans cliquer dans la fenêtre.',
+        'Pour un recruteur : un administrateur sécurité passe une part de son temps à former les salariés à ce réflexe.'
+      ]
+    },
+    toolbar: {
+      title: 'Logiciel indésirable',
+      points: [
+        'Ces programmes arrivent en même temps qu’un autre, via une case cochée par défaut.',
+        'Sur un poste d’entreprise, l’utilisateur ne doit pas pouvoir installer seul un logiciel.',
+        'Pour un recruteur : « gestion des droits locaux » dans un CV désigne exactement cette prévention.'
+      ]
+    },
+    cookies: {
+      title: 'Consentement et données',
+      points: [
+        'Accepter sans lire ouvre le partage de vos données à des centaines de sociétés.',
+        'Le refus doit être aussi simple que l’acceptation. C’est une obligation légale en France.',
+        'Pour un recruteur : ce sujet relève du délégué à la protection des données, un profil souvent confondu avec l’administrateur sécurité.'
+      ]
+    },
+    phishing: {
+      title: 'Hameçonnage',
+      points: [
+        'Trois signaux reviennent toujours : l’urgence, l’adresse d’expéditeur bancale, le lien qui ne correspond pas.',
+        'Un vrai service informatique ne demande jamais votre mot de passe.',
+        'Pour un recruteur : demandez au candidat s’il a déjà organisé une campagne de test interne.'
+      ]
+    },
+    support: {
+      title: 'Faux support technique',
+      points: [
+        'Personne ne vous appelle spontanément pour réparer votre machine.',
+        'Donner la main à distance revient à ouvrir la porte du réseau de l’entreprise.',
+        'Pour un recruteur : la procédure d’escalade doit être écrite, et le candidat doit savoir qui a le droit d’intervenir.'
+      ]
+    }
+  };
+
+  function resolve(id, outcome) {
+    if (results[id]) { return; }
+    results[id] = outcome;
+    refresh();
+    var lesson = LESSONS[id];
+    var content = el('div');
+    content.appendChild(el('p', 'verdict ' + (outcome === 'evite' ? 'ok' : 'ko'),
+      outcome === 'evite' ? '✔ Bien joué, piège évité !' : '✗ Piège réussi, vous avez cliqué !'));
+    content.appendChild(el('p', null, lesson.title));
+    var list = el('ul');
+    lesson.points.forEach(function (point) { list.appendChild(el('li', null, point)); });
+    content.appendChild(list);
+    var box = win({ title: 'Ce qu’il fallait voir', pos: 'w' + ((order % 5) + 1), lecon: true, content: content });
+    content.appendChild(actions([
+      { label: 'Compris !', style: 'blue', run: function () { box.remove(); next(); } }
+    ]));
+  }
+
+  /* ============ Conséquences ============ */
+  function consequenceAntivirus() {
+    var over = el('div', 'overlay ov-ranson');
+    var inner = el('div', 'inner');
+    inner.appendChild(el('h3', null, '!!! VOS FICHIERS SONT CHIFFRÉS !!!'));
+    inner.appendChild(el('p', null, 'Paiement exigé sous :'));
+    var cd = el('p', 'cd', '03');
+    inner.appendChild(cd);
+    over.appendChild(inner);
+    document.body.appendChild(over);
+    var left = 3;
+    var tick = window.setInterval(function () {
+      left--;
+      cd.textContent = '0' + Math.max(left, 0);
+      if (left <= 0) { window.clearInterval(tick); over.remove(); resolve('antivirus', 'piege'); }
+    }, 900);
+  }
+
+  function consequenceToolbar() {
+    var stack = document.getElementById('tbStack');
+    [
+      { cls: 'a', name: 'SuperBarre 2003', extra: 'Météo · Jeux · Smileys' },
+      { cls: 'b', name: 'MégaRecherche', extra: 'Page d’accueil modifiée ✔' },
+      { cls: 'c', name: 'ShopiBarre', extra: 'Bons plans toutes les 4 secondes' }
+    ].forEach(function (item) {
+      var bar = el('div', 'tbbar ' + item.cls);
+      bar.appendChild(el('strong', null, item.name));
+      var field = document.createElement('input');
+      field.type = 'text';
+      field.value = 'rechercher...';
+      field.readOnly = true;
+      field.setAttribute('aria-label', 'Barre de recherche décorative');
+      bar.appendChild(field);
+      bar.appendChild(el('span', null, item.extra));
+      stack.appendChild(bar);
+    });
+    var control = el('div', 'tbbar a');
+    control.appendChild(el('strong', null, '3 barres installées !'));
+    var tries = 0;
+    var uninstall = el('button', 'btn red', 'Désinstaller');
+    uninstall.type = 'button';
+    uninstall.addEventListener('click', function () {
+      tries++;
+      if (tries === 1) { uninstall.textContent = 'Échec. Réessayer ?'; return; }
+      if (tries === 2) { uninstall.textContent = 'Vraiment tout supprimer ?'; return; }
+      stack.textContent = '';
+      resolve('toolbar', 'piege');
+    });
+    control.appendChild(uninstall);
+    stack.appendChild(control);
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+  }
+
+  function consequenceCookies() {
+    ['decodeur', 'article', 'rubriques'].forEach(function (id, i) {
+      var host = document.getElementById(id);
+      if (!host) { return; }
+      var ad = el('div', 'ad');
+      ad.dataset.ad = '1';
+      ad.appendChild(el('p', 'blink', ['🎁 VOUS AVEZ GAGNÉ UN PC GAMER !!! 🎁', '💰 PRÊT IMMÉDIAT SANS JUSTIFICATIF !!! 💰', '📱 SONNERIES ILLIMITÉES 3€/SEMAINE !!! 📱'][i]));
+      ad.appendChild(el('p', null, 'Publicité adaptée grâce à vos 847 partenaires.'));
+      host.insertBefore(ad, host.firstChild);
+    });
+    var banner = el('div', 'ad');
+    banner.dataset.ad = '1';
+    banner.appendChild(el('p', null, '847 partenaires publicitaires enregistrés. Vous pouvez retirer votre consentement.'));
+    var remove = el('button', 'btn', 'Retirer mon consentement');
+    remove.type = 'button';
+    var step = 0;
+    remove.addEventListener('click', function () {
+      step++;
+      if (step === 1) { remove.textContent = 'Décocher les 847 partenaires un par un ?'; return; }
+      if (step === 2) { remove.textContent = 'Chargement... (patientez 4 h)'; window.setTimeout(function () { remove.textContent = 'Terminer maintenant'; }, 1200); return; }
+      Array.prototype.forEach.call(document.querySelectorAll('[data-ad]'), function (node) { node.remove(); });
+      resolve('cookies', 'piege');
+    });
+    banner.appendChild(remove);
+    var main = document.querySelector('.main');
+    main.insertBefore(banner, main.firstChild);
+  }
+
+  function consequencePhishing(box) {
+    var body = box.querySelector('.ct');
+    body.textContent = '';
+    body.appendChild(el('p', null, 'Connexion en cours...'));
+    var bar = el('div', 'bar');
+    var fill = el('i');
+    bar.appendChild(fill);
+    body.appendChild(bar);
+    var pct = 0;
+    var tick = window.setInterval(function () {
+      pct += 20;
+      fill.style.width = pct + '%';
+      if (pct >= 100) {
+        window.clearInterval(tick);
+        body.textContent = '';
+        body.appendChild(el('p', null, 'Identifiants transmis à un serveur inconnu.'));
+        body.appendChild(el('p', 'note', 'Rien n’a réellement été envoyé. Les identifiants affichés étaient fictifs, et cette page ne collecte aucune donnée.'));
+        body.appendChild(actions([{ label: 'Voir la leçon', style: 'blue', run: function () { box.remove(); resolve('phishing', 'piege'); } }]));
+      }
+    }, 420);
+  }
+
+  function consequenceSupport() {
+    var over = el('div', 'overlay ov-remote');
+    var inner = el('div', 'inner');
+    inner.appendChild(el('h3', null, 'PRISE DE CONTRÔLE À DISTANCE'));
+    var log = el('div', 'log');
+    inner.appendChild(log);
+    over.appendChild(inner);
+    document.body.appendChild(over);
+
+    var cursor = el('div', 'fakecursor', '🖱️');
+    cursor.setAttribute('aria-hidden', 'true');
+    cursor.style.left = '30%';
+    cursor.style.top = '40%';
+    document.body.appendChild(cursor);
+
+    var lines = [
+      'Connexion établie avec le technicien...',
+      'Lecture du carnet d’adresses...',
+      'Installation de 14 logiciels utiles...',
+      'Désactivation de l’antivirus...',
+      'Accès au lecteur réseau de l’entreprise...',
+      'Terminé. Merci de votre confiance.'
+    ];
+    var i = 0;
+    var tick = window.setInterval(function () {
+      if (i >= lines.length) {
+        window.clearInterval(tick);
+        cursor.remove();
+        over.remove();
+        resolve('support', 'piege');
+        return;
+      }
+      log.appendChild(el('div', null, '> ' + lines[i]));
+      log.scrollTop = log.scrollHeight;
+      cursor.style.left = (18 + Math.random() * 60) + '%';
+      cursor.style.top = (22 + Math.random() * 56) + '%';
+      i++;
+    }, 850);
+  }
+
+  /* ============ Les 5 pièges ============ */
+  function trapAntivirus() {
+    var content = el('div');
+    var head = el('p');
+    head.appendChild(el('span', 'ico', '☣️'));
+    head.appendChild(document.createTextNode('ANALYSE TERMINÉE : votre ordinateur contient '));
+    head.appendChild(el('strong', 'blink', '7 VIRUS'));
+    head.appendChild(document.createTextNode(' !!! Nettoyage immédiat recommandé !!'));
+    content.appendChild(head);
+    var box = win({ title: '⚠ ALERTE SÉCURITÉE ⚠', pos: 'w1', content: content, onClose: function () { resolve('antivirus', 'evite'); } });
+    content.appendChild(actions([
+      { label: 'NETTOYER MON PC !!', style: 'red', run: function () { box.remove(); consequenceAntivirus(); } },
+      { label: 'Fermer sans cliquer', run: function () { box.remove(); resolve('antivirus', 'evite'); } }
+    ]));
+  }
+
+  function trapToolbar() {
+    var content = el('div');
+    var head = el('p');
+    head.appendChild(el('span', 'ico', '🧰'));
+    head.appendChild(document.createTextNode('Installez la SuperBarre 2003 : météo, smileys et moteur de recherche offert. Trois barres pour le prix d’une !'));
+    content.appendChild(head);
+    var box = win({ title: 'SuperBarre 2003 — Installation', pos: 'w2', content: content, onClose: function () { resolve('toolbar', 'evite'); } });
+    content.appendChild(actions([
+      { label: 'INSTALLER (7,2 Mo)', style: 'red', run: function () { box.remove(); consequenceToolbar(); } },
+      { label: 'Refuser l’installation', run: function () { box.remove(); resolve('toolbar', 'evite'); } }
+    ]));
+  }
+
+  function trapCookies() {
+    var content = el('div');
+    var head = el('p');
+    head.appendChild(el('span', 'ico', '🍪'));
+    head.appendChild(document.createTextNode('Ce site utilise des cookies, des miettes et 847 partenaires publicitaires pour améliorer votre expérience.'));
+    content.appendChild(head);
+    var box = win({ title: 'Vos préférences (ou pas)', pos: 'w3', content: content, onClose: function () { resolve('cookies', 'evite'); } });
+    content.appendChild(actions([
+      { label: 'TOUT ACCEPTER', style: 'red', run: function () { box.remove(); consequenceCookies(); } },
+      { label: 'Refuser', run: function () { box.remove(); resolve('cookies', 'evite'); } }
+    ]));
+  }
+
+  function trapPhishing() {
+    var content = el('div');
+    content.appendChild(el('p', null, 'Objet : URGENT votre session intranet expire dans 2 minutes'));
+    content.appendChild(el('p', 'note', 'De : service.informatique@intranet-secure-login.ru'));
+    content.appendChild(el('p', null, 'Identifiant : j.martin  ·  Mot de passe : ••••••••'));
+    content.appendChild(el('p', 'note', 'Champs pré-remplis avec des valeurs fictives. N’entrez jamais un vrai mot de passe sur ce genre de page.'));
+    var box = win({ title: 'Intranet Sécuriz’Pro — reconnexion', pos: 'w4', content: content, onClose: function () { resolve('phishing', 'evite'); } });
+    content.appendChild(actions([
+      { label: 'SE CONNECTER', style: 'red', run: function () { consequencePhishing(box); } },
+      { label: 'Vérifier l’expéditeur d’abord', run: function () { box.remove(); resolve('phishing', 'evite'); } }
+    ]));
+  }
+
+  function trapSupport() {
+    var content = el('div');
+    var head = el('p');
+    head.appendChild(el('span', 'ico', '📞'));
+    head.appendChild(document.createTextNode('Bonjour, ici le Service Informatique Mondial. Nous détectons une anomalie sur votre poste. Autorisez la prise en main à distance.'));
+    content.appendChild(head);
+    var box = win({ title: 'Appel entrant — Service Informatique Mondial', pos: 'w5', content: content, onClose: function () { resolve('support', 'evite'); } });
+    content.appendChild(actions([
+      { label: 'AUTORISER L’ACCÈS', style: 'red', run: function () { box.remove(); consequenceSupport(); } },
+      { label: 'Raccrocher', run: function () { box.remove(); resolve('support', 'evite'); } }
+    ]));
+  }
+
+  var RUNNERS = [trapAntivirus, trapToolbar, trapCookies, trapPhishing, trapSupport];
+
+  function next() {
+    if (!popupsOn || order >= RUNNERS.length) { return; }
+    var run = RUNNERS[order];
+    order++;
+    pending = window.setTimeout(run, 500);
+  }
+
+  var startBtn = document.getElementById('startBtn');
+  var skipBtn = document.getElementById('skipBtn');
+  startBtn.addEventListener('click', function () {
+    if (order === 0) { next(); }
+    startBtn.textContent = '▶ PIÈGE SUIVANT !!';
+  });
+  skipBtn.addEventListener('click', next);
+  window.setTimeout(function () { if (order === 0) { next(); } }, 9000);
+
+  /* ============ Interrupteurs ============ */
+  function sayState() {
+    optState.textContent = (popupsOn ? 'Pop-up activées' : 'Pop-up coupées') + ', ' + (fxOn ? 'émojis activés.' : 'émojis coupés.');
+  }
+
+  function setPopups(state) {
+    popupsOn = state;
+    var label = state ? '🚫 Couper les pop-up' : '▶ Réactiver les pop-up';
+    document.getElementById('popToggle').textContent = label;
+    document.getElementById('popToggle2').textContent = label;
+    startBtn.disabled = !state;
+    skipBtn.disabled = !state;
+    if (!state) {
+      if (pending) { window.clearTimeout(pending); pending = null; }
+      Array.prototype.forEach.call(document.querySelectorAll('.win,.overlay,.fakecursor'), function (node) { node.remove(); });
+    }
+    sayState();
+  }
+
+  document.getElementById('popToggle').addEventListener('click', function () { setPopups(!popupsOn); });
+  document.getElementById('popToggle2').addEventListener('click', function () { setPopups(!popupsOn); });
+
+  fxToggle.addEventListener('click', function () {
+    fxOn = !fxOn;
+    fxToggle.textContent = fxOn ? '✨ Couper les émojis' : '✨ Remettre les émojis';
+    if (fxOn) { startRain(); } else { stopRain(); }
+    sayState();
+  });
+  if (reduced) { fxToggle.textContent = '✨ Remettre les émojis'; }
+  sayState();
+
+  /* ============ Certificat ============ */
+  function showCert() {
+    if (document.getElementById('cert')) { return; }
+    var good = TRAPS.filter(function (id) { return results[id] === 'evite'; }).length;
+    var mention = good >= 5 ? 'Vigilance exemplaire' : good >= 3 ? 'Bonne vigilance' : good >= 1 ? 'Vigilance à renforcer' : 'Tout cliqué, comme 9 salariés sur 10';
+
+    var card = el('div', 'cert');
+    card.id = 'cert';
+    card.setAttribute('role', 'dialog');
+    card.setAttribute('aria-label', 'Certificat de vigilance');
+    card.appendChild(el('h3', null, '✦ CERTIFICAT DE VIGILANCE ✦'));
+    card.appendChild(el('p', 'seal', '🏅'));
+    var intro = el('p', null, 'Décerné au visiteur n° ' + String(n).padStart(6, '0') + ' · pièges évités : ' + good + ' sur 5 · mention : ' + mention + '.');
+    intro.style.textAlign = 'center';
+    card.appendChild(intro);
+
+    var wrapTable = el('div', 'tbl-wrap');
+    var table = el('table', 'retro');
+    var thead = el('thead');
+    var headRow = el('tr');
+    ['Piège', 'Résultat', 'À retenir pour un recrutement'].forEach(function (label) { headRow.appendChild(el('th', null, label)); });
+    thead.appendChild(headRow);
+    table.appendChild(thead);
+    var tbody = el('tbody');
+    TRAPS.forEach(function (id) {
+      var row = el('tr');
+      row.appendChild(el('td', 'h', LABELS[id]));
+      row.appendChild(el('td', null, results[id] === 'evite' ? '✔ évité' : '✗ cliqué'));
+      row.appendChild(el('td', null, LESSONS[id].points[2].replace('Pour un recruteur : ', '')));
+      tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    wrapTable.appendChild(table);
+    card.appendChild(wrapTable);
+
+    card.appendChild(el('p', null, 'Ces cinq réflexes font partie du travail quotidien d’un administrateur sécurité. Les lui demander en entretien vaut mieux que de compter ses sigles.'));
+
+    var close = el('button', 'btn big close', 'Fermer le certificat');
+    close.type = 'button';
+    close.addEventListener('click', function () { card.remove(); });
+    card.appendChild(close);
+    document.body.appendChild(card);
+  }
+
+  /* ============ Panneau de score ============ */
+  var scoreBody = document.getElementById('scoreBody');
+  var scoreToggle = document.getElementById('scoreToggle');
+  scoreToggle.addEventListener('click', function () {
+    var open = scoreBody.hidden;
+    scoreBody.hidden = !open;
+    scoreToggle.textContent = open ? '_' : '□';
+    scoreToggle.setAttribute('aria-expanded', String(open));
+  });
+
+  refresh();
+}());
+</script>
 
 </body></html>
