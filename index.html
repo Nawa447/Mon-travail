@@ -4,28 +4,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap">
 <style>
-/* Layout : page perso 2003 saturée (fond animé, bandeaux arc-en-ciel, pluie d'émojis),
-   contenu RH sérieux dans des encadrés colorés, 5 pièges jouables et désactivables. */
+/* Layout : page perso 2003 assumée (fond animé, bandeaux arc-en-ciel, blocs de travers),
+   notice d'accueil en premier, contenu RH en phrases courtes, modules interactifs partout. */
 :root{
-  --navy:#07005c;
-  --paper:#ffffff;
-  --ink:#111111;
-  --link:#0000ee;
-  --vlink:#551a8b;
-  --red:#e00000;
-  --green:#007a3d;
-  --yellow:#ffff33;
-  --lime:#39e639;
-  --pink:#ff2d95;
-  --cyan:#00d9ff;
-  --purple:#9d3cff;
-  --orange:#ff8a00;
-  --silver:#c0c0c0;
-  --steel:#808080;
-  --cream:#fffdf0;
+  --navy:#07005c;--paper:#ffffff;--ink:#111;--link:#0000ee;--vlink:#551a8b;
+  --red:#e00000;--green:#007a3d;--yellow:#ffff33;--lime:#39e639;--pink:#ff2d95;
+  --cyan:#00d9ff;--purple:#9d3cff;--orange:#ff8a00;--silver:#c0c0c0;--steel:#808080;--cream:#fffdf0;
   --f-comic:'Comic Sans MS','Comic Neue',cursive,sans-serif;
   --f-serif:'Times New Roman',Times,Georgia,serif;
   --f-mono:'Courier New',Courier,monospace;
+  --f-impact:Impact,'Arial Black','Haettenschweiler',sans-serif;
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -36,18 +24,16 @@ body{
     radial-gradient(circle at 36px 27px,rgba(255,110,220,.55) 1.2px,transparent 2px),
     radial-gradient(circle at 21px 46px,rgba(255,255,100,.6) 1.3px,transparent 2.1px),
     radial-gradient(circle at 48px 12px,rgba(0,230,255,.5) 1.1px,transparent 1.9px);
-  background-size:62px 62px;
-  animation:drift 24s linear infinite;
-  font-family:var(--f-serif);font-size:17px;line-height:1.55;overflow-x:hidden;
+  background-size:62px 62px;animation:drift 24s linear infinite;
+  font-family:var(--f-serif);font-size:17px;line-height:1.5;overflow-x:hidden;
 }
 @keyframes drift{to{background-position:62px 62px,-62px 62px,62px -62px,-62px -62px}}
 p{margin:0}
 a{color:var(--link)}a:visited{color:var(--vlink)}
-.shell{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px 26px}
+.shell{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px 26px}
 .frame{border:6px ridge var(--pink);background:var(--paper);box-shadow:0 0 0 3px var(--yellow),8px 8px 0 rgba(0,0,0,.5)}
 :focus-visible{outline:3px dashed var(--red);outline-offset:2px}
 
-/* ---------- bandeaux ---------- */
 .ticker{overflow:hidden;white-space:nowrap;border-block:3px double #000}
 .ticker.a{background:linear-gradient(90deg,#ffff33,#ff8a00,#ffff33);background-size:200% 100%;animation:shift 4s linear infinite}
 .ticker.b{background:linear-gradient(90deg,#00d9ff,#39e639,#00d9ff);background-size:200% 100%;animation:shift 5s linear infinite}
@@ -55,145 +41,207 @@ a{color:var(--link)}a:visited{color:var(--vlink)}
 .ticker.b span{animation-direction:reverse}
 @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes shift{to{background-position:200% 0}}
-
 .rainbow{height:9px;background:linear-gradient(90deg,#f00,#f90,#ff0,#0c0,#09f,#60f,#f09,#f00);background-size:200% 100%;animation:shift 3s linear infinite;border-block:1px solid #000}
+.dots{text-align:center;font-family:var(--f-mono);font-size:13px;color:var(--purple);letter-spacing:2px;padding:4px 0;background:#fff8fd;border-block:1px dotted var(--pink)}
 
-.banner{background:radial-gradient(circle at 50% 120%,#3b007a,#000040 70%);text-align:center;padding:18px 12px;border-bottom:5px ridge var(--cyan)}
-.banner h1{
-  margin:0;font-family:var(--f-comic);font-size:clamp(28px,6.6vw,54px);color:#fff;
-  text-shadow:0 0 6px #ff2d95,3px 3px 0 #ff2d95,6px 6px 0 #00d9ff,9px 9px 0 #000;
-  animation:hue 6s linear infinite;
-}
-@keyframes hue{to{filter:hue-rotate(360deg)}}
+/* ---------- notice ---------- */
+.notice{background:repeating-linear-gradient(45deg,#fffbe0 0 14px,#fff6cc 14px 28px);border:7px ridge var(--red);margin:0;padding:14px}
+.notice h2{font-family:var(--f-impact);font-size:clamp(20px,4.4vw,30px);color:var(--red);text-transform:uppercase;letter-spacing:1px;margin:0;text-shadow:2px 2px 0 var(--yellow);background:none;border:0;padding:0}
+.notice .sub{font-family:var(--f-comic);font-size:15px;margin-top:6px}
+.notice ol{margin:10px 0 0;padding-left:22px;display:grid;gap:7px;font-size:16px}
+.notice .ok{margin-top:11px;background:#e6ffe6;border:3px dashed var(--green);padding:9px;font-family:var(--f-comic);font-size:14px}
+.notice .ok b{color:var(--green)}
+
+/* ---------- bannière ---------- */
+.banner{background:radial-gradient(circle at 50% 120%,#3b007a,#000040 70%);text-align:center;padding:16px 12px;border-block:5px ridge var(--cyan)}
+.wa{margin:0;font-family:var(--f-impact);font-size:clamp(30px,8vw,66px);letter-spacing:1px;line-height:1}
+.wa span{display:inline-block;text-shadow:2px 2px 0 #000,4px 4px 0 rgba(0,0,0,.45);animation:bounce 1.9s ease-in-out infinite}
+.wa span:nth-child(6n+1){color:#ff2d95}.wa span:nth-child(6n+2){color:#ffff33}
+.wa span:nth-child(6n+3){color:#00d9ff}.wa span:nth-child(6n+4){color:#39e639}
+.wa span:nth-child(6n+5){color:#ff8a00}.wa span:nth-child(6n){color:#c77dff}
+.wa span:nth-child(2n){animation-delay:.15s}.wa span:nth-child(3n){animation-delay:.3s}
+@keyframes bounce{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-7px) rotate(4deg)}}
 .banner .sub{color:#aef;font-family:var(--f-comic);font-size:15px;margin-top:9px}
-.banner .gifs{margin-top:9px;font-size:23px;letter-spacing:6px}
-.banner .gifs span{display:inline-block;animation:bounce 1.6s ease-in-out infinite}
-.banner .gifs span:nth-child(2){animation-delay:.2s}
-.banner .gifs span:nth-child(3){animation-delay:.4s}
-.banner .gifs span:nth-child(4){animation-delay:.6s}
-.banner .gifs span:nth-child(5){animation-delay:.8s}
-.banner .gifs span:nth-child(6){animation-delay:1s}
-@keyframes bounce{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-9px) rotate(6deg)}}
+.banner .gifs{margin-top:8px;font-size:23px;letter-spacing:6px}
 
-.cols{display:grid;grid-template-columns:200px 1fr}
-@media(max-width:800px){.cols{grid-template-columns:1fr}}
-.side{background:linear-gradient(#ffe9fb,#e3f4ff);border-right:4px ridge var(--purple);padding:13px;min-width:0}
-@media(max-width:800px){.side{border-right:0;border-bottom:4px ridge var(--purple)}}
+.cols{display:grid;grid-template-columns:212px 1fr 196px;align-items:stretch}
+@media(max-width:1100px){.cols{grid-template-columns:206px 1fr}}
+@media(max-width:820px){.cols{grid-template-columns:1fr}}
+
+/* ---------- régie publicitaire ---------- */
+.adrail{background:repeating-linear-gradient(135deg,#fff6fb 0 10px,#f2ecff 10px 20px);border-left:4px ridge var(--orange);padding:9px;min-width:0;display:grid;gap:8px;align-content:start}
+@media(max-width:1100px){.adrail{grid-column:1/-1;border-left:0;border-top:4px ridge var(--orange);grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}}
+.adrail h4,.adslot .tag{font-family:var(--f-mono);font-size:8px;color:#8a8a8a;letter-spacing:1.4px;text-transform:uppercase}
+.adslot{display:grid;gap:2px;min-width:0}
+.side .adslot{margin-top:8px}
+.adbox{border:1px solid #8a8a8a;background:#fff;cursor:pointer;padding:0;overflow:hidden;min-width:0;line-height:0}
+.adbox:hover{outline:2px solid var(--pink)}
+.adbox svg{display:block;width:100%;height:auto}
+.ad-bk{animation:blink 1s steps(1,end) infinite}
+.adstrip{padding:11px;background:repeating-linear-gradient(45deg,#fff9e6 0 12px,#fff3d0 12px 24px);border-top:4px dashed var(--pink);display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.adstrip .lbl{grid-column:1/-1;font-family:var(--f-mono);font-size:10px;color:#777;text-align:center;letter-spacing:1px}
+.sideads{display:grid;gap:8px;margin-top:10px}
+.widget{background:#fff;border:3px outset var(--silver);padding:8px;font-family:var(--f-comic);font-size:12px;line-height:1.45}
+.widget p+p{margin-top:4px}
+.meteo b{font-family:var(--f-mono);color:#0a7a3a}
+.meteo ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:3px;font-size:11px}
+.meteo li{display:flex;gap:5px;align-items:center}
+.dot{width:9px;height:9px;border-radius:50%;flex:none;border:1px solid #0006}
+.dot.up{background:#2ecc40}.dot.slow{background:#ffcc00}.dot.down{background:#e01b1b}
+.motdujour b{display:block;font-family:var(--f-impact);font-size:15px;color:#0000aa;letter-spacing:.5px}
+.motdujour .btn{margin-top:6px;font-size:11px;padding:4px 8px;width:100%}
+.lastsign{display:grid;gap:5px;font-size:11px}
+.lastsign i{font-style:normal;color:#aa0066;font-weight:700}
+.liens{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:12px}
+.liens button{background:none;border:0;color:#0000ee;text-decoration:underline;cursor:pointer;font-family:var(--f-comic);font-size:12px;text-align:left;padding:0}
+.news input{width:100%;margin-top:5px;font-size:12px}
+.news .btn{margin-top:5px;font-size:11px;padding:4px 8px;width:100%}
+.adrail .adslot.sticky{position:sticky;top:12px}
+.topsearch{list-style:none;margin:0;padding:0;counter-reset:ts;font-size:11px;display:grid;gap:3px}
+.topsearch li::before{counter-increment:ts;content:counter(ts) ". ";font-family:var(--f-mono);color:var(--red);font-weight:700}
+.adwin .ct{background:repeating-linear-gradient(135deg,#fff 0 9px,#fff6fb 9px 18px)}
+.side{background:linear-gradient(#ffe9fb,#e3f4ff);border-right:4px ridge var(--purple);padding:12px;min-width:0;display:flex;flex-direction:column;gap:0}
+@media(max-width:820px){.side{border-right:0;border-bottom:4px ridge var(--purple)}}
 .side h3{font-family:var(--f-comic);font-size:13px;margin:0 0 7px;color:#fff;text-transform:uppercase;background:var(--purple);padding:4px 6px;border:2px outset #fff;text-shadow:1px 1px 0 #000}
-.menu{list-style:none;margin:0 0 15px;padding:0;font-family:var(--f-comic);font-size:14px}
+.side h3.alt{background:var(--orange)}.side h3.alt2{background:var(--green)}.side h3.alt3{background:var(--red)}
+.menu{list-style:none;margin:0 0 14px;padding:0;font-family:var(--f-comic);font-size:14px}
 .menu li{margin-bottom:5px}
 .menu a{display:block;background:linear-gradient(#fff,#d9d9ff);border:2px outset #fff;padding:4px 7px;color:#0000aa;text-decoration:none;font-weight:700}
 .menu a:hover{background:var(--yellow);border-style:inset;transform:translateX(3px)}
 .odo{background:#000;border:3px inset var(--silver);padding:5px;text-align:center;font-family:var(--f-mono);font-size:19px;color:#0f0;letter-spacing:3px;text-shadow:0 0 6px #0f0}
-.side small{display:block;font-family:var(--f-comic);font-size:11px;color:#222;margin-top:8px;line-height:1.4}
-.badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.clock{background:#000;border:3px inset var(--silver);padding:4px;text-align:center;font-family:var(--f-mono);font-size:14px;color:var(--cyan);margin-top:6px}
+.side small{display:block;font-family:var(--f-comic);font-size:11px;color:#222;margin-top:7px;line-height:1.4}
+.badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
 .badge{font-family:var(--f-mono);font-size:9px;font-weight:700;padding:4px;border:2px outset #fff;background:#000;color:#0f0;text-align:center;line-height:1.2}
 .badge.b{background:#fff;color:#0000aa;border-color:var(--silver)}
 .badge.c{background:var(--red);color:#fff}
 .badge.d{background:var(--pink);color:#fff}
-.opt{display:grid;gap:6px;margin-top:4px}
+.badge.e{background:var(--cyan);color:#003344}
+.opt{display:grid;gap:6px}
 .opt .btn{width:100%;font-size:12px;padding:6px 8px}
 
-.main{padding:16px;min-width:0;background:
-  repeating-linear-gradient(180deg,transparent 0 38px,rgba(255,45,149,.04) 38px 39px)}
-
-h2{
-  font-family:var(--f-comic);font-size:clamp(19px,3.6vw,27px);margin:0;color:#fff;
-  padding:7px 10px;border:3px outset #fff;text-shadow:2px 2px 0 #000;text-wrap:balance;
-}
+.main{padding:15px;min-width:0;background:repeating-linear-gradient(180deg,transparent 0 38px,rgba(255,45,149,.04) 38px 39px)}
+h2{font-family:var(--f-comic);font-size:clamp(18px,3.4vw,26px);margin:0;color:#fff;padding:7px 10px;border:3px outset #fff;text-shadow:2px 2px 0 #000;text-wrap:balance}
 h2.c1{background:linear-gradient(90deg,#ff2d95,#ff8a00)}
 h2.c2{background:linear-gradient(90deg,#9d3cff,#00d9ff)}
 h2.c3{background:linear-gradient(90deg,#007a3d,#39e639)}
 h2.c4{background:linear-gradient(90deg,#e00000,#ff8a00)}
 h2.c5{background:linear-gradient(90deg,#0000aa,#00d9ff)}
 h2.c6{background:linear-gradient(90deg,#ff8a00,#ffff33);color:#4a2500;text-shadow:1px 1px 0 #fff}
+h2.c7{background:linear-gradient(90deg,#aa0066,#ff2d95)}
 h3{font-family:var(--f-comic);font-size:17px;margin:0;color:#aa0066}
-section{padding-block:10px 20px}
-section+section{border-top:4px dashed var(--cyan);padding-top:16px}
-.lead{margin-top:10px;max-width:62ch}
+h4{font-family:var(--f-impact);font-size:17px;margin:0;color:#0000aa;letter-spacing:.5px}
+section{padding-block:10px 18px}
+section+section{border-top:4px dashed var(--cyan);padding-top:14px}
+.lead{margin-top:9px;max-width:60ch}
+.tilt{transform:rotate(-1deg)}.tilt2{transform:rotate(.8deg)}
 .blink{animation:blink 1s steps(1,end) infinite;color:var(--red);font-weight:700}
 @keyframes blink{50%{opacity:0}}
-.neon{animation:hue 5s linear infinite;font-weight:700;color:var(--pink)}
-.new{background:var(--red);color:#fff;font-family:var(--f-mono);font-size:10px;font-weight:700;padding:1px 4px;vertical-align:middle;animation:blink 1.4s steps(1,end) infinite}
-
-.btn{font-family:var(--f-comic);font-weight:700;font-size:14px;background:linear-gradient(#fff,var(--silver));border:3px outset #fff;padding:6px 12px;color:#000;cursor:pointer;text-decoration:none;display:inline-block}
+.new{background:var(--red);color:#fff;font-family:var(--f-mono);font-size:10px;font-weight:700;padding:1px 4px;animation:blink 1.4s steps(1,end) infinite}
+.btn{font-family:var(--f-comic);font-weight:700;font-size:14px;background:linear-gradient(#fff,var(--silver));border:3px outset #fff;padding:6px 12px;color:#000;cursor:pointer;display:inline-block;text-decoration:none}
 .btn:hover{background:linear-gradient(#ffffcc,var(--yellow))}
 .btn:active{border-style:inset}
 .btn.big{font-size:17px;padding:10px 17px;background:linear-gradient(#9bff9b,var(--lime));color:#003300;animation:pulse 1.5s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
 .btn.red{background:linear-gradient(#ff8080,var(--red));color:#fff}
 .btn.blue{background:linear-gradient(#80c8ff,#3366cc);color:#fff}
 .btn.pink{background:linear-gradient(#ff9fd4,var(--pink));color:#fff}
-.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.btn[disabled]{opacity:.55;cursor:not-allowed;animation:none}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px;align-items:center}
+input[type=text]{font-family:var(--f-mono);font-size:14px;border:3px inset var(--silver);padding:5px 7px;min-width:0;background:#fff;color:#000}
 
 /* ---------- défi ---------- */
-.defi{border:5px ridge var(--lime);background:linear-gradient(#f0fff2,#e4fff8);padding:14px;margin-top:12px}
-.defi ol{margin:10px 0 0;padding-left:20px;font-size:15px}
-.jauge{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
+.defi{border:5px ridge var(--lime);background:linear-gradient(#f0fff2,#e4fff8);padding:13px;margin-top:11px}
+.defi ol{margin:9px 0 0;padding-left:20px;font-size:15px;display:grid;gap:4px}
+.jauge{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
 .pastille{width:32px;height:32px;border:3px outset #fff;background:var(--silver);font-family:var(--f-mono);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
 .pastille.ok{background:linear-gradient(#9bff9b,var(--lime));color:#003300}
 .pastille.ko{background:linear-gradient(#ff8080,var(--red));color:#fff}
 
+/* ---------- quiz / sondage / livre d'or ---------- */
+.mod{border:5px ridge var(--cyan);background:var(--cream);padding:13px;margin-top:11px}
+.mod.pinkb{border-color:var(--pink)}
+.mod.orangeb{border-color:var(--orange)}
+.q{border:2px dashed var(--steel);padding:10px;margin-top:9px;background:#fff}
+.q p.qt{font-family:var(--f-comic);font-weight:700;color:#0000aa;font-size:15px}
+.q .choices{display:grid;gap:6px;margin-top:8px}
+.q .choices button{text-align:left;font-size:13px}
+.q .fb{margin-top:8px;padding:8px;font-size:14px;border:3px solid}
+.q .fb.ok{background:#e8ffe8;border-color:var(--green);color:#004d26}
+.q .fb.ko{background:#ffeaea;border-color:var(--red);color:#7a0000}
+.poll{display:grid;gap:7px;margin-top:9px}
+.poll .opt-row{display:grid;gap:3px}
+.poll .lab{font-size:14px;font-family:var(--f-comic)}
+.poll .track{height:19px;border:2px inset var(--silver);background:#fff}
+.poll .track i{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,var(--pink) 0 9px,var(--purple) 9px 18px);transition:width .5s ease}
+.gb{border:3px inset var(--silver);background:#f8f8ff;padding:10px;margin-top:9px;max-height:230px;overflow:auto}
+.gb .e{border-bottom:2px dotted var(--steel);padding-bottom:8px;margin-bottom:8px;font-size:15px}
+.gb .e:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.gb .who{font-family:var(--f-comic);font-weight:700;color:#0000aa}
+.gb .when{font-family:var(--f-mono);font-size:11px;color:var(--steel)}
+
 /* ---------- décodeur ---------- */
-.deck{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:12px}
-.term{border:4px outset var(--cyan);background:var(--cream);padding:11px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.deck{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));margin-top:11px}
+.term{border:4px outset var(--cyan);background:var(--cream);padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .term:nth-child(2n){border-color:var(--pink)}
 .term:nth-child(3n){border-color:var(--lime)}
 .term:nth-child(5n){border-color:var(--orange)}
-.term .w{font-family:var(--f-comic);font-weight:700;font-size:19px;color:#0000aa}
-.term .w small{display:block;font-size:11px;color:var(--steel);font-weight:400}
+.term .w{font-family:var(--f-impact);font-size:21px;color:#0000aa;letter-spacing:.5px}
+.term .w small{display:block;font-family:var(--f-comic);font-size:11px;color:var(--steel);letter-spacing:0}
 .term .tr{font-size:15px}
-.term .ask{background:var(--yellow);border:3px dashed var(--red);padding:9px;font-size:14px}
+.term .ask{background:var(--yellow);border:3px dashed var(--red);padding:8px;font-size:14px}
 .term .ask b{display:block;font-family:var(--f-comic);font-size:12px;color:var(--red)}
 .term .btn{align-self:flex-start;margin-top:auto;font-size:12px;padding:4px 9px}
 
-/* ---------- encadrés ---------- */
-.essentiel{border:4px dashed var(--red);background:linear-gradient(#ffff99,#ffffcc);padding:13px;margin:12px 0 16px;max-width:64ch}
+/* ---------- article ---------- */
+.essentiel{border:4px dashed var(--red);background:linear-gradient(#ffff99,#ffffcc);padding:12px;margin:11px 0 14px;max-width:62ch}
 .essentiel b{font-family:var(--f-comic);font-size:14px;color:var(--red)}
 .essentiel ul{margin:8px 0 0;padding-left:20px;font-size:16px;display:grid;gap:5px}
-.art{max-width:64ch;display:grid;gap:13px;margin-top:10px}
-.pull{max-width:64ch;margin:4px 0;border-block:4px double var(--pink);padding:11px 0;font-family:var(--f-comic);font-size:18px;color:#aa0066}
-.tbl-wrap{overflow-x:auto;margin-top:12px}
+.art{max-width:60ch;display:grid;gap:9px;margin-top:8px}
+.art h4{margin-top:7px}
+.art p{font-size:16.5px}
+.pull{max-width:62ch;margin:9px 0;border-block:4px double var(--pink);padding:10px 0;font-family:var(--f-comic);font-size:18px;color:#aa0066}
+.tbl-wrap{overflow-x:auto;margin-top:11px}
 table.retro{border-collapse:collapse;width:100%;min-width:420px;background:#fff}
-table.retro th,table.retro td{border:2px solid var(--steel);padding:7px 9px;text-align:left;vertical-align:top;font-size:15px}
+table.retro th,table.retro td{border:2px solid var(--steel);padding:6px 8px;text-align:left;vertical-align:top;font-size:15px}
 table.retro th{background:linear-gradient(#5a00b0,#9d3cff);color:var(--yellow);font-family:var(--f-comic);font-size:14px;text-shadow:1px 1px 0 #000}
 table.retro tr:nth-child(even) td{background:#f2f0ff}
 table.retro td.h{font-family:var(--f-comic);font-weight:700;color:#aa0066}
 
-.rubs{display:grid;gap:9px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin-top:12px}
-.rub{border:4px outset var(--yellow);background:linear-gradient(#fff,#f2f2ff);padding:11px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rubs{display:grid;gap:9px;grid-template-columns:repeat(auto-fit,minmax(212px,1fr));margin-top:11px}
+.rub{border:4px outset var(--yellow);background:linear-gradient(#fff,#f2f2ff);padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .rub:nth-child(2n){border-color:var(--cyan)}
 .rub:nth-child(3n){border-color:var(--pink)}
 .rub p{font-size:14px}
 .soon{align-self:flex-start;margin-top:auto;font-family:var(--f-mono);font-size:10px;background:var(--red);color:#fff;padding:3px 6px;animation:blink 1.8s steps(1,end) infinite}
 
-details{border:4px outset var(--purple);background:var(--cream);margin-top:14px}
+details{border:4px outset var(--purple);background:var(--cream);margin-top:12px}
 summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:700;font-size:15px;color:#5a00b0}
 .dt{padding:0 12px 12px}
-.dt .r{display:grid;grid-template-columns:150px 1fr;gap:3px 16px;padding:8px 0;border-top:2px dotted var(--steel);min-width:0}
+.dt .r{display:grid;grid-template-columns:148px 1fr;gap:3px 16px;padding:8px 0;border-top:2px dotted var(--steel);min-width:0}
 .dt dt{font-family:var(--f-comic);font-size:13px;color:var(--red)}
 .dt dd{margin:0;font-size:15px;min-width:0}
 .dt ol{margin:0;padding-left:18px}
 @media(max-width:560px){.dt .r{grid-template-columns:1fr}}
 
-.foot{background:radial-gradient(circle at 50% -20%,#3b007a,#000040 70%);color:#cde;padding:16px;text-align:center;font-size:13px;border-top:5px ridge var(--cyan)}
+.foot{background:radial-gradient(circle at 50% -20%,#3b007a,#000040 70%);color:#cde;padding:15px;text-align:center;font-size:13px;border-top:5px ridge var(--cyan)}
 .foot a{color:#9ff}
-.webring{font-family:var(--f-comic);font-size:12px;background:#000;border:3px outset var(--lime);display:inline-block;padding:6px 10px;margin-bottom:10px;color:#0f0;text-shadow:0 0 5px #0f0}
-.works{font-family:var(--f-comic);font-size:15px;color:var(--yellow);margin-bottom:8px}
+.webring{font-family:var(--f-comic);font-size:12px;background:#000;border:3px outset var(--lime);display:inline-block;padding:6px 10px;margin-bottom:9px;color:#0f0;text-shadow:0 0 5px #0f0}
+.webring button{background:#000;border:0;color:#0f0;font-family:inherit;font-size:12px;cursor:pointer;text-decoration:underline}
+.works{font-family:var(--f-comic);font-size:15px;color:var(--yellow);margin-bottom:7px}
 .works span{display:inline-block;animation:wob 1.3s ease-in-out infinite}
 @keyframes wob{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+.powered{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:9px}
 
-/* ---------- barres d'outils parasites ---------- */
+/* ---------- barres parasites + pubs ---------- */
 .tb-stack{display:grid}
 .tbbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:5px 8px;border-bottom:2px ridge var(--silver);font-family:var(--f-comic);font-size:12px}
 .tbbar.a{background:linear-gradient(#ffd9a0,#ffb347)}
 .tbbar.b{background:linear-gradient(#d8c8ff,#b39ddb)}
 .tbbar.c{background:linear-gradient(#bfe8ff,#81d4fa)}
-.tbbar input{border:2px inset var(--silver);padding:3px 5px;font-family:var(--f-mono);font-size:12px;flex:1 1 110px;min-width:0}
+.tbbar input{flex:1 1 110px}
 .tbbar .btn{font-size:11px;padding:3px 7px;border-width:2px}
-
-/* ---------- pubs ---------- */
-.ad{border:5px ridge var(--pink);background:linear-gradient(90deg,#fff0f8,#e8f8ff,#fff8e0);background-size:200% 100%;animation:shift 4s linear infinite;padding:9px;margin:12px 0;text-align:center;font-family:var(--f-comic);font-size:14px;color:#aa0066}
+.ad{border:5px ridge var(--pink);background:linear-gradient(90deg,#fff0f8,#e8f8ff,#fff8e0);background-size:200% 100%;animation:shift 4s linear infinite;padding:9px;margin:11px 0;text-align:center;font-family:var(--f-comic);font-size:14px;color:#aa0066}
 .ad .btn{font-size:11px;padding:3px 8px;margin-top:5px}
 
 /* ---------- fenêtres ---------- */
@@ -209,7 +257,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
 .win .bar i{display:block;height:100%;width:0;background:#000080;transition:width .25s linear}
 .win .note{font-size:12px;color:#333;border-top:2px dotted var(--steel);padding-top:7px;margin-top:9px}
 .w1{top:9%;left:6%}.w2{top:17%;left:26%}.w3{top:27%;left:11%}.w4{top:35%;left:31%}.w5{top:44%;left:16%}.w6{top:20%;left:20%}
-@media(max-width:800px){
+@media(max-width:820px){
   .w1,.w2,.w3,.w4,.w5,.w6{left:50%;right:auto;transform:translateX(-50%)}
   .w1{top:7%}.w2{top:13%}.w3{top:19%}.w4{top:25%}.w5{top:31%}.w6{top:10%}
 }
@@ -221,61 +269,98 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
 .verdict.ko{background:#ffe8e8;border-color:var(--red);color:var(--red)}
 .verdict.ok{background:#e8ffe8;border-color:var(--green);color:var(--green)}
 
-/* ---------- plein écran ---------- */
 .overlay{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:18px}
 .overlay .inner{max-width:520px;width:100%;text-align:center}
 .ov-ranson{background:#0a0a0a;color:#ff3b3b;font-family:var(--f-mono)}
-.ov-ranson h3{font-family:var(--f-mono);color:#ff3b3b;font-size:clamp(21px,5vw,34px);margin:0 0 12px;text-shadow:0 0 12px #f00}
+.ov-ranson h3{font-family:var(--f-mono);color:#ff3b3b;font-size:clamp(20px,5vw,33px);margin:0 0 12px;text-shadow:0 0 12px #f00}
 .ov-ranson .cd{font-size:46px;font-weight:700;color:#fff}
 .ov-remote{background:#001a33;color:#9fd;font-family:var(--f-mono)}
-.ov-remote h3{font-family:var(--f-mono);color:#9fd;font-size:clamp(19px,4.4vw,28px);margin:0 0 12px}
+.ov-remote h3{font-family:var(--f-mono);color:#9fd;font-size:clamp(18px,4.4vw,27px);margin:0 0 12px}
 .ov-remote .log{text-align:left;background:#000;border:2px solid #2a6;padding:10px;font-size:13px;min-height:120px;max-height:190px;overflow:auto;color:#6f6}
 .fakecursor{position:fixed;z-index:95;font-size:22px;pointer-events:none;transition:left .55s ease,top .55s ease}
 
-/* ---------- score ---------- */
-.score{
-  position:fixed;z-index:60;left:max(10px,env(safe-area-inset-left,0px));
-  bottom:calc(10px + env(safe-area-inset-bottom,0px));
-  width:196px;background:var(--silver);border:3px outset #fff;font-family:var(--f-comic);font-size:12px;
-  box-shadow:4px 4px 0 rgba(0,0,0,.4);
-}
+/* ---------- score + bot ---------- */
+.score{position:fixed;z-index:60;left:max(10px,env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));width:198px;background:var(--silver);border:3px outset #fff;font-family:var(--f-comic);font-size:12px;box-shadow:4px 4px 0 rgba(0,0,0,.4)}
 .score .tb{background:linear-gradient(90deg,#aa0066,#ff2d95);color:#fff;font-weight:700;padding:3px 6px;font-size:12px;display:flex;gap:6px}
 .score .tb button{margin-left:auto;background:var(--silver);border:2px outset #fff;font-family:var(--f-mono);font-size:10px;cursor:pointer;padding:0 4px}
 .score .ct{padding:8px;background:linear-gradient(#fff,#ffe9f6)}
-.score .jauge{margin-top:7px;gap:4px}
+.score .jauge{margin-top:6px;gap:4px}
 .score .pastille{width:25px;height:25px;font-size:12px;border-width:2px}
-.score .btn{width:100%;margin-top:7px;font-size:11px;padding:5px}
-@media(max-width:480px){.score{width:168px}}
+.score .btn{width:100%;margin-top:6px;font-size:11px;padding:5px}
+.bot{position:fixed;z-index:60;right:max(10px,env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));width:min(260px,calc(100vw - 24px));background:var(--silver);border:3px outset #fff;font-family:var(--f-comic);font-size:12px;box-shadow:4px 4px 0 rgba(0,0,0,.4)}
+.bot .tb{background:linear-gradient(90deg,#00557a,#00d9ff);color:#003;font-weight:700;padding:3px 6px;display:flex;gap:6px;cursor:pointer}
+.bot .tb button{margin-left:auto;background:var(--silver);border:2px outset #fff;font-family:var(--f-mono);font-size:10px;cursor:pointer;padding:0 4px}
+.bot .ct{padding:8px;display:grid;gap:6px;max-height:250px;overflow:auto;background:#f0fbff}
+.bot .msg{background:#fff;border-left:4px solid var(--cyan);padding:6px 7px;font-size:12px}
+.bot .btn{font-size:11px;padding:4px 7px;text-align:left}
+@media(max-width:560px){.score{width:160px}.bot{width:min(200px,calc(100vw - 24px))}}
 
-/* ---------- certificat ---------- */
-.cert{position:fixed;z-index:92;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,calc(100vw - 24px));max-height:86vh;overflow:auto;background:var(--cream);border:10px ridge #ffcf33;padding:18px;box-shadow:0 0 0 9999px rgba(0,0,0,.7)}
-.cert h3{font-family:var(--f-comic);font-size:23px;color:var(--red);text-align:center;text-shadow:2px 2px 0 var(--yellow)}
+.cert{position:fixed;z-index:92;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,calc(100vw - 24px));max-height:86vh;overflow:auto;background:var(--cream);border:10px ridge #ffcf33;padding:17px;box-shadow:0 0 0 9999px rgba(0,0,0,.7)}
+.cert h3{font-family:var(--f-impact);font-size:24px;color:var(--red);text-align:center;text-shadow:2px 2px 0 var(--yellow)}
 .cert .seal{text-align:center;font-size:36px;margin:6px 0}
 .cert .close{display:block;margin:14px auto 0}
 
-/* ---------- émojis ---------- */
 .sparkle{position:fixed;pointer-events:none;z-index:85;font-size:17px;animation:fade .85s ease-out forwards}
 @keyframes fade{to{opacity:0;transform:translateY(-26px) rotate(22deg) scale(.5)}}
 .drop{position:fixed;top:-30px;pointer-events:none;z-index:1;font-size:19px;animation:fall linear forwards}
 @keyframes fall{to{transform:translateY(105vh) rotate(260deg)}}
 
+/* ---------- Gontrand, l'oie de garde ---------- */
+.goose{position:fixed;z-index:58;bottom:calc(6px + env(safe-area-inset-bottom,0px));left:40%;width:94px;cursor:pointer;transition:left 2.6s linear}
+.goose svg{display:block;width:100%;height:auto;overflow:visible}
+.goose g{transform-box:view-box}
+.g-body{transform-origin:62px 58px;animation:bob .54s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(0) rotate(-1.1deg)}to{transform:translateY(-2.6px) rotate(1.1deg)}}
+.g-neck{transform-origin:50px 60px;animation:neckSway 2.1s ease-in-out infinite alternate}
+@keyframes neckSway{from{transform:rotate(-3deg)}to{transform:rotate(4deg)}}
+.g-leg-a{transform-origin:54px 70px;animation:stepA .54s ease-in-out infinite alternate}
+.g-leg-b{transform-origin:68px 70px;animation:stepA .54s ease-in-out infinite alternate-reverse}
+@keyframes stepA{from{transform:rotate(-15deg)}to{transform:rotate(15deg)}}
+.g-shadow{animation:shad .54s ease-in-out infinite alternate}
+@keyframes shad{from{opacity:.26}to{opacity:.13}}
+.goose.flip{transform:scaleX(-1)}
+.bubble{position:absolute;bottom:86px;left:50%;transform:translateX(-50%);width:max-content;max-width:min(250px,68vw);background:#fff;border:3px solid #000;border-radius:11px;padding:7px 9px;font-family:var(--f-comic);font-size:12px;line-height:1.35;color:#000}
+.goose.flip .bubble{transform:translateX(-50%) scaleX(-1)}
+.postit{position:fixed;z-index:57;width:172px;background:linear-gradient(#fffac0,#ffe97a);border:2px solid #d9c24a;box-shadow:3px 3px 0 rgba(0,0,0,.3);padding:10px 9px 9px;font-family:var(--f-comic);font-size:12px;line-height:1.4;transform:rotate(-3deg)}
+.postit:nth-of-type(even){transform:rotate(2.5deg)}
+.postit b{display:block;font-size:11px;color:#8a6d00;margin-bottom:3px}
+.postit button{position:absolute;top:1px;right:4px;border:0;background:none;font-family:var(--f-mono);font-size:13px;cursor:pointer;color:#8a6d00}
+
 @media (prefers-reduced-motion:reduce){
-  body,.ticker span,.ticker,.rainbow,.banner h1,.banner .gifs span,.btn.big,.blink,.neon,.new,.soon,.ad,.works span{animation:none !important}
+  .goose{transition:none}
+  .goose svg *{animation:none !important}
+  body,.ticker span,.ticker,.rainbow,.wa span,.btn.big,.blink,.new,.soon,.ad,.works span{animation:none !important}
   .sparkle,.drop{display:none}
+  .tilt,.tilt2{transform:none}
 }
 </style>
 
 <div class="shell">
 <div class="frame" id="page">
 
-  <div class="ticker a" aria-hidden="true"><span>★彡 BIENVENU SUR PÉRIMÈTRE 2000 !!! 彡★ · 🔥 LE SITE QUI EXPLIQUE LA CYBERSÉCURITÉ AUX RH !!! 🔥 · ⚡ NOUVO : LE DÉCODEUR DE SIGLES ⚡ · 💥 5 PIÈGES VOUS ATTENDENT !!! 💥 · 🎉 SIGNEZ LE LIVRE D'OR 🎉 · ★彡 BIENVENU SUR PÉRIMÈTRE 2000 !!! 彡★ · 🔥 LE SITE QUI EXPLIQUE LA CYBERSÉCURITÉ AUX RH !!! 🔥 · ⚡ NOUVO : LE DÉCODEUR DE SIGLES ⚡ · 💥 5 PIÈGES VOUS ATTENDENT !!! 💥 · 🎉 SIGNEZ LE LIVRE D'OR 🎉 · </span></div>
+  <div class="ticker a" aria-hidden="true"><span>★彡 BIENVENU SUR PÉRIMÈTRE 2000 !!! 彡★ · 🔥 ON EXPLIQUE LA CYBERSÉCURITÉ AUX RH !!! 🔥 · ⚡ TESTEZ LE DÉCODEUR DE SIGLES ⚡ · 💥 5 PIÈGES VOUS ATTENDENT !!! 💥 · ✍️ SIGNEZ LE LIVRE D'OR ✍️ · 🗳️ VOTEZ AU SONDAGE 🗳️ · ★彡 BIENVENU SUR PÉRIMÈTRE 2000 !!! 彡★ · 🔥 ON EXPLIQUE LA CYBERSÉCURITÉ AUX RH !!! 🔥 · ⚡ TESTEZ LE DÉCODEUR DE SIGLES ⚡ · 💥 5 PIÈGES VOUS ATTENDENT !!! 💥 · ✍️ SIGNEZ LE LIVRE D'OR ✍️ · 🗳️ VOTEZ AU SONDAGE 🗳️ · </span></div>
 
   <div class="tb-stack" id="tbStack"></div>
 
+  <div class="notice" id="notice">
+    <h2>⚠ Lisez ceci avant d'entrer ⚠</h2>
+    <p class="sub"><strong>Ce site n'est pas une arnaque. C'est un exercice de sensibilisation.</strong></p>
+    <ol>
+      <li><strong>Il est moche exprès.</strong> Il copie les sites des années 2000. Ces codes visuels servent encore aux vraies arnaques.</li>
+      <li><strong>Cinq fausses fenêtres vont s'ouvrir.</strong> Elles sont simulées. Chacune vous explique ensuite ce qu'il fallait repérer.</li>
+      <li><strong>Vous pouvez tout couper.</strong> Le bouton « Couper les pop-up » est dans le menu, à gauche.</li>
+      <li><strong>Rien n'est collecté.</strong> Aucun champ n'envoie de donnée. Aucun fichier n'est touché. Tout reste dans votre navigateur.</li>
+      <li><strong>Les publicités sont fausses.</strong> Elles imitent les régies des années 2000. Cliquez dessus : elles vous expliquent leur propre piège.</li>
+      <li><strong>Une oie se promène en bas de l'écran.</strong> Elle s'appelle Gontrand. Elle donne l'alerte, comme les oies du Capitole. Vous pouvez la renvoyer depuis le menu.</li>
+      <li><strong>Le fond est sérieux.</strong> Ce site explique les métiers de la sécurité aux ressources humaines.</li>
+    </ol>
+    <p class="ok"><b>Pressé ?</b> Faites le quiz, puis lisez le décodeur de sigles. Cinq minutes suffisent. <button class="btn" type="button" id="goQuiz">Aller au quiz</button></p>
+  </div>
+
   <header class="banner" id="haut">
-    <h1>~*~ Périmètre 2000 ~*~</h1>
-    <p class="sub">★ La sécurité des infrastructures expliquée aux ressources humaines ★</p>
-    <p class="gifs" aria-hidden="true"><span>💾</span><span>🛡️</span><span>📠</span><span>💿</span><span>🔐</span><span>📡</span></p>
+    <h1 class="wa" aria-label="Périmètre 2000"><span>P</span><span>é</span><span>r</span><span>i</span><span>m</span><span>è</span><span>t</span><span>r</span><span>e</span><span>&nbsp;</span><span>2</span><span>0</span><span>0</span><span>0</span></h1>
+    <p class="sub">★ On traduit la sécurité informatique pour les ressources humaines ★</p>
+    <p class="gifs" aria-hidden="true">💾 🛡️ 📠 💿 🔐 📡</p>
     <p class="sub"><span class="blink">!!! MISE A JOUR : 21/10/2026 !!!</span> <span class="new">NEW</span></p>
   </header>
   <div class="rainbow" aria-hidden="true"></div>
@@ -286,119 +371,185 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     <aside class="side">
       <h3>★ Menu ★</h3>
       <ul class="menu">
-        <li><a href="#defi">🎮 Le défi vigilance</a></li>
+        <li><a href="#quiz">🧠 Le quiz</a></li>
+        <li><a href="#defi">🎮 Le défi</a></li>
         <li><a href="#decodeur">🔎 Le décodeur</a></li>
         <li><a href="#article">📰 L'article</a></li>
+        <li><a href="#sondage">🗳️ Le sondage</a></li>
         <li><a href="#rubriques">📁 Rubriques</a></li>
         <li><a href="#paraitre">📅 À paraître</a></li>
+        <li><a href="#livredor">✍️ Livre d'or</a></li>
         <li><a href="#apropos">👋 À propos</a></li>
       </ul>
 
-      <h3>★ Options ★</h3>
+      <h3 class="alt3">★ Réglages ★</h3>
       <div class="opt">
         <button class="btn pink" id="popToggle" type="button">🚫 Couper les pop-up</button>
         <button class="btn" id="fxToggle" type="button">✨ Couper les émojis</button>
+        <button class="btn" id="gooseToggle" type="button">🪿 Renvoyer l'oie</button>
+        <button class="btn" id="midiBtn" type="button">♪ Activer le MIDI</button>
       </div>
       <small id="optState">Pop-up activées, émojis activés.</small>
 
-      <h3 style="margin-top:14px">★ Visiteurs ★</h3>
+      <h3 class="alt" style="margin-top:13px">★ Visiteurs ★</h3>
       <div class="odo" id="odo">000000</div>
-      <small>compteur remis à zéro 11 fois depuis 1999 !!</small>
+      <div class="clock" id="clock">--:--:--</div>
+      <small>Compteur remis à zéro 11 fois depuis 1999 !!</small>
 
-      <h3 style="margin-top:14px">★ Certifié ★</h3>
+      <h3 class="alt2" style="margin-top:13px">★ Certifié ★</h3>
       <div class="badges" aria-hidden="true">
         <span class="badge">NETSCAPE<br>NOW!</span>
         <span class="badge b">800x600<br>RECOMMANDÉ</span>
         <span class="badge c">0 VIRUS<br>(promis)</span>
         <span class="badge d">100%<br>RH FRIENDLY</span>
+        <span class="badge e">SANS<br>JARGON</span>
       </div>
 
-      <h3 style="margin-top:14px">★ Le saviez-vous ★</h3>
-      <small>Un salarié met quelques secondes à cliquer sur un lien piégé. La sensibilisation fait partie du travail de l'administrateur sécurité !</small>
+      <div class="sideads">
+        <div class="adslot"><span class="tag">publicité</span><div class="adbox" data-ad-fake data-creative="turbo"></div></div>
+        <div class="adslot"><span class="tag">publicité</span><div class="adbox" data-ad-fake data-creative="voiture"></div></div>
+        <div class="adslot"><span class="tag">publicité</span><div class="adbox" data-ad-fake data-creative="chat"></div></div>
+      </div>
+
+      <h3 class="alt2" style="margin-top:13px">★ Météo du réseau ★</h3>
+      <div class="widget meteo">
+        <p>Ping : <b id="mPing">18 ms</b></p>
+        <p>Disponibilité : <b id="mUp">99,97 %</b></p>
+        <ul id="mSvc">
+          <li><span class="dot up"></span>Serveur de fichiers</li>
+          <li><span class="dot up"></span>Messagerie</li>
+          <li><span class="dot up"></span>Accès distant (VPN)</li>
+          <li><span class="dot down"></span>Imprimante 2<sup>e</sup> étage</li>
+        </ul>
+        <small style="margin-top:5px">C'est le premier écran que regarde un administrateur en arrivant.</small>
+      </div>
+
+      <h3 style="margin-top:13px">★ Le mot du jour ★</h3>
+      <div class="widget motdujour">
+        <b id="motTerm">Durcissement</b>
+        <p id="motDef">Fermer tout ce dont une machine n'a pas besoin.</p>
+        <button class="btn" type="button" id="motNext">Mot suivant ►</button>
+      </div>
+
+      <h3 class="alt" style="margin-top:13px">★ Dernières signatures ★</h3>
+      <div class="widget"><div class="lastsign" id="lastSign"></div></div>
+
+      <h3 style="margin-top:13px">★ Mes liens préférés ★</h3>
+      <div class="widget">
+        <ul class="liens">
+          <li><button type="button" data-go="quiz">» Le quiz anti-arnaque</button></li>
+          <li><button type="button" data-go="decodeur">» Le décodeur de sigles</button></li>
+          <li><button type="button" data-go="livredor">» Signer le livre d'or</button></li>
+          <li><button type="button" data-go="paraitre">» Les prochains articles</button></li>
+        </ul>
+      </div>
+
+      <h3 class="alt3" style="margin-top:13px">★ Newsletter ★</h3>
+      <div class="widget news">
+        <p>Recevez un article par semaine !!</p>
+        <label for="newsMail" style="position:absolute;left:-9999px">Votre adresse</label>
+        <input id="newsMail" type="text" placeholder="votre@email.fr" autocomplete="off">
+        <button class="btn pink" type="button" id="newsBtn">JE M'INSCRIS !!</button>
+        <small id="newsNote">Formulaire de démonstration.</small>
+      </div>
+
+      <h3 style="margin-top:13px">★ Le saviez-vous ★</h3>
+      <small>Un salarié met quelques secondes à cliquer sur un lien piégé. Former les équipes fait partie du métier d'administrateur sécurité !</small>
     </aside>
 
     <main class="main">
 
+      <section id="quiz">
+        <h2 class="c7 tilt">🧠 QUIZ : REPÉREZ L'ARNAQUE !! <span class="new">NEW</span></h2>
+        <p class="lead">Trois situations. Trois clics. Vous saurez où vous en êtes.</p>
+        <div class="mod pinkb" id="quizBox">
+          <h3>★ Testez-vous en 1 minute ★</h3>
+          <p style="font-size:15px;margin-top:5px">Choisissez une réponse. L'explication s'affiche aussitôt.</p>
+          <div id="quizList"></div>
+          <p id="quizScore" style="font-family:var(--f-comic);font-weight:700;margin-top:10px;font-size:15px">Score : 0 / 3</p>
+          <button class="btn" type="button" id="quizReset">Recommencer</button>
+        </div>
+      </section>
+
       <section id="defi">
-        <h2 class="c1">🎮 LE DÉFI VIGILANCE !!! 🎮</h2>
-        <p class="lead">Ce site est volontairement horrible. Il imite les pages qui piègent vos collaborateurs tous les jours.</p>
-        <div class="defi">
+        <h2 class="c1">🎮 LE DÉFI VIGILANCE !!!</h2>
+        <p class="lead">Cinq fausses fenêtres. Un bon choix et un mauvais choix à chaque fois. Cliquez mal : le site en subit les conséquences.</p>
+        <div class="defi tilt2">
           <h3>★ Règle du jeu ★</h3>
           <ol>
-            <li>Cinq fenêtres vont s'ouvrir pendant votre visite.</li>
-            <li>Chacune propose un bon choix et un mauvais choix.</li>
-            <li>Si vous tombez dans le piège, le site en subit vraiment les conséquences.</li>
-            <li>Chaque piège se termine par une fiche à réutiliser en entretien de recrutement.</li>
+            <li>Les fenêtres s'ouvrent une par une.</li>
+            <li>Vous choisissez. Le site réagit pour de vrai.</li>
+            <li>Une fiche verte vous explique le piège.</li>
+            <li>Au bout de cinq, vous recevez votre certificat.</li>
           </ol>
           <div class="row">
             <button class="btn big" id="startBtn" type="button">▶ LANCER LE PREMIER PIÈGE !!</button>
             <button class="btn blue" id="skipBtn" type="button">piège suivant</button>
           </div>
           <div class="jauge" id="jaugeMain" aria-label="Progression du défi"></div>
-          <p style="margin-top:9px;font-size:14px" id="jaugeTxt">Aucun piège déclenché pour le moment.</p>
-          <p style="margin-top:6px;font-size:13px;color:#444">Les fenêtres vous dérangent ? Le bouton « Couper les pop-up » est dans le menu de gauche.</p>
+          <p style="margin-top:8px;font-size:14px" id="jaugeTxt">Aucun piège déclenché pour le moment.</p>
         </div>
       </section>
 
       <section id="decodeur">
-        <h2 class="c2">🔎 LE DÉCODEUR DE SIGLES <span class="new">NEW</span></h2>
-        <p class="lead">Huit mots qui traînent dans vos annonces, leur traduction, et la question à poser au candidat !</p>
+        <h2 class="c2">🔎 LE DÉCODEUR DE SIGLES</h2>
+        <p class="lead">Huit mots pris dans de vraies annonces. Leur traduction. La question à poser au candidat.</p>
         <div class="deck">
 
           <article class="term">
-            <p class="w">SIEM<small>prononcer « sim »</small></p>
-            <p class="tr">Un logiciel qui rassemble les journaux techniques de tout le parc, puis signale ce qui sort de l'ordinaire.</p>
+            <p class="w">SIEM<small>prononcez « sim »</small></p>
+            <p class="tr">Un logiciel qui rassemble les journaux techniques du parc. Il signale ce qui sort de l'ordinaire.</p>
             <button class="btn" type="button" data-ask>La question à poser</button>
-            <p class="ask" hidden><b>En entretien</b>« Vous l'avez utilisé au quotidien ou vous l'avez installé ? » Les deux réponses désignent deux métiers.</p>
+            <p class="ask" hidden><b>Demandez</b>« Vous l'avez utilisé, ou vous l'avez installé ? » Deux réponses, deux métiers.</p>
           </article>
 
           <article class="term">
-            <p class="w">EDR<small>détection sur les postes</small></p>
-            <p class="tr">Un agent installé sur chaque ordinateur. Il repère un comportement suspect et isole la machine du réseau.</p>
+            <p class="w">EDR<small>surveillance des postes</small></p>
+            <p class="tr">Un agent installé sur chaque ordinateur. Il repère un comportement suspect. Il isole la machine.</p>
             <button class="btn" type="button" data-ask>La question à poser</button>
-            <p class="ask" hidden><b>En entretien</b>« Combien de postes couvriez-vous ? » Le chiffre situe la taille du parc, donc le niveau réel.</p>
+            <p class="ask" hidden><b>Demandez</b>« Combien de postes couvriez-vous ? » Le chiffre situe le niveau réel.</p>
           </article>
 
           <article class="term">
-            <p class="w">Pentest<small>test d'intrusion</small></p>
-            <p class="tr">Un spécialiste attaque le système avec l'accord écrit de l'entreprise, puis remet un rapport de failles.</p>
+            <p class="w">PENTEST<small>test d'intrusion</small></p>
+            <p class="tr">Un spécialiste attaque le système, avec l'accord écrit de l'entreprise. Il remet un rapport.</p>
             <button class="btn" type="button" data-ask>La question à poser</button>
-            <p class="ask" hidden><b>En entretien</b>« Qui corrigeait les failles que vous trouviez ? » Attaquer et réparer sont deux postes distincts.</p>
+            <p class="ask" hidden><b>Demandez</b>« Qui corrigeait les failles ? » Attaquer et réparer sont deux postes.</p>
           </article>
 
           <article class="term">
             <p class="w">PRA<small>plan de reprise d'activité</small></p>
-            <p class="tr">La procédure qui remet l'entreprise en marche après un sinistre : incendie, panne majeure ou attaque.</p>
+            <p class="tr">La procédure qui remet l'entreprise en marche après un sinistre. Incendie, panne ou attaque.</p>
             <button class="btn" type="button" data-ask>La question à poser</button>
-            <p class="ask" hidden><b>En entretien</b>« Vous l'avez écrit, ou vous l'avez testé ? » Seul le test prouve que le plan fonctionne.</p>
+            <p class="ask" hidden><b>Demandez</b>« Vous l'avez écrit, ou testé ? » Seul le test prouve qu'il marche.</p>
           </article>
 
           <article class="term">
             <p class="w">SOC<small>centre de supervision</small></p>
-            <p class="tr">L'équipe qui surveille les alertes en continu et déclenche la réaction dès qu'une attaque commence.</p>
+            <p class="tr">L'équipe qui surveille les alertes en continu. Elle déclenche la réaction dès le début d'une attaque.</p>
             <button class="btn" type="button" data-ask>La question à poser</button>
-            <p class="ask" hidden><b>En entretien</b>« Travailliez-vous en horaires décalés ? » Beaucoup de ces postes tournent la nuit. L'annonce doit le dire.</p>
+            <p class="ask" hidden><b>Demandez</b>« Vous travailliez en horaires décalés ? » Beaucoup de ces postes tournent la nuit.</p>
           </article>
 
           <article class="term">
-            <p class="w">Durcissement<small>hardening</small></p>
-            <p class="tr">Le réglage qui ferme tout ce dont une machine n'a pas besoin : comptes, services et ports inutiles.</p>
+            <p class="w">DURCISSEMENT<small>hardening</small></p>
+            <p class="tr">Le réglage qui ferme tout ce dont une machine n'a pas besoin. Comptes, services et ports inutiles.</p>
             <button class="btn" type="button" data-ask>La question à poser</button>
-            <p class="ask" hidden><b>En entretien</b>« Sur quel référentiel vous appuyiez-vous ? » Un profil méthodique cite un guide officiel.</p>
+            <p class="ask" hidden><b>Demandez</b>« Quel référentiel suiviez-vous ? » Un profil méthodique cite un guide officiel.</p>
           </article>
 
           <article class="term">
             <p class="w">MFA<small>double authentification</small></p>
-            <p class="tr">Un mot de passe, plus un second élément : code temporaire, application mobile ou clé physique.</p>
+            <p class="tr">Un mot de passe, plus un second élément. Code temporaire, application mobile ou clé physique.</p>
             <button class="btn" type="button" data-ask>La question à poser</button>
-            <p class="ask" hidden><b>En entretien</b>« Comment avez-vous convaincu les utilisateurs ? » Ce déploiement échoue rarement pour des raisons techniques.</p>
+            <p class="ask" hidden><b>Demandez</b>« Comment avez-vous convaincu les utilisateurs ? » Ce projet échoue rarement pour des raisons techniques.</p>
           </article>
 
           <article class="term">
             <p class="w">CVE<small>faille référencée</small></p>
-            <p class="tr">Le numéro public attribué à une faille connue. Chaque faille publiée reçoit sa référence unique.</p>
+            <p class="tr">Le numéro public d'une faille connue. Chaque faille publiée reçoit sa référence.</p>
             <button class="btn" type="button" data-ask>La question à poser</button>
-            <p class="ask" hidden><b>En entretien</b>Un CV qui cite des CVE signale un candidat qui a publié ou corrigé des failles réelles.</p>
+            <p class="ask" hidden><b>Repérez</b>Un CV qui cite des CVE signale un candidat qui a publié ou corrigé des failles.</p>
           </article>
 
         </div>
@@ -406,39 +557,62 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
 
       <section id="article">
         <h2 class="c3">📰 SIX JOURS D'ARRÊT, ET UN POSTE QUE PERSONNE N'AVAIT OUVERT</h2>
-        <p style="font-family:var(--f-mono);font-size:13px;color:#555;margin-top:7px">Publié le 21/10/2026 · lecture 2 minutes</p>
+        <p style="font-family:var(--f-mono);font-size:13px;color:#555;margin-top:6px">21/10/2026 · lecture 2 minutes</p>
 
-        <div class="essentiel">
+        <div class="essentiel tilt">
           <b>⚡⚡ L'ESSENTIEL EN 3 POINTS ⚡⚡</b>
           <ul>
             <li>La sécurité des infrastructures protège les serveurs, les réseaux et les sauvegardes.</li>
-            <li>Les attaques visent toutes les tailles de société, pas seulement les grands groupes.</li>
-            <li>Deux candidats au même sigle sur le CV ne font pas le même métier.</li>
+            <li>Les attaques visent toutes les tailles de société.</li>
+            <li>Deux candidats au même sigle ne font pas le même métier.</li>
           </ul>
         </div>
 
         <div class="art">
-          <p>Un lundi matin, une petite entreprise de quarante salariés ne peut plus ouvrir un seul fichier. Un message réclame une rançon. L'activité redémarre six jours plus tard. Personne, au service des ressources humaines, n'avait entendu parler du poste qui aurait pu éviter cela.</p>
-          <p>La sécurité des infrastructures protège les machines et les réseaux qui font tourner une entreprise. Elle couvre les serveurs, les postes de travail, les liaisons internet et les sauvegardes. Elle poursuit trois objectifs simples. Les données restent accessibles, exactes et confidentielles.</p>
-          <p>Les attaques visent aujourd'hui toutes les tailles d'entreprise. Un rançongiciel chiffre les fichiers d'une société, puis réclame un paiement pour les rendre. Il frappe une PME de quarante personnes comme un groupe de dix mille. Les profils capables d'anticiper ces incidents manquent sur le marché. Les recruteurs les cherchent donc avec des annonces qu'ils maîtrisent mal.</p>
+          <h4>LUNDI MATIN, PLUS RIEN NE S'OUVRE</h4>
+          <p>Une entreprise de quarante salariés ne peut plus ouvrir un seul fichier. Un message réclame une rançon.</p>
+          <p>L'activité redémarre six jours plus tard. Personne, au service des ressources humaines, n'avait entendu parler du poste qui aurait pu éviter cela.</p>
+
+          <h4>C'EST QUOI, AU JUSTE ?</h4>
+          <p>La sécurité des infrastructures protège les machines et les réseaux qui font tourner l'entreprise. Serveurs, postes de travail, liaisons internet, sauvegardes.</p>
+          <p>Elle poursuit trois objectifs. Les données restent accessibles, exactes et confidentielles.</p>
+
+          <h4>POURQUOI ÇA VOUS CONCERNE</h4>
+          <p>Un rançongiciel chiffre les fichiers d'une société. Il réclame ensuite un paiement pour les rendre. Il frappe une PME de quarante personnes comme un groupe de dix mille.</p>
+          <p>Ces profils manquent sur le marché. Les recruteurs les cherchent avec des annonces qu'ils maîtrisent mal.</p>
         </div>
 
-        <p class="pull">« Maîtrise du SIEM exigée » : un candidat peut avoir utilisé cet outil trois ans sans jamais l'avoir installé !</p>
+        <p class="pull tilt2">« Maîtrise du SIEM exigée » : un candidat peut avoir utilisé cet outil trois ans sans jamais l'avoir installé !</p>
 
         <div class="art">
-          <p>Ce sigle désigne un système de gestion des informations et des événements de sécurité. L'outil rassemble les journaux techniques de tout le parc, puis signale les comportements anormaux. Les deux profils ne couvrent pas les mêmes besoins. Une seule question en entretien suffit à les distinguer.</p>
-          <p>Périmètre publie des fiches métier, des repères de salaires et des explications sur les certifications. Chaque article part d'une situation de recrutement réelle. Vous repartez avec de quoi arbitrer, pas avec un cours technique.</p>
+          <h4>UN EXEMPLE CONCRET</h4>
+          <p>Ce sigle désigne un système de gestion des informations et des événements de sécurité. L'outil rassemble les journaux du parc et signale les comportements anormaux.</p>
+          <p>Les deux profils ne couvrent pas les mêmes besoins. Une question en entretien suffit à les distinguer.</p>
+
+          <h4>CE QUE VOUS TROUVEREZ ICI</h4>
+          <p>Des fiches métier, des repères de salaires, des explications sur les certifications. Chaque article part d'une situation de recrutement réelle.</p>
+          <p>Vous repartez avec de quoi arbitrer. Pas avec un cours technique.</p>
+        </div>
+      </section>
+
+      <section id="sondage">
+        <h2 class="c6">🗳️ LE SONDAGE DE LA SEMAINE</h2>
+        <div class="mod orangeb">
+          <h3>★ Dans votre entreprise, qui s'occupe de la sécurité informatique ? ★</h3>
+          <p style="font-size:14px;margin-top:5px">Votez, les résultats s'affichent aussitôt.</p>
+          <div class="poll" id="poll"></div>
+          <p id="pollNote" style="font-size:13px;margin-top:8px;color:#444">Résultats fictifs, pour l'exemple. Votre vote reste dans votre navigateur.</p>
         </div>
       </section>
 
       <section id="rubriques">
         <h2 class="c4">📁 NOS RUBRIQUES !!!</h2>
         <div class="rubs">
-          <article class="rub"><h3>1. Les métiers décryptés</h3><p>Une fiche par poste : missions réelles, niveau d'entrée, place dans l'organisation.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
-          <article class="rub"><h3>2. Bien recruter un profil sécurité</h3><p>Rédiger l'annonce, lire un parcours, mener l'entretien sans être technique.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
-          <article class="rub"><h3>3. Compétences et certifications</h3><p>Ce que chaque certification valide, et ce qu'elle ne garantit pas.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
-          <article class="rub"><h3>4. Salaires et marché</h3><p>Fourchettes par niveau, tensions du marché, délais de recrutement observés.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
-          <article class="rub"><h3>5. Former et fidéliser</h3><p>Faire monter une équipe en compétences et limiter les départs.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
+          <article class="rub"><h3>1. Les métiers décryptés</h3><p>Une fiche par poste. Missions, niveau d'entrée, place dans l'organisation.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
+          <article class="rub"><h3>2. Bien recruter un profil sécurité</h3><p>Écrire l'annonce. Lire un parcours. Mener l'entretien sans être technique.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
+          <article class="rub"><h3>3. Compétences et certifications</h3><p>Ce que chaque certification valide. Et ce qu'elle ne garantit pas.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
+          <article class="rub"><h3>4. Salaires et marché</h3><p>Fourchettes par niveau. Tensions du marché. Délais de recrutement.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
+          <article class="rub"><h3>5. Former et fidéliser</h3><p>Faire monter l'équipe en compétences. Limiter les départs.</p><span class="soon">EN CONSTRUCTION 🚧</span></article>
         </div>
       </section>
 
@@ -446,55 +620,185 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
         <h2 class="c5">📅 LES SIX PROCHAINS ARTICLES</h2>
         <div class="tbl-wrap">
           <table class="retro">
-            <thead><tr><th>N°</th><th>Titre</th><th>Ce que l'article apporte</th></tr></thead>
+            <thead><tr><th>N°</th><th>Titre</th><th>Ce que ça vous apporte</th></tr></thead>
             <tbody>
-              <tr><td class="h">01</td><td class="h">Responsable sécurité, administrateur, testeur d'intrusion : qui fait quoi ?</td><td>Trois postes que les annonces confondent, avec leurs missions et leur niveau d'entrée.</td></tr>
-              <tr><td class="h">02</td><td class="h">Lire une fiche de poste en sécurité sans se tromper</td><td>Les sigles les plus fréquents dans les annonces, traduits un par un.</td></tr>
-              <tr><td class="h">03</td><td class="h">Cinq questions à poser quand on n'est pas technique</td><td>Des questions ouvertes qui révèlent l'expérience réelle, et les réponses qui alertent.</td></tr>
-              <tr><td class="h">04</td><td class="h">Certifications : lesquelles comptent vraiment ?</td><td>Ce que valide chaque certification du domaine, et ce qu'elle ne prouve pas.</td></tr>
-              <tr><td class="h">05</td><td class="h">Ce que coûte un profil sécurité</td><td>Les fourchettes par niveau et par région, et les écarts entre PME et grands comptes.</td></tr>
-              <tr><td class="h">06</td><td class="h">Garder un expert sécurité plus de trois ans</td><td>Les raisons de départ les plus citées, et les leviers qui ne passent pas par le salaire.</td></tr>
+              <tr><td class="h">01</td><td class="h">Responsable sécurité, administrateur, testeur d'intrusion : qui fait quoi ?</td><td>Trois postes que les annonces confondent. Missions et niveau d'entrée.</td></tr>
+              <tr><td class="h">02</td><td class="h">Lire une fiche de poste sans se tromper</td><td>Les sigles les plus fréquents, traduits un par un.</td></tr>
+              <tr><td class="h">03</td><td class="h">Cinq questions à poser quand on n'est pas technique</td><td>Les questions qui révèlent l'expérience réelle. Et les réponses qui alertent.</td></tr>
+              <tr><td class="h">04</td><td class="h">Certifications : lesquelles comptent vraiment ?</td><td>Ce que valide chaque certification. Et ce qu'elle ne prouve pas.</td></tr>
+              <tr><td class="h">05</td><td class="h">Ce que coûte un profil sécurité</td><td>Fourchettes par niveau et par région. Écarts entre PME et grands comptes.</td></tr>
+              <tr><td class="h">06</td><td class="h">Garder un expert sécurité plus de trois ans</td><td>Les raisons de départ les plus citées. Les leviers hors salaire.</td></tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section id="livredor">
+        <h2 class="c7">✍️ SIGNEZ LE LIVRE D'OR !!</h2>
+        <div class="mod">
+          <p style="font-size:15px">Laissez un mot. Il s'affiche en bas de la liste.</p>
+          <div class="gb" id="gbList">
+            <div class="e"><p class="who">Sandrine, DRH</p><p>J'ai cliqué sur les 5 pièges. Je vais faire passer le lien à toute l'équipe.</p><p class="when">posté le 21/10/2026 à 09:14</p></div>
+            <div class="e"><p class="who">xXx_DarkAdmin_xXx</p><p>enfin un site qui parle notre langue frere</p><p class="when">posté le 21/10/2026 à 10:02</p></div>
+            <div class="e"><p class="who">mamie_colette</p><p>bonjour comment on ferme la fenetre qui clignote svp merci</p><p class="when">posté le 21/10/2026 à 10:41</p></div>
+          </div>
+          <div class="row">
+            <label for="gbName" style="position:absolute;left:-9999px">Votre pseudo</label>
+            <input id="gbName" type="text" placeholder="votre pseudo" autocomplete="off" style="flex:0 1 150px">
+            <label for="gbMsg" style="position:absolute;left:-9999px">Votre message</label>
+            <input id="gbMsg" type="text" placeholder="votre message" autocomplete="off" style="flex:1 1 200px">
+            <button class="btn blue" id="gbSend" type="button">Envoyer</button>
+          </div>
+          <p style="font-size:13px;margin-top:7px;color:#444">Votre message reste affiché jusqu'au rechargement de la page. Rien n'est envoyé nulle part.</p>
         </div>
       </section>
 
       <section id="apropos">
         <h2 class="c6">👋 À PROPOS DE NOUS !</h2>
         <div class="art">
-          <p>Vous recrutez un profil sécurité. L'annonce vient du service technique. Elle contient huit sigles. Vous devez trier des candidatures sur des mots que personne ne vous a expliqués.</p>
-          <p>Périmètre règle ce problème. Nous traduisons les métiers, les compétences et les certifications de la sécurité des infrastructures en français courant.</p>
-          <p>Nous ne faisons pas de vous un expert. Nous vous donnons de quoi écrire une annonce juste, poser trois bonnes questions en entretien et comparer deux parcours.</p>
-          <p>Un administrateur systèmes et une chargée de recrutement écrivent ce site à deux. L'un vérifie la technique. L'autre vérifie qu'on comprend. Un article paraît chaque semaine, et il se lit en moins de trois minutes.</p>
+          <p>Vous êtes DRH, chargé de recrutement ou manager. Vous n'êtes pas technicien. Ce site est fait pour vous.</p>
+          <p>Vous recrutez un profil sécurité. L'annonce vient du service technique. Elle contient huit sigles. Personne ne vous les a expliqués.</p>
+          <p>Périmètre les traduit. Les métiers, les compétences, les certifications : en français courant.</p>
+          <p>On ne fait pas de vous un expert. On vous donne trois choses. Écrire une annonce juste. Poser les bonnes questions. Comparer deux parcours.</p>
+          <p>Qui écrit ? Un administrateur systèmes et une chargée de recrutement. L'un vérifie la technique. L'autre vérifie qu'on comprend.</p>
+          <p>Un article par semaine. Trois minutes de lecture. Zéro sigle sans traduction.</p>
         </div>
 
         <details>
-          <summary>▸ Notre ligne éditoriale</summary>
+          <summary>▸ Notre ligne éditoriale (pour les curieux)</summary>
           <div class="dt">
             <dl>
-              <div class="r"><dt>Public cible</dt><dd>Des DRH et des chargés de recrutement de PME et d'entreprises de taille intermédiaire. Ils recrutent des profils en sécurité des infrastructures sans en maîtriser le vocabulaire.</dd></div>
+              <div class="r"><dt>Public cible</dt><dd>Des DRH et des chargés de recrutement de PME et d'entreprises de taille intermédiaire. Ils recrutent des profils sécurité sans en maîtriser le vocabulaire.</dd></div>
               <div class="r"><dt>Thématique</dt><dd>La sécurité des infrastructures : pare-feu, durcissement, gestion des accès, sauvegardes, métiers d'administrateur sécurité et de responsable de la sécurité des systèmes d'information.</dd></div>
               <div class="r"><dt>Promesse</dt><dd>Périmètre explique les métiers de la sécurité des infrastructures aux professionnels des ressources humaines qui recrutent ces profils.</dd></div>
-              <div class="r"><dt>Ton</dt><dd>Professionnel et pédagogique, sous une forme volontairement datée. Voix active, phrases courtes, aucun sigle employé sans sa traduction.</dd></div>
+              <div class="r"><dt>Ton</dt><dd>Professionnel et pédagogique, sous une forme volontairement datée. Voix active, phrases courtes, aucun sigle sans traduction.</dd></div>
               <div class="r"><dt>Rubriques</dt><dd><ol><li>Les métiers décryptés</li><li>Bien recruter un profil sécurité</li><li>Compétences et certifications</li><li>Salaires et marché de l'emploi</li><li>Former et fidéliser</li></ol></dd></div>
+              <div class="r"><dt>Pourquoi ce design</dt><dd>La forme imite les sites et les fenêtres qui servent encore aux arnaques. Le visiteur apprend à les reconnaître en les vivant.</dd></div>
             </dl>
           </div>
         </details>
       </section>
 
     </main>
+
+    <aside class="adrail">
+      <h4>Publicité</h4>
+      <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="pcgamer"></div></div>
+      <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="antivirus"></div></div>
+      <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="sonneries"></div></div>
+      <h4>Publicité</h4>
+      <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="smileys"></div></div>
+      <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="dragon"></div></div>
+      <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="heberg"></div></div>
+      <h4>Top 10 des recherches</h4>
+      <div class="widget">
+        <ul class="topsearch">
+          <li>fiche de poste admin sécurité</li>
+          <li>salaire RSSI PME</li>
+          <li>différence SOC et SIEM</li>
+          <li>certification cybersécurité France</li>
+          <li>recruter sans être technique</li>
+          <li>mon imprimante clignote orange</li>
+        </ul>
+      </div>
+      <h4>Publicité</h4>
+      <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="horoscope"></div></div>
+      <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="mp3"></div></div>
+      <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="qi"></div></div>
+      <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="cdfai"></div></div>
+      <div class="adslot sticky"><span class="tag">régie</span><div class="adbox" data-ad-fake data-creative="vide"></div></div>
+    </aside>
+  </div>
+
+  <div class="adstrip">
+    <p class="lbl">ESPACES PUBLICITAIRES PARTENAIRES</p>
+    <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="encre"></div></div>
+    <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="turbo"></div></div>
+    <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="voiture"></div></div>
+    <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="cuisine"></div></div>
+    <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="fonds"></div></div>
+    <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="superbarre"></div></div>
+    <div class="adslot"><span class="tag">annonce</span><div class="adbox" data-ad-fake data-creative="mobile"></div></div>
+    <div class="adslot"><span class="tag">régie</span><div class="adbox" data-ad-fake data-creative="vide"></div></div>
   </div>
 
   <div class="rainbow" aria-hidden="true"></div>
   <footer class="foot">
     <p class="works">🚧 <span>👷</span> SITE EN CONSTRUCTION PERMANENTE <span>👷</span> 🚧</p>
-    <div class="webring">◀ PRÉCÉDENT · [ ANNEAU WEB DES MÉTIERS DE LA SÉCURITÉ ] · SUIVANT ▶</div>
+    <div class="webring">◀ <button type="button" class="ringBtn">PRÉCÉDENT</button> · [ ANNEAU WEB DES MÉTIERS DE LA SÉCURITÉ ] · <button type="button" class="ringBtn">SUIVANT</button> ▶</div>
     <p>© 2026 Périmètre 2000 · site média de vulgarisation destiné aux professionnels du recrutement</p>
-    <p style="margin-top:6px;font-size:12px">Les fenêtres de ce site sont des simulations pédagogiques. Aucune donnée n'est collectée, aucun fichier n'est modifié.</p>
+    <p style="margin-top:6px;font-size:12px">Toutes les fenêtres de ce site sont des simulations pédagogiques. Aucune donnée n'est collectée. Aucun fichier n'est modifié.</p>
     <p style="margin-top:6px;font-family:var(--f-mono);color:#9ff">remplacez-ceci@par-votre-email.fr</p>
+    <div class="powered" aria-hidden="true">
+      <span class="badge">POWERED BY<br>CAFÉINE</span>
+      <span class="badge b">CODÉ À LA<br>MAIN</span>
+      <span class="badge d">NO FRAMES<br>(presque)</span>
+    </div>
   </footer>
 
 </div>
+</div>
+
+<div class="goose" id="goose" role="button" tabindex="0" aria-label="Gontrand, l'oie de garde : cliquez pour un conseil">
+  <div class="bubble" id="gooseBubble" hidden></div>
+  <svg viewBox="0 0 125 100" aria-hidden="true">
+    <defs>
+      <linearGradient id="gsBody" x1="0.3" y1="0" x2="0.55" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset="0.55" stop-color="#f5f3ec"/>
+        <stop offset="1" stop-color="#d5d0c2"/>
+      </linearGradient>
+      <linearGradient id="gsNeck" x1="0" y1="0" x2="1" y2="0.3">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset="1" stop-color="#e4e0d4"/>
+      </linearGradient>
+      <linearGradient id="gsBeak" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffc063"/>
+        <stop offset="0.55" stop-color="#f3a233"/>
+        <stop offset="1" stop-color="#d9811a"/>
+      </linearGradient>
+      <linearGradient id="gsFoot" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f5ab44"/>
+        <stop offset="1" stop-color="#d9811a"/>
+      </linearGradient>
+    </defs>
+
+    <ellipse class="g-shadow" cx="64" cy="95" rx="31" ry="4.6" fill="#101010" opacity="0.2"/>
+
+    <g class="g-leg-b">
+      <path d="M68 68 L66 83" stroke="#c8761a" stroke-width="5" stroke-linecap="round"/>
+      <path d="M66 83 C60 85 55 87 53 89 C56 91 62 91 67 90 C71 89 74 87 74 85 Z" fill="#d98c22" stroke="#b06c14" stroke-width="0.9" stroke-linejoin="round"/>
+    </g>
+
+    <g class="g-body">
+      <path d="M96 48 C105 43 114 43 119 46 C114 53 105 57 96 57 C93 54 93 51 96 48 Z" fill="#efece3" stroke="#c7c2b2" stroke-width="1"/>
+      <ellipse cx="64" cy="58" rx="34" ry="23" fill="url(#gsBody)" stroke="#c7c2b2" stroke-width="1.2"/>
+      <path d="M34 62 C36 72 46 79 60 80 C50 81 38 77 33 70 Z" fill="#e3dfd2" opacity="0.85"/>
+      <path d="M58 46 C72 39 89 43 96 52 C88 65 68 67 57 57 C54 53 55 49 58 46 Z" fill="#faf8f3" stroke="#cdc8b8" stroke-width="1"/>
+      <path d="M66 60 C76 60 86 57 94 53" fill="none" stroke="#d6d1c2" stroke-width="1.1"/>
+      <path d="M68 64 C78 63 87 60 94 56" fill="none" stroke="#dcd7c8" stroke-width="1.1"/>
+      <path d="M72 67 C80 66 88 63 94 59" fill="none" stroke="#e1dccd" stroke-width="1.1"/>
+
+      <g class="g-neck">
+        <path d="M50 64 C39 55 31 42 31 29 C31 21 42 20 43 28 C44 40 52 50 60 56 Z" fill="url(#gsNeck)" stroke="#c7c2b2" stroke-width="1.1"/>
+        <g transform="rotate(-10 35 21)">
+          <ellipse cx="35" cy="21" rx="12" ry="9.6" fill="url(#gsNeck)" stroke="#c7c2b2" stroke-width="1.1"/>
+          <path d="M25 16 C17 13.5 11 16 9.5 19.5 C11 23 17 25.5 25 23.5 C27.5 21.5 27.5 18 25 16 Z" fill="url(#gsBeak)" stroke="#c07615" stroke-width="0.9"/>
+          <path d="M9.5 19.5 C10.6 17.8 12.6 16.8 14 16.5 C13 18.6 13 20.6 14 22.5 C12.4 22.2 10.6 21.2 9.5 19.5 Z" fill="#c9780f" opacity="0.65"/>
+          <ellipse cx="18.5" cy="18.6" rx="1.7" ry="1" fill="#b36a10"/>
+          <path d="M26 24 C30 25.6 36 25.6 40 24.4" fill="none" stroke="#d9d4c5" stroke-width="0.9"/>
+          <circle cx="31.5" cy="17.4" r="2.9" fill="#2a2318"/>
+          <circle cx="30.6" cy="16.4" r="1" fill="#ffffff" opacity="0.9"/>
+        </g>
+      </g>
+    </g>
+
+    <g class="g-leg-a">
+      <path d="M54 68 L52 84" stroke="#e59a2c" stroke-width="5.2" stroke-linecap="round"/>
+      <path d="M52 84 C46 86 40 88 38 90 C41 92 47 92.5 52 91.5 C57 90.5 60 88.5 60 86 Z" fill="url(#gsFoot)" stroke="#bf7514" stroke-width="0.9" stroke-linejoin="round"/>
+      <path d="M44 88.6 L50 85.4 M50 90.2 L54 86" fill="none" stroke="#bf7514" stroke-width="0.8" opacity="0.7"/>
+    </g>
+  </svg>
 </div>
 
 <div class="score" id="score">
@@ -506,11 +810,28 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
   </div>
 </div>
 
+<div class="bot" id="bot">
+  <div class="tb" id="botToggle" role="button" tabindex="0" aria-expanded="false">🤖 SécuriBot (en ligne)<button type="button" aria-label="Ouvrir ou fermer">▲</button></div>
+  <div class="ct" id="botBody" hidden>
+    <p class="msg">Bonjour !! Je suis SécuriBot. Posez votre question de recruteur.</p>
+    <button class="btn" type="button" data-bot="annonce">« Que mettre dans mon annonce ? »</button>
+    <button class="btn" type="button" data-bot="junior">« Un junior, c'est possible ? »</button>
+    <button class="btn" type="button" data-bot="certif">« Une certification suffit ? »</button>
+    <button class="btn" type="button" data-bot="rssi">« RSSI ou administrateur ? »</button>
+  </div>
+</div>
+
 <script>
 (function () {
   'use strict';
-
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) { node.className = cls; }
+    if (text) { node.textContent = text; }
+    return node;
+  }
 
   /* ============ Décodeur ============ */
   Array.prototype.forEach.call(document.querySelectorAll('.term'), function (card) {
@@ -523,7 +844,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     });
   });
 
-  /* ============ Compteur ============ */
+  /* ============ Compteur + horloge ============ */
   var odo = document.getElementById('odo');
   var n = 0;
   var odoTimer = window.setInterval(function () {
@@ -532,25 +853,27 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     odo.textContent = String(n).padStart(6, '0');
   }, 170);
 
+  var clock = document.getElementById('clock');
+  function tickClock() {
+    clock.textContent = new Date().toLocaleTimeString('fr-FR');
+  }
+  tickClock();
+  window.setInterval(tickClock, 1000);
+
   /* ============ Émojis ============ */
   var EMO = ['✨', '🌟', '💖', '🔥', '⭐', '💫', '😎', '💾', '🎉', '🛡️'];
   var fxOn = !reduced;
   var lastMove = 0;
   var rainTimer = null;
-
   function pick() { return EMO[Math.floor(Math.random() * EMO.length)]; }
-
   function sparkle(x, y) {
-    var node = document.createElement('span');
-    node.className = 'sparkle';
+    var node = el('span', 'sparkle', pick());
     node.setAttribute('aria-hidden', 'true');
-    node.textContent = pick();
     node.style.left = (x - 8) + 'px';
     node.style.top = (y - 8) + 'px';
     document.body.appendChild(node);
     window.setTimeout(function () { node.remove(); }, 900);
   }
-
   document.addEventListener('mousemove', function (event) {
     if (!fxOn) { return; }
     var now = Date.now();
@@ -565,14 +888,11 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     lastMove = now;
     sparkle(event.touches[0].clientX, event.touches[0].clientY);
   }, { passive: true });
-
   function startRain() {
     if (rainTimer || !fxOn) { return; }
     rainTimer = window.setInterval(function () {
-      var node = document.createElement('span');
-      node.className = 'drop';
+      var node = el('span', 'drop', pick());
       node.setAttribute('aria-hidden', 'true');
-      node.textContent = pick();
       node.style.left = Math.random() * 94 + 'vw';
       var dur = 5 + Math.random() * 4;
       node.style.animationDuration = dur + 's';
@@ -586,11 +906,715 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
   }
   if (fxOn) { startRain(); }
 
-  var fxToggle = document.getElementById('fxToggle');
-  var optState = document.getElementById('optState');
+  /* ============ Quiz ============ */
+  var QUIZ = [
+    {
+      q: 'Une annonce exige « 5 ans de SIEM, CISSP, pentest et astreinte » pour un premier poste à bac+2. Que faites-vous ?',
+      options: [
+        { t: 'Je publie, le service technique sait ce qu’il veut.', ok: false },
+        { t: 'Je demande de séparer l’indispensable du souhaitable.', ok: true },
+        { t: 'Je supprime tous les sigles de l’annonce.', ok: false }
+      ],
+      fb: 'Une annonce qui empile les exigences ne trouve personne. Faites trier : deux compétences obligatoires, le reste en souhaitable.'
+    },
+    {
+      q: 'Un candidat écrit « SIEM » sur son CV. Quelle question donne le plus d’information ?',
+      options: [
+        { t: '« Vous connaissez le SIEM ? »', ok: false },
+        { t: '« Racontez-moi une alerte que vous avez traitée. »', ok: true },
+        { t: '« Sur une échelle de 1 à 10, vous vous situez où ? »', ok: false }
+      ],
+      fb: 'La question ouverte fait parler du concret. L’auto-évaluation chiffrée ne prouve rien.'
+    },
+    {
+      q: 'Un mail interne demande vos identifiants « pour la migration de ce soir ». Que faites-vous ?',
+      options: [
+        { t: 'Je réponds vite, la migration est urgente.', ok: false },
+        { t: 'Je clique sur le lien pour vérifier la page.', ok: false },
+        { t: 'J’appelle le service informatique par un autre canal.', ok: true }
+      ],
+      fb: 'Un service informatique ne demande jamais de mot de passe. Vérifiez toujours par un canal que vous connaissez déjà.'
+    }
+  ];
 
-  /* ============ État du défi ============ */
-  var TRAPS = ['antivirus', 'toolbar', 'cookies', 'phishing', 'support'];
+  var quizList = document.getElementById('quizList');
+  var quizScore = document.getElementById('quizScore');
+  var answered = {};
+
+  function renderQuiz() {
+    quizList.textContent = '';
+    answered = {};
+    quizScore.textContent = 'Score : 0 / 3';
+    QUIZ.forEach(function (item, index) {
+      var block = el('div', 'q');
+      block.appendChild(el('p', 'qt', (index + 1) + '. ' + item.q));
+      var choices = el('div', 'choices');
+      item.options.forEach(function (option) {
+        var button = el('button', 'btn', option.t);
+        button.type = 'button';
+        button.addEventListener('click', function () {
+          if (answered[index]) { return; }
+          answered[index] = option.ok;
+          Array.prototype.forEach.call(choices.querySelectorAll('button'), function (other) { other.disabled = true; });
+          button.className = 'btn ' + (option.ok ? 'blue' : 'red');
+          var feedback = el('p', 'fb ' + (option.ok ? 'ok' : 'ko'), (option.ok ? '✔ Bonne réponse. ' : '✗ Pas le bon réflexe. ') + item.fb);
+          block.appendChild(feedback);
+          var good = Object.keys(answered).filter(function (key) { return answered[key]; }).length;
+          quizScore.textContent = 'Score : ' + good + ' / 3';
+        });
+        choices.appendChild(button);
+      });
+      block.appendChild(choices);
+      quizList.appendChild(block);
+    });
+  }
+  renderQuiz();
+  document.getElementById('quizReset').addEventListener('click', renderQuiz);
+  document.getElementById('goQuiz').addEventListener('click', function () {
+    document.getElementById('quiz').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  });
+
+  /* ============ Sondage ============ */
+  var POLL = [
+    { t: 'Un administrateur dédié à la sécurité', v: 118 },
+    { t: 'L’informaticien généraliste, en plus du reste', v: 341 },
+    { t: 'Un prestataire extérieur', v: 206 },
+    { t: 'Honnêtement, personne', v: 157 }
+  ];
+  var pollHost = document.getElementById('poll');
+  var voted = false;
+
+  function renderPoll() {
+    pollHost.textContent = '';
+    var total = POLL.reduce(function (sum, item) { return sum + item.v; }, 0);
+    POLL.forEach(function (item, index) {
+      var rowNode = el('div', 'opt-row');
+      if (!voted) {
+        var button = el('button', 'btn', item.t);
+        button.type = 'button';
+        button.addEventListener('click', function () {
+          if (voted) { return; }
+          voted = true;
+          POLL[index].v += 1;
+          renderPoll();
+          document.getElementById('pollNote').textContent = 'Merci pour votre vote ! Résultats fictifs, gardés dans votre navigateur.';
+        });
+        rowNode.appendChild(button);
+      } else {
+        var pct = Math.round((item.v / total) * 100);
+        rowNode.appendChild(el('p', 'lab', item.t + ' — ' + pct + '% (' + item.v + ' votes)'));
+        var track = el('div', 'track');
+        var fill = el('i');
+        track.appendChild(fill);
+        rowNode.appendChild(track);
+        window.setTimeout(function () { fill.style.width = pct + '%'; }, 60);
+      }
+      pollHost.appendChild(rowNode);
+    });
+  }
+  renderPoll();
+
+  /* ============ Livre d'or ============ */
+  var gbList = document.getElementById('gbList');
+  var gbName = document.getElementById('gbName');
+  var gbMsg = document.getElementById('gbMsg');
+  var lastSign = document.getElementById('lastSign');
+  function refreshSign() {
+    lastSign.textContent = '';
+    var entries = gbList.querySelectorAll('.e');
+    var start = Math.max(0, entries.length - 3);
+    for (var i = entries.length - 1; i >= start; i--) {
+      var who = entries[i].querySelector('.who').textContent;
+      var line = el('p');
+      line.appendChild(el('i', null, who));
+      line.appendChild(document.createTextNode(' a signé'));
+      lastSign.appendChild(line);
+    }
+  }
+
+  function addEntry() {
+    var name = gbName.value.trim() || 'visiteur anonyme';
+    var message = gbMsg.value.trim();
+    if (!message) { gbMsg.focus(); return; }
+    var now = new Date();
+    var entry = el('div', 'e');
+    entry.appendChild(el('p', 'who', name));
+    entry.appendChild(el('p', null, message));
+    entry.appendChild(el('p', 'when', 'posté le ' + now.toLocaleDateString('fr-FR') + ' à ' + now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })));
+    gbList.appendChild(entry);
+    gbList.scrollTop = gbList.scrollHeight;
+    gbMsg.value = '';
+    refreshSign();
+  }
+  refreshSign();
+  document.getElementById('gbSend').addEventListener('click', addEntry);
+  gbMsg.addEventListener('keydown', function (event) { if (event.key === 'Enter') { addEntry(); } });
+
+  /* ============ SécuriBot ============ */
+  var BOT = {
+    annonce: 'Mettez trois choses : le périmètre (combien de serveurs, combien de postes), deux compétences vraiment obligatoires, et les horaires. Le reste passe en « souhaitable ».',
+    junior: 'Oui, sur un poste encadré. Un junior apprend vite les outils. Il lui faut un senior à côté pour les décisions. Cherchez de la rigueur et de la curiosité.',
+    certif: 'Non. Une certification prouve des connaissances, pas de l’expérience. Demandez toujours un exemple de situation vécue.',
+    rssi: 'L’administrateur applique et maintient. Le responsable de la sécurité décide, arbitre et rend compte à la direction. Une PME commence par un administrateur.'
+  };
+  var botToggle = document.getElementById('botToggle');
+  var botBody = document.getElementById('botBody');
+  function toggleBot() {
+    var open = botBody.hidden;
+    botBody.hidden = !open;
+    botToggle.setAttribute('aria-expanded', String(open));
+    botToggle.querySelector('button').textContent = open ? '▼' : '▲';
+  }
+  botToggle.addEventListener('click', toggleBot);
+  botToggle.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleBot(); }
+  });
+  Array.prototype.forEach.call(botBody.querySelectorAll('[data-bot]'), function (button) {
+    button.addEventListener('click', function () {
+      var answer = el('p', 'msg', BOT[button.getAttribute('data-bot')]);
+      botBody.appendChild(answer);
+      botBody.scrollTop = botBody.scrollHeight;
+      button.disabled = true;
+    });
+  });
+
+  /* ============ MIDI + anneau web ============ */
+  var midiBtn = document.getElementById('midiBtn');
+  var midiOn = false;
+  midiBtn.addEventListener('click', function () {
+    midiOn = !midiOn;
+    midiBtn.textContent = midiOn ? '♪ Couper le MIDI' : '♪ Activer le MIDI';
+    document.getElementById('optState').textContent = midiOn
+      ? 'canyon.mid : lecture impossible, votre navigateur a abandonné le MIDI en 2011.'
+      : stateText();
+  });
+
+  var SECTIONS = ['quiz', 'defi', 'decodeur', 'article', 'sondage', 'rubriques', 'paraitre', 'livredor', 'apropos'];
+  Array.prototype.forEach.call(document.querySelectorAll('.ringBtn'), function (button) {
+    button.addEventListener('click', function () {
+      var target = SECTIONS[Math.floor(Math.random() * SECTIONS.length)];
+      document.getElementById(target).scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* ============ Widgets de la colonne ============ */
+  var mPing = document.getElementById('mPing');
+  var mUp = document.getElementById('mUp');
+  var svcDots = document.querySelectorAll('#mSvc .dot');
+  window.setInterval(function () {
+    mPing.textContent = (12 + Math.floor(Math.random() * 26)) + ' ms';
+    mUp.textContent = '99,9' + (Math.floor(Math.random() * 4) + 5) + ' %';
+    var roll = Math.random();
+    svcDots[1].className = 'dot ' + (roll < 0.18 ? 'slow' : 'up');
+    svcDots[2].className = 'dot ' + (roll > 0.92 ? 'slow' : 'up');
+  }, 3200);
+
+  var MOTS = [
+    ['Durcissement', 'Fermer tout ce dont une machine n’a pas besoin.'],
+    ['Moindre privilège', 'Chacun reçoit les seuls accès utiles à son travail.'],
+    ['Rançongiciel', 'Programme qui chiffre vos fichiers et exige un paiement.'],
+    ['Hameçonnage', 'Faux message qui réclame vos identifiants.'],
+    ['PRA', 'Plan de reprise d’activité, à tester, pas seulement à écrire.'],
+    ['Malvertising', 'Logiciel malveillant diffusé par une régie publicitaire.'],
+    ['Sauvegarde 3-2-1', 'Trois copies, deux supports, une hors site.'],
+    ['Journalisation', 'Garder la trace de qui a fait quoi, et quand.']
+  ];
+  var motIndex = 0;
+  var motTerm = document.getElementById('motTerm');
+  var motDef = document.getElementById('motDef');
+  function showMot() {
+    motTerm.textContent = MOTS[motIndex][0];
+    motDef.textContent = MOTS[motIndex][1];
+    motIndex = (motIndex + 1) % MOTS.length;
+  }
+  showMot();
+  document.getElementById('motNext').addEventListener('click', showMot);
+  window.setInterval(showMot, 9000);
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function (button) {
+    button.addEventListener('click', function () {
+      var target = document.getElementById(button.getAttribute('data-go'));
+      if (target) { target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' }); }
+    });
+  });
+
+  var newsBtn = document.getElementById('newsBtn');
+  newsBtn.addEventListener('click', function () {
+    document.getElementById('newsNote').textContent = 'Rien n’a été envoyé. Avant de laisser votre adresse quelque part, vérifiez toujours qui la reçoit.';
+    document.getElementById('newsMail').value = '';
+  });
+
+  /* ============ Régie publicitaire ============ */
+  var CREA = {
+    pcgamer: '<svg viewBox="0 0 300 250" role="img" aria-label="Publicité fictive : gagnez un PC gamer">'
+      + '<defs><linearGradient id="pgb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b0d52"/><stop offset="1" stop-color="#08030f"/></linearGradient>'
+      + '<linearGradient id="pgr" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff2d95"/><stop offset=".5" stop-color="#00d9ff"/><stop offset="1" stop-color="#39e639"/></linearGradient>'
+      + '<linearGradient id="pgbtn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd83d"/><stop offset="1" stop-color="#e08a00"/></linearGradient></defs>'
+      + '<rect width="300" height="250" fill="url(#pgb)"/>'
+      + '<circle cx="40" cy="30" r="1.6" fill="#fff" opacity=".7"/><circle cx="120" cy="18" r="1.2" fill="#fff" opacity=".5"/><circle cx="265" cy="46" r="1.5" fill="#fff" opacity=".6"/><circle cx="210" cy="26" r="1" fill="#fff" opacity=".5"/>'
+      + '<rect x="24" y="96" width="66" height="118" rx="5" fill="#15121f" stroke="#6f54ff" stroke-width="2"/>'
+      + '<rect x="30" y="104" width="54" height="34" rx="3" fill="#0a0812" stroke="#2a2340"/>'
+      + '<circle cx="57" cy="165" r="18" fill="#0a0812" stroke="#6f54ff" stroke-width="2"/>'
+      + '<path d="M57 151 L62 165 L57 179 L52 165 Z" fill="#00d9ff" opacity=".85"/>'
+      + '<rect x="30" y="196" width="54" height="7" rx="3" fill="url(#pgr)"/>'
+      + '<rect x="104" y="104" width="104" height="70" rx="4" fill="#0b0a14" stroke="#6f54ff" stroke-width="2"/>'
+      + '<rect x="110" y="110" width="92" height="58" fill="#101a3a"/>'
+      + '<path d="M110 158 L134 128 L152 148 L172 118 L202 158 Z" fill="#2b4cff" opacity=".75"/>'
+      + '<rect x="140" y="174" width="32" height="7" fill="#2a2340"/><rect x="124" y="181" width="64" height="5" rx="2" fill="#3a3356"/>'
+      + '<text x="222" y="126" font-family="Impact,Arial Black,sans-serif" font-size="27" fill="#ffd83d" text-anchor="middle" stroke="#000" stroke-width="1.2">PC</text>'
+      + '<text x="222" y="152" font-family="Impact,Arial Black,sans-serif" font-size="27" fill="#ffd83d" text-anchor="middle" stroke="#000" stroke-width="1.2">GAMER</text>'
+      + '<text x="222" y="172" font-family="Verdana,sans-serif" font-size="11" fill="#9fe8ff" text-anchor="middle">valeur 1 899 €</text>'
+      + '<path d="M250 20 l7 15 16-6 -6 16 15 7 -15 7 6 16 -16-6 -7 15 -7-15 -16 6 6-16 -15-7 15-7 -6-16 16 6 Z" fill="#e0001b"/>'
+      + '<text x="250" y="44" font-family="Arial Black,sans-serif" font-size="10" fill="#fff" text-anchor="middle">100%</text>'
+      + '<text x="250" y="55" font-family="Arial Black,sans-serif" font-size="10" fill="#fff" text-anchor="middle">GRATUI</text>'
+      + '<text x="150" y="42" font-family="Impact,Arial Black,sans-serif" font-size="25" fill="#fff" text-anchor="middle" stroke="#ff2d95" stroke-width="1">FÉLICITATION !!</text>'
+      + '<text x="150" y="64" font-family="Verdana,sans-serif" font-size="12" fill="#ffd83d" text-anchor="middle">Vous êtes le visiteur n° 1 000 000</text>'
+      + '<rect x="78" y="206" width="144" height="31" rx="6" fill="url(#pgbtn)" stroke="#7a4b00" stroke-width="2"/>'
+      + '<text x="150" y="227" font-family="Arial Black,sans-serif" font-size="15" fill="#4a2a00" text-anchor="middle" class="ad-bk">JE RÉCLAME !!</text></svg>',
+
+    antivirus: '<svg viewBox="0 0 300 250" role="img" aria-label="Publicité fictive : antivirus expiré">'
+      + '<defs><linearGradient id="avb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a0000"/><stop offset="1" stop-color="#120000"/></linearGradient></defs>'
+      + '<rect width="300" height="250" fill="url(#avb)"/>'
+      + '<rect x="0" y="0" width="300" height="250" fill="none" stroke="#ff2b2b" stroke-width="6" class="ad-bk"/>'
+      + '<path d="M150 56 L186 120 L114 120 Z" fill="#ffd400" stroke="#111" stroke-width="3" stroke-linejoin="round"/>'
+      + '<rect x="146" y="78" width="8" height="24" fill="#111"/><circle cx="150" cy="110" r="4.5" fill="#111"/>'
+      + '<text x="150" y="150" font-family="Impact,Arial Black,sans-serif" font-size="26" fill="#fff" text-anchor="middle">VOTRE ANTIVIRUS</text>'
+      + '<text x="150" y="176" font-family="Impact,Arial Black,sans-serif" font-size="26" fill="#ff5b5b" text-anchor="middle" class="ad-bk">A EXPIRÉ !!!</text>'
+      + '<text x="150" y="196" font-family="Verdana,sans-serif" font-size="11" fill="#ffd0d0" text-anchor="middle">3 menaces détectées · expire dans 00:04:59</text>'
+      + '<rect x="60" y="206" width="180" height="32" rx="4" fill="#1fbf4a" stroke="#0a5e23" stroke-width="2"/>'
+      + '<text x="150" y="228" font-family="Arial Black,sans-serif" font-size="14" fill="#fff" text-anchor="middle">RENOUVELER MAINTENANT</text>'
+      + '<path d="M44 40 h34 v26 c0 12 -17 20 -17 20 c0 0 -17 -8 -17 -20 Z" fill="#c9c9c9" stroke="#fff" stroke-width="2"/>'
+      + '<path d="M61 40 v46" stroke="#8a8a8a" stroke-width="2"/>'
+      + '<path d="M50 48 l22 26" stroke="#ff2b2b" stroke-width="4"/></svg>',
+
+    sonneries: '<svg viewBox="0 0 160 330" role="img" aria-label="Publicité fictive : sonneries polyphoniques">'
+      + '<defs><linearGradient id="sob" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff2d95"/><stop offset="1" stop-color="#6a00b8"/></linearGradient></defs>'
+      + '<rect width="160" height="330" fill="url(#sob)"/>'
+      + '<text x="80" y="34" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="#ffe94a" text-anchor="middle">SONNERIES</text>'
+      + '<text x="80" y="56" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="#fff" text-anchor="middle">POLYPHONIQUES</text>'
+      + '<rect x="50" y="76" width="60" height="104" rx="9" fill="#2b2b33" stroke="#0c0c10" stroke-width="3"/>'
+      + '<rect x="57" y="86" width="46" height="36" rx="3" fill="#9fe870"/>'
+      + '<rect x="57" y="130" width="12" height="9" rx="2" fill="#55555f"/><rect x="74" y="130" width="12" height="9" rx="2" fill="#55555f"/><rect x="91" y="130" width="12" height="9" rx="2" fill="#55555f"/>'
+      + '<rect x="57" y="144" width="12" height="9" rx="2" fill="#55555f"/><rect x="74" y="144" width="12" height="9" rx="2" fill="#55555f"/><rect x="91" y="144" width="12" height="9" rx="2" fill="#55555f"/>'
+      + '<rect x="57" y="158" width="12" height="9" rx="2" fill="#55555f"/><rect x="74" y="158" width="12" height="9" rx="2" fill="#55555f"/><rect x="91" y="158" width="12" height="9" rx="2" fill="#55555f"/>'
+      + '<path d="M104 70 v-14 h12" stroke="#0c0c10" stroke-width="3" fill="none"/>'
+      + '<ellipse cx="28" cy="110" rx="7" ry="5" fill="#ffe94a"/><rect x="33" y="84" width="3" height="26" fill="#ffe94a"/>'
+      + '<ellipse cx="124" cy="150" rx="7" ry="5" fill="#ffe94a"/><rect x="129" y="124" width="3" height="26" fill="#ffe94a"/>'
+      + '<ellipse cx="34" cy="186" rx="6" ry="4.5" fill="#fff"/><rect x="38" y="164" width="2.6" height="22" fill="#fff"/>'
+      + '<text x="80" y="208" font-family="Arial Black,sans-serif" font-size="17" fill="#fff" text-anchor="middle">3 € / SEMAINE</text>'
+      + '<text x="80" y="228" font-family="Verdana,sans-serif" font-size="10" fill="#ffd9f0" text-anchor="middle">sans engagement*</text>'
+      + '<rect x="18" y="244" width="124" height="34" rx="5" fill="#ffe94a" stroke="#8a6a00" stroke-width="2"/>'
+      + '<text x="80" y="266" font-family="Arial Black,sans-serif" font-size="14" fill="#5a4400" text-anchor="middle" class="ad-bk">JE TÉLÉCHARGE</text>'
+      + '<text x="80" y="296" font-family="Verdana,sans-serif" font-size="8" fill="#f3d4ea" text-anchor="middle">*reconduction tacite</text>'
+      + '<text x="80" y="310" font-family="Verdana,sans-serif" font-size="8" fill="#f3d4ea" text-anchor="middle">tapez SONNE au 81212</text></svg>',
+
+    chat: '<svg viewBox="0 0 300 250" role="img" aria-label="Publicité fictive : messagerie en ligne">'
+      + '<defs><linearGradient id="chb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd3ec"/><stop offset="1" stop-color="#ff8fc8"/></linearGradient></defs>'
+      + '<rect width="300" height="250" fill="url(#chb)"/>'
+      + '<text x="150" y="36" font-family="Impact,Arial Black,sans-serif" font-size="24" fill="#a3005c" text-anchor="middle">3 PERSONNES</text>'
+      + '<text x="150" y="58" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="#5e0035" text-anchor="middle">VEULENT DISCUTER !!</text>'
+      + '<circle cx="48" cy="104" r="17" fill="#fff" stroke="#a3005c" stroke-width="2"/><path d="M28 136 c0 -13 9 -21 20 -21 c11 0 20 8 20 21 Z" fill="#fff" stroke="#a3005c" stroke-width="2"/>'
+      + '<rect x="78" y="84" width="150" height="34" rx="9" fill="#fff" stroke="#a3005c" stroke-width="2"/><path d="M78 104 l-10 6 10 5 Z" fill="#fff" stroke="#a3005c" stroke-width="2"/>'
+      + '<text x="92" y="106" font-family="Verdana,sans-serif" font-size="13" fill="#333">slt, tu fais koi ? :-)</text>'
+      + '<circle cx="252" cy="160" r="17" fill="#fff" stroke="#a3005c" stroke-width="2"/><path d="M232 192 c0 -13 9 -21 20 -21 c11 0 20 8 20 21 Z" fill="#fff" stroke="#a3005c" stroke-width="2"/>'
+      + '<rect x="62" y="140" width="152" height="34" rx="9" fill="#fff" stroke="#a3005c" stroke-width="2"/><path d="M214 160 l10 6 -10 5 Z" fill="#fff" stroke="#a3005c" stroke-width="2"/>'
+      + '<text x="76" y="162" font-family="Verdana,sans-serif" font-size="13" fill="#333">coucou, ça va ? ^^</text>'
+      + '<rect x="70" y="202" width="160" height="32" rx="5" fill="#a3005c"/>'
+      + '<text x="150" y="224" font-family="Arial Black,sans-serif" font-size="14" fill="#fff" text-anchor="middle" class="ad-bk">DISCUTER GRATUI</text></svg>',
+
+    dragon: '<svg viewBox="0 0 160 330" role="img" aria-label="Publicité fictive : jeu en ligne">'
+      + '<defs><linearGradient id="drb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06301f"/><stop offset="1" stop-color="#010a06"/></linearGradient></defs>'
+      + '<rect width="160" height="330" fill="url(#drb)"/>'
+      + '<text x="80" y="32" font-family="Impact,Arial Black,sans-serif" font-size="21" fill="#ffd83d" text-anchor="middle">DRAGON</text>'
+      + '<text x="80" y="54" font-family="Impact,Arial Black,sans-serif" font-size="21" fill="#39e639" text-anchor="middle">QUÊTE</text>'
+      + '<path d="M36 150 C36 110 62 86 92 86 C118 86 134 104 134 124 C134 142 120 152 104 152 L70 152 Z" fill="#1f8a4c" stroke="#0b3d22" stroke-width="3"/>'
+      + '<path d="M92 86 L84 62 L104 76 Z" fill="#1f8a4c" stroke="#0b3d22" stroke-width="3"/>'
+      + '<path d="M118 92 L130 70 L132 94 Z" fill="#1f8a4c" stroke="#0b3d22" stroke-width="3"/>'
+      + '<circle cx="110" cy="112" r="6" fill="#ffd83d"/><circle cx="112" cy="112" r="2.6" fill="#101010"/>'
+      + '<path d="M36 150 C24 150 16 158 14 168 C30 170 40 164 46 156 Z" fill="#ff6a00"/>'
+      + '<path d="M36 150 C20 156 12 168 10 180 C30 178 42 168 48 158 Z" fill="#ffb300" opacity=".8"/>'
+      + '<path d="M60 150 h52 l-8 14 h-36 Z" fill="#0b3d22"/>'
+      + '<text x="80" y="200" font-family="Arial Black,sans-serif" font-size="16" fill="#fff" text-anchor="middle">JOUEZ GRATUI</text>'
+      + '<text x="80" y="220" font-family="Verdana,sans-serif" font-size="10" fill="#9ff0c0" text-anchor="middle">sans téléchargement</text>'
+      + '<text x="80" y="236" font-family="Verdana,sans-serif" font-size="10" fill="#9ff0c0" text-anchor="middle">12 400 000 joueurs</text>'
+      + '<rect x="20" y="252" width="120" height="34" rx="5" fill="#39e639" stroke="#0b3d22" stroke-width="2"/>'
+      + '<text x="80" y="274" font-family="Arial Black,sans-serif" font-size="15" fill="#06301f" text-anchor="middle" class="ad-bk">JOUER !!</text>'
+      + '<text x="80" y="304" font-family="Verdana,sans-serif" font-size="8" fill="#6fbf90" text-anchor="middle">serveur France n°1</text></svg>',
+
+    argent: '<svg viewBox="0 0 300 250" role="img" aria-label="Publicité fictive : revenus à domicile">'
+      + '<defs><linearGradient id="arb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b6b35"/><stop offset="1" stop-color="#042d16"/></linearGradient></defs>'
+      + '<rect width="300" height="250" fill="url(#arb)"/>'
+      + '<g transform="rotate(-11 80 150)"><rect x="34" y="128" width="92" height="46" rx="4" fill="#cfe9c9" stroke="#1d5c2e" stroke-width="2"/><circle cx="80" cy="151" r="14" fill="#a9d6a0" stroke="#1d5c2e"/><text x="80" y="157" font-family="Georgia,serif" font-size="17" fill="#1d5c2e" text-anchor="middle">€</text></g>'
+      + '<g transform="rotate(8 120 178)"><rect x="76" y="158" width="92" height="46" rx="4" fill="#dff2d8" stroke="#1d5c2e" stroke-width="2"/><circle cx="122" cy="181" r="14" fill="#a9d6a0" stroke="#1d5c2e"/><text x="122" y="187" font-family="Georgia,serif" font-size="17" fill="#1d5c2e" text-anchor="middle">€</text></g>'
+      + '<ellipse cx="214" cy="196" rx="20" ry="7" fill="#c89b16"/><ellipse cx="214" cy="190" rx="20" ry="7" fill="#f2c230" stroke="#9c7a10"/>'
+      + '<ellipse cx="246" cy="202" rx="17" ry="6" fill="#c89b16"/><ellipse cx="246" cy="197" rx="17" ry="6" fill="#f2c230" stroke="#9c7a10"/>'
+      + '<text x="150" y="48" font-family="Impact,Arial Black,sans-serif" font-size="34" fill="#ffe94a" text-anchor="middle" stroke="#063" stroke-width="1">5 000 € / MOIS</text>'
+      + '<text x="150" y="76" font-family="Impact,Arial Black,sans-serif" font-size="21" fill="#fff" text-anchor="middle">DEPUIS CHEZ VOUS</text>'
+      + '<text x="150" y="100" font-family="Verdana,sans-serif" font-size="12" fill="#bfe8c8" text-anchor="middle">Méthode légale. Les banques la détestent.</text>'
+      + '<rect x="78" y="110" width="144" height="12" rx="6" fill="#063" stroke="#1d5c2e"/>'
+      + '<rect x="78" y="110" width="128" height="12" rx="6" fill="#ffe94a"/>'
+      + '<text x="150" y="226" font-family="Arial Black,sans-serif" font-size="15" fill="#063" text-anchor="middle">JE VEUX SAVOIR</text>'
+      + '<rect x="84" y="208" width="132" height="26" rx="4" fill="none" stroke="#ffe94a" stroke-width="2" class="ad-bk"/></svg>',
+
+    encre: '<svg viewBox="0 0 468 60" role="img" aria-label="Publicité fictive : cartouches d\'encre">'
+      + '<defs><linearGradient id="enb" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff6e5"/><stop offset="1" stop-color="#ffd089"/></linearGradient></defs>'
+      + '<rect width="468" height="60" fill="url(#enb)" stroke="#d08c1a"/>'
+      + '<rect x="14" y="14" width="22" height="32" rx="3" fill="#00a7d6" stroke="#005f7a" stroke-width="2"/><rect x="20" y="46" width="10" height="5" fill="#005f7a"/>'
+      + '<rect x="42" y="14" width="22" height="32" rx="3" fill="#e5007e" stroke="#7a0044" stroke-width="2"/><rect x="48" y="46" width="10" height="5" fill="#7a0044"/>'
+      + '<rect x="70" y="14" width="22" height="32" rx="3" fill="#ffd400" stroke="#8a7200" stroke-width="2"/><rect x="76" y="46" width="10" height="5" fill="#8a7200"/>'
+      + '<text x="112" y="30" font-family="Impact,Arial Black,sans-serif" font-size="25" fill="#d60000">ENCRE D\'IMPRIMANTE</text>'
+      + '<text x="112" y="50" font-family="Verdana,sans-serif" font-size="13" fill="#5a3b00">toutes marques · livraison 24 h · stock limité</text>'
+      + '<circle cx="330" cy="30" r="25" fill="#d60000"/><text x="330" y="27" font-family="Arial Black,sans-serif" font-size="16" fill="#fff" text-anchor="middle">-90</text><text x="330" y="41" font-family="Arial Black,sans-serif" font-size="12" fill="#fff" text-anchor="middle">%</text>'
+      + '<rect x="368" y="14" width="88" height="32" rx="5" fill="#1fbf4a" stroke="#0a5e23" stroke-width="2"/>'
+      + '<text x="412" y="35" font-family="Arial Black,sans-serif" font-size="14" fill="#fff" text-anchor="middle" class="ad-bk">COMMANDER</text></svg>',
+
+    turbo: '<svg viewBox="0 0 468 60" role="img" aria-label="Publicité fictive : accélérateur de PC">'
+      + '<defs><linearGradient id="tub" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#001b3d"/><stop offset="1" stop-color="#003a7a"/></linearGradient></defs>'
+      + '<rect width="468" height="60" fill="url(#tub)"/>'
+      + '<path d="M40 8 A26 26 0 0 1 66 34" fill="none" stroke="#39e639" stroke-width="5"/>'
+      + '<path d="M14 34 A26 26 0 0 1 40 8" fill="none" stroke="#ffd400" stroke-width="5"/>'
+      + '<path d="M40 34 L58 18" stroke="#ff3b3b" stroke-width="3"/><circle cx="40" cy="34" r="4" fill="#fff"/>'
+      + '<path d="M86 10 l-14 24 h12 l-8 18 20 -26 h-12 Z" fill="#ffd400" stroke="#8a7200"/>'
+      + '<text x="112" y="29" font-family="Impact,Arial Black,sans-serif" font-size="24" fill="#fff">ACCÉLÉREZ VOTRE PC</text>'
+      + '<text x="306" y="29" font-family="Impact,Arial Black,sans-serif" font-size="24" fill="#39e639" class="ad-bk">x 500</text>'
+      + '<text x="112" y="48" font-family="Verdana,sans-serif" font-size="12" fill="#9fd4ff">analyse offerte · 1 clic · compatible Windows</text>'
+      + '<rect x="372" y="14" width="84" height="32" rx="5" fill="#ff8a00" stroke="#8a4a00" stroke-width="2"/>'
+      + '<text x="414" y="35" font-family="Arial Black,sans-serif" font-size="13" fill="#fff" text-anchor="middle">ANALYSER</text></svg>',
+
+    voiture: '<svg viewBox="0 0 300 110" role="img" aria-label="Publicité fictive : estimation de voiture">'
+      + '<defs><linearGradient id="vob" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd8ff"/><stop offset="1" stop-color="#e9f6ff"/></linearGradient></defs>'
+      + '<rect width="300" height="110" fill="url(#vob)"/>'
+      + '<rect x="0" y="82" width="300" height="28" fill="#5a5a5a"/><path d="M10 96 h30 M60 96 h30 M110 96 h30 M160 96 h30 M210 96 h30 M260 96 h30" stroke="#fff" stroke-width="3"/>'
+      + '<path d="M24 80 L32 58 C34 52 40 48 48 48 h34 c7 0 10 2 15 7 l12 11 h18 c8 0 12 4 12 9 v5 Z" fill="#d61f1f" stroke="#7a0f0f" stroke-width="2" stroke-linejoin="round"/>'
+      + '<path d="M44 56 h22 v14 h-28 Z" fill="#bfe4ff" stroke="#7a0f0f"/><path d="M72 56 h12 l12 14 h-24 Z" fill="#bfe4ff" stroke="#7a0f0f"/>'
+      + '<circle cx="52" cy="80" r="11" fill="#1a1a1a"/><circle cx="52" cy="80" r="4" fill="#bbb"/>'
+      + '<circle cx="112" cy="80" r="11" fill="#1a1a1a"/><circle cx="112" cy="80" r="4" fill="#bbb"/>'
+      + '<text x="152" y="34" font-family="Impact,Arial Black,sans-serif" font-size="21" fill="#003a7a">VOTRE VOITURE</text>'
+      + '<text x="152" y="56" font-family="Impact,Arial Black,sans-serif" font-size="21" fill="#d60000">VAUT 3 FOIS PLUS</text>'
+      + '<text x="152" y="72" font-family="Verdana,sans-serif" font-size="10" fill="#333">estimation gratuite en 2 clics</text>'
+      + '<rect x="196" y="78" width="96" height="26" rx="4" fill="#ffd400" stroke="#8a7200" stroke-width="2"/>'
+      + '<text x="244" y="96" font-family="Arial Black,sans-serif" font-size="12" fill="#5a4400" text-anchor="middle" class="ad-bk">J\'ESTIME</text></svg>',
+
+    smileys: '<svg viewBox="0 0 300 250" role="img" aria-label="Publicité fictive : pack de smileys">'
+      + '<defs><linearGradient id="smb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff7c2"/><stop offset="1" stop-color="#ffcf2e"/></linearGradient>'
+      + '<radialGradient id="smf"><stop offset="0" stop-color="#fff07a"/><stop offset="1" stop-color="#f0b400"/></radialGradient></defs>'
+      + '<rect width="300" height="250" fill="url(#smb)"/>'
+      + '<circle cx="70" cy="120" r="34" fill="url(#smf)" stroke="#9a7000" stroke-width="3"/><circle cx="59" cy="110" r="4.5" fill="#3a2a00"/><circle cx="81" cy="110" r="4.5" fill="#3a2a00"/><path d="M53 130 q17 16 34 0" fill="none" stroke="#3a2a00" stroke-width="4" stroke-linecap="round"/>'
+      + '<circle cx="150" cy="140" r="28" fill="url(#smf)" stroke="#9a7000" stroke-width="3"/><path d="M140 132 l8 8 M148 132 l-8 8 M152 132 l8 8 M160 132 l-8 8" stroke="#3a2a00" stroke-width="3" stroke-linecap="round"/><path d="M138 152 q12 10 24 0" fill="none" stroke="#3a2a00" stroke-width="3.5" stroke-linecap="round"/>'
+      + '<circle cx="226" cy="118" r="30" fill="url(#smf)" stroke="#9a7000" stroke-width="3"/><circle cx="216" cy="110" r="4" fill="#3a2a00"/><circle cx="236" cy="110" r="4" fill="#3a2a00"/><ellipse cx="226" cy="131" rx="9" ry="7" fill="#3a2a00"/><path d="M244 100 l10 -8 M246 112 l12 2" stroke="#e01b1b" stroke-width="3" stroke-linecap="round"/>'
+      + '<text x="150" y="42" font-family="Impact,Arial Black,sans-serif" font-size="31" fill="#d60000" text-anchor="middle">500 SMILEYS</text>'
+      + '<text x="150" y="68" font-family="Impact,Arial Black,sans-serif" font-size="20" fill="#5a4400" text-anchor="middle">POUR VOS E-MAILS !!</text>'
+      + '<rect x="72" y="196" width="156" height="32" rx="5" fill="#1fbf4a" stroke="#0a5e23" stroke-width="2"/>'
+      + '<text x="150" y="218" font-family="Arial Black,sans-serif" font-size="14" fill="#fff" text-anchor="middle" class="ad-bk">JE TÉLÉCHARGE</text></svg>',
+
+    fonds: '<svg viewBox="0 0 468 60" role="img" aria-label="Publicité fictive : fonds d\'écran">'
+      + '<defs><linearGradient id="fob" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9e4a"/><stop offset="0.55" stop-color="#ffd79a"/><stop offset="1" stop-color="#4aa3d6"/></linearGradient></defs>'
+      + '<rect width="468" height="60" fill="url(#fob)"/>'
+      + '<circle cx="66" cy="26" r="13" fill="#fff3b0"/>'
+      + '<path d="M0 46 L40 24 L70 42 L108 18 L150 46 Z" fill="#2f6b4f"/>'
+      + '<path d="M0 52 L468 52 L468 60 L0 60 Z" fill="#1f4a36"/>'
+      + '<text x="170" y="28" font-family="Impact,Arial Black,sans-serif" font-size="23" fill="#fff" stroke="#003" stroke-width="0.8">FONDS D\'ÉCRAN HD</text>'
+      + '<text x="170" y="46" font-family="Verdana,sans-serif" font-size="12" fill="#06263a">chatons · voitures · couchers de soleil · 100% gratui</text>'
+      + '<rect x="372" y="14" width="84" height="32" rx="5" fill="#ffd400" stroke="#8a7200" stroke-width="2"/>'
+      + '<text x="414" y="35" font-family="Arial Black,sans-serif" font-size="13" fill="#5a4400" text-anchor="middle" class="ad-bk">VOIR</text></svg>',
+
+    heberg: '<svg viewBox="0 0 160 330" role="img" aria-label="Publicité fictive : hébergement de site">'
+      + '<defs><linearGradient id="hbb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#062a52"/><stop offset="1" stop-color="#0a4f8a"/></linearGradient></defs>'
+      + '<rect width="160" height="330" fill="url(#hbb)"/>'
+      + '<text x="80" y="32" font-family="Impact,Arial Black,sans-serif" font-size="20" fill="#9fe8ff" text-anchor="middle">HÉBERGEZ</text>'
+      + '<text x="80" y="54" font-family="Impact,Arial Black,sans-serif" font-size="20" fill="#fff" text-anchor="middle">VOTRE SITE</text>'
+      + '<rect x="44" y="76" width="72" height="116" rx="4" fill="#12223a" stroke="#4aa3d6" stroke-width="2"/>'
+      + '<rect x="50" y="84" width="60" height="18" rx="2" fill="#1b3busy"/><rect x="50" y="84" width="60" height="18" rx="2" fill="#1b365a" stroke="#2f5b8a"/><circle cx="58" cy="93" r="3" fill="#39e639"/><circle cx="68" cy="93" r="3" fill="#39e639"/>'
+      + '<rect x="50" y="108" width="60" height="18" rx="2" fill="#1b365a" stroke="#2f5b8a"/><circle cx="58" cy="117" r="3" fill="#ffd400"/><circle cx="68" cy="117" r="3" fill="#39e639"/>'
+      + '<rect x="50" y="132" width="60" height="18" rx="2" fill="#1b365a" stroke="#2f5b8a"/><circle cx="58" cy="141" r="3" fill="#39e639"/><circle cx="68" cy="141" r="3" fill="#39e639"/>'
+      + '<rect x="50" y="156" width="60" height="18" rx="2" fill="#1b365a" stroke="#2f5b8a"/><circle cx="58" cy="165" r="3" fill="#39e639"/><circle cx="68" cy="165" r="3" fill="#e01b1b" class="ad-bk"/>'
+      + '<text x="80" y="214" font-family="Arial Black,sans-serif" font-size="30" fill="#ffd400" text-anchor="middle">1 €</text>'
+      + '<text x="80" y="232" font-family="Verdana,sans-serif" font-size="11" fill="#9fe8ff" text-anchor="middle">par mois</text>'
+      + '<text x="80" y="252" font-family="Verdana,sans-serif" font-size="10" fill="#cfe9ff" text-anchor="middle">50 Mo d\'espace</text>'
+      + '<text x="80" y="266" font-family="Verdana,sans-serif" font-size="10" fill="#cfe9ff" text-anchor="middle">compteur de visites inclus</text>'
+      + '<rect x="18" y="278" width="124" height="32" rx="5" fill="#39e639" stroke="#0a5e23" stroke-width="2"/>'
+      + '<text x="80" y="299" font-family="Arial Black,sans-serif" font-size="13" fill="#06301f" text-anchor="middle">JE CRÉE MON SITE</text></svg>',
+
+    cdfai: '<svg viewBox="0 0 300 250" role="img" aria-label="Publicité fictive : CD de connexion">'
+      + '<defs><linearGradient id="cdb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8f4ff"/><stop offset="1" stop-color="#9fc8ff"/></linearGradient>'
+      + '<linearGradient id="cdr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9ad5"/><stop offset=".35" stop-color="#9ad5ff"/><stop offset=".7" stop-color="#b6ff9a"/><stop offset="1" stop-color="#ffe59a"/></linearGradient></defs>'
+      + '<rect width="300" height="250" fill="url(#cdb)"/>'
+      + '<text x="150" y="38" font-family="Impact,Arial Black,sans-serif" font-size="26" fill="#0a3f7a" text-anchor="middle">100 HEURES</text>'
+      + '<text x="150" y="60" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="#d60000" text-anchor="middle">DE CONNEXION OFFERTES</text>'
+      + '<circle cx="150" cy="140" r="54" fill="url(#cdr)" stroke="#8aa8c8" stroke-width="2"/>'
+      + '<circle cx="150" cy="140" r="36" fill="none" stroke="#ffffff" stroke-width="2" opacity=".6"/>'
+      + '<circle cx="150" cy="140" r="17" fill="#e8f4ff" stroke="#8aa8c8" stroke-width="2"/>'
+      + '<circle cx="150" cy="140" r="6" fill="#cfe0f0" stroke="#8aa8c8"/>'
+      + '<path d="M150 86 A54 54 0 0 1 204 140" fill="none" stroke="#fff" stroke-width="5" opacity=".75"/>'
+      + '<text x="150" y="212" font-family="Verdana,sans-serif" font-size="12" fill="#0a3f7a" text-anchor="middle">CD gratui envoyé sous 48 h · 56k</text>'
+      + '<rect x="84" y="220" width="132" height="24" rx="4" fill="#0a3f7a"/>'
+      + '<text x="150" y="237" font-family="Arial Black,sans-serif" font-size="12" fill="#fff" text-anchor="middle" class="ad-bk">RECEVOIR MON CD</text></svg>',
+
+    mp3: '<svg viewBox="0 0 160 330" role="img" aria-label="Publicité fictive : téléchargement de musique">'
+      + '<defs><linearGradient id="mpb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1a26"/><stop offset="1" stop-color="#3a1a52"/></linearGradient></defs>'
+      + '<rect width="160" height="330" fill="url(#mpb)"/>'
+      + '<text x="80" y="30" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="#39e639" text-anchor="middle">VOS MP3 EN</text>'
+      + '<text x="80" y="54" font-family="Impact,Arial Black,sans-serif" font-size="27" fill="#ffd400" text-anchor="middle" class="ad-bk">12 SEC.</text>'
+      + '<rect x="46" y="74" width="68" height="110" rx="10" fill="#d8d8e0" stroke="#8a8a9a" stroke-width="2"/>'
+      + '<rect x="54" y="82" width="52" height="34" rx="3" fill="#2b3a2b" stroke="#6a7a6a"/>'
+      + '<path d="M60 108 h8 l4 -10 4 14 4 -8 4 6 h12" fill="none" stroke="#9fff9f" stroke-width="2"/>'
+      + '<circle cx="80" cy="146" r="22" fill="#bcbcc8" stroke="#8a8a9a" stroke-width="2"/><circle cx="80" cy="146" r="8" fill="#e8e8f0" stroke="#8a8a9a"/>'
+      + '<ellipse cx="34" cy="212" rx="8" ry="6" fill="#39e639"/><rect x="40" y="182" width="3" height="30" fill="#39e639"/>'
+      + '<ellipse cx="118" cy="236" rx="8" ry="6" fill="#ffd400"/><rect x="124" y="206" width="3" height="30" fill="#ffd400"/>'
+      + '<text x="80" y="262" font-family="Verdana,sans-serif" font-size="11" fill="#cfcfe0" text-anchor="middle">4 200 000 titres</text>'
+      + '<rect x="18" y="274" width="124" height="32" rx="5" fill="#ff2d95" stroke="#7a0044" stroke-width="2"/>'
+      + '<text x="80" y="295" font-family="Arial Black,sans-serif" font-size="13" fill="#fff" text-anchor="middle">TÉLÉCHARGER</text></svg>',
+
+    qi: '<svg viewBox="0 0 300 250" role="img" aria-label="Publicité fictive : test de QI">'
+      + '<defs><linearGradient id="qib" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1b5e"/><stop offset="1" stop-color="#0d0724"/></linearGradient></defs>'
+      + '<rect width="300" height="250" fill="url(#qib)"/>'
+      + '<path d="M96 196 C70 186 58 160 62 136 C66 108 90 92 118 94 C142 96 158 114 158 136 C158 158 144 170 134 178 L134 196 Z" fill="#f0d0b0" stroke="#8a6a4a" stroke-width="2"/>'
+      + '<path d="M78 128 C84 108 104 100 120 106" fill="none" stroke="#8a6a4a" stroke-width="2"/>'
+      + '<text x="186" y="80" font-family="Georgia,serif" font-size="42" fill="#ffd400" class="ad-bk">?</text>'
+      + '<text x="226" y="120" font-family="Georgia,serif" font-size="30" fill="#9fe8ff">?</text>'
+      + '<text x="200" y="152" font-family="Georgia,serif" font-size="22" fill="#ff8fc8">?</text>'
+      + '<text x="150" y="40" font-family="Impact,Arial Black,sans-serif" font-size="29" fill="#fff" text-anchor="middle">TESTEZ VOTRE QI</text>'
+      + '<text x="150" y="62" font-family="Verdana,sans-serif" font-size="12" fill="#c8b8ff" text-anchor="middle">20 questions · 3 minutes</text>'
+      + '<rect x="166" y="178" width="118" height="30" rx="4" fill="#ffd400" stroke="#8a7200" stroke-width="2"/>'
+      + '<text x="225" y="198" font-family="Arial Black,sans-serif" font-size="13" fill="#4a3a00" text-anchor="middle">COMMENCER</text>'
+      + '<text x="225" y="224" font-family="Verdana,sans-serif" font-size="9" fill="#9a8ac8" text-anchor="middle">résultat par SMS 4 €</text></svg>',
+
+    horoscope: '<svg viewBox="0 0 300 250" role="img" aria-label="Publicité fictive : horoscope">'
+      + '<defs><linearGradient id="hob" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140c3a"/><stop offset="1" stop-color="#3d1163"/></linearGradient></defs>'
+      + '<rect width="300" height="250" fill="url(#hob)"/>'
+      + '<circle cx="54" cy="56" r="1.8" fill="#fff"/><circle cx="110" cy="34" r="1.3" fill="#fff" opacity=".8"/><circle cx="244" cy="44" r="1.6" fill="#fff"/><circle cx="276" cy="96" r="1.2" fill="#fff" opacity=".7"/><circle cx="36" cy="128" r="1.4" fill="#fff" opacity=".8"/>'
+      + '<path d="M226 52 a30 30 0 1 0 28 40 a24 24 0 1 1 -28 -40 Z" fill="#ffe08a"/>'
+      + '<path d="M60 170 L92 150 L120 178 L158 142 L196 170" fill="none" stroke="#9fe8ff" stroke-width="1.6"/>'
+      + '<circle cx="60" cy="170" r="4" fill="#9fe8ff"/><circle cx="92" cy="150" r="3" fill="#9fe8ff"/><circle cx="120" cy="178" r="3.5" fill="#9fe8ff"/><circle cx="158" cy="142" r="3" fill="#9fe8ff"/><circle cx="196" cy="170" r="4" fill="#9fe8ff"/>'
+      + '<text x="150" y="52" font-family="Georgia,serif" font-size="29" fill="#ffe08a" text-anchor="middle" font-style="italic">Votre horoscope</text>'
+      + '<text x="150" y="82" font-family="Impact,Arial Black,sans-serif" font-size="27" fill="#fff" text-anchor="middle">2026 GRATUI</text>'
+      + '<text x="150" y="110" font-family="Verdana,sans-serif" font-size="12" fill="#d8c8ff" text-anchor="middle">amour · travail · argent</text>'
+      + '<rect x="74" y="202" width="152" height="32" rx="16" fill="#ffe08a" stroke="#8a6a00" stroke-width="2"/>'
+      + '<text x="150" y="223" font-family="Arial Black,sans-serif" font-size="13" fill="#4a3600" text-anchor="middle" class="ad-bk">MON SIGNE</text></svg>',
+
+    cuisine: '<svg viewBox="0 0 468 60" role="img" aria-label="Publicité fictive : cuisine équipée">'
+      + '<rect width="468" height="60" fill="#f4efe6"/>'
+      + '<rect x="0" y="0" width="150" height="60" fill="#e3d8c6"/>'
+      + '<rect x="10" y="10" width="42" height="22" fill="#fff" stroke="#9a8a72" stroke-width="2"/><rect x="10" y="36" width="42" height="18" fill="#efe6d6" stroke="#9a8a72" stroke-width="2"/>'
+      + '<rect x="58" y="10" width="36" height="44" fill="#cfd8dd" stroke="#8a949a" stroke-width="2"/><rect x="64" y="18" width="24" height="3" fill="#8a949a"/>'
+      + '<rect x="100" y="28" width="42" height="26" fill="#fff" stroke="#9a8a72" stroke-width="2"/><circle cx="110" cy="41" r="4" fill="#8a949a"/><circle cx="122" cy="41" r="4" fill="#8a949a"/>'
+      + '<text x="162" y="28" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="#8a3b00">CUISINE ÉQUIPÉE</text>'
+      + '<text x="162" y="48" font-family="Verdana,sans-serif" font-size="12" fill="#5a4a30">pose comprise · devis en 2 minutes</text>'
+      + '<circle cx="348" cy="30" r="24" fill="#d60000"/><text x="348" y="27" font-family="Arial Black,sans-serif" font-size="15" fill="#fff" text-anchor="middle">-70</text><text x="348" y="40" font-family="Arial Black,sans-serif" font-size="11" fill="#fff" text-anchor="middle">%</text>'
+      + '<rect x="382" y="14" width="76" height="32" rx="5" fill="#ff8a00" stroke="#8a4a00" stroke-width="2"/>'
+      + '<text x="420" y="35" font-family="Arial Black,sans-serif" font-size="12" fill="#fff" text-anchor="middle" class="ad-bk">DEVIS</text></svg>',
+
+    mobile: '<svg viewBox="0 0 300 250" role="img" aria-label="Publicité fictive : concours téléphone">'
+      + '<defs><linearGradient id="mob" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00a7d6"/><stop offset="1" stop-color="#004b7a"/></linearGradient></defs>'
+      + '<rect width="300" height="250" fill="url(#mob)"/>'
+      + '<text x="150" y="38" font-family="Impact,Arial Black,sans-serif" font-size="25" fill="#ffe94a" text-anchor="middle">GAGNEZ LE DERNIER</text>'
+      + '<text x="150" y="62" font-family="Impact,Arial Black,sans-serif" font-size="25" fill="#fff" text-anchor="middle">TÉLÉPHONE !!</text>'
+      + '<rect x="118" y="82" width="64" height="112" rx="10" fill="#2b2b33" stroke="#0c0c10" stroke-width="3"/>'
+      + '<rect x="126" y="92" width="48" height="62" rx="3" fill="#7fd4ff"/>'
+      + '<circle cx="150" cy="172" r="10" fill="#55555f" stroke="#0c0c10" stroke-width="2"/>'
+      + '<path d="M150 82 v-10" stroke="#0c0c10" stroke-width="3"/>'
+      + '<path d="M60 112 l6 13 14 2 -10 10 2 14 -12 -7 -12 7 2 -14 -10 -10 14 -2 Z" fill="#ffe94a"/>'
+      + '<path d="M240 140 l6 13 14 2 -10 10 2 14 -12 -7 -12 7 2 -14 -10 -10 14 -2 Z" fill="#ffe94a" opacity=".85"/>'
+      + '<text x="150" y="214" font-family="Verdana,sans-serif" font-size="11" fill="#cfefff" text-anchor="middle">tirage au sort chaque jour</text>'
+      + '<rect x="78" y="220" width="144" height="26" rx="4" fill="#e01b1b" stroke="#7a0000" stroke-width="2"/>'
+      + '<text x="150" y="238" font-family="Arial Black,sans-serif" font-size="13" fill="#fff" text-anchor="middle" class="ad-bk">JE PARTICIPE</text></svg>',
+
+    superbarre: '<svg viewBox="0 0 468 60" role="img" aria-label="Publicité fictive : barre d\'outils">'
+      + '<rect width="468" height="60" fill="#dfe6ef"/>'
+      + '<rect x="8" y="6" width="150" height="48" fill="#fff" stroke="#8a93a0" stroke-width="2"/>'
+      + '<rect x="8" y="6" width="150" height="9" fill="#2a5a9a"/>'
+      + '<rect x="10" y="17" width="146" height="7" fill="#ffd79a" stroke="#c9a05a"/>'
+      + '<rect x="10" y="25" width="146" height="7" fill="#d8c8ff" stroke="#9a7ac9"/>'
+      + '<rect x="10" y="33" width="146" height="7" fill="#bfe8ff" stroke="#5a9ac9"/>'
+      + '<rect x="10" y="41" width="146" height="7" fill="#ffd0e6" stroke="#c95a9a"/>'
+      + '<rect x="10" y="49" width="146" height="4" fill="#f4f4f4"/>'
+      + '<text x="172" y="27" font-family="Impact,Arial Black,sans-serif" font-size="21" fill="#5a00b0">SUPERBARRE 2003</text>'
+      + '<text x="172" y="46" font-family="Verdana,sans-serif" font-size="12" fill="#444">7 barres incluses · météo · smileys · recherche</text>'
+      + '<rect x="378" y="14" width="80" height="32" rx="5" fill="#1fbf4a" stroke="#0a5e23" stroke-width="2"/>'
+      + '<text x="418" y="35" font-family="Arial Black,sans-serif" font-size="13" fill="#fff" text-anchor="middle" class="ad-bk">INSTALLER</text></svg>',
+
+    vide: '<svg viewBox="0 0 300 120" role="img" aria-label="Espace publicitaire à louer">'
+      + '<rect width="300" height="120" fill="#fafafa" stroke="#9a9a9a" stroke-width="2" stroke-dasharray="8 6"/>'
+      + '<text x="150" y="50" font-family="Verdana,sans-serif" font-size="15" fill="#777" text-anchor="middle">ESPACE PUBLICITAIRE</text>'
+      + '<text x="150" y="74" font-family="Verdana,sans-serif" font-size="19" fill="#555" text-anchor="middle" font-weight="bold">À LOUER</text>'
+      + '<text x="150" y="96" font-family="Courier New,monospace" font-size="11" fill="#999" text-anchor="middle">contactez la régie</text></svg>'
+  };
+
+  var CREA_KEYS = ['pcgamer', 'antivirus', 'chat', 'argent', 'dragon', 'encre', 'turbo', 'voiture',
+    'smileys', 'fonds', 'heberg', 'cdfai', 'mp3', 'qi', 'horoscope', 'cuisine', 'mobile', 'superbarre'];
+
+  for (var shuffleI = CREA_KEYS.length - 1; shuffleI > 0; shuffleI--) {
+    var swapJ = Math.floor(Math.random() * (shuffleI + 1));
+    var swapTmp = CREA_KEYS[shuffleI];
+    CREA_KEYS[shuffleI] = CREA_KEYS[swapJ];
+    CREA_KEYS[swapJ] = swapTmp;
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-creative]'), function (host) {
+    host.innerHTML = CREA[host.getAttribute('data-creative')] || CREA.vide;
+  });
+
+  /* --- remplissage automatique des colonnes (la régie déteste le vide) --- */
+  var fillIndex = 0;
+  function makeAdSlot() {
+    var slot = el('div', 'adslot');
+    slot.appendChild(el('span', 'tag', fillIndex % 5 === 4 ? 'régie' : 'annonce'));
+    var box = el('div', 'adbox');
+    box.setAttribute('data-ad-fake', '');
+    box.innerHTML = fillIndex % 7 === 6 ? CREA.vide : CREA[CREA_KEYS[fillIndex % CREA_KEYS.length]];
+    fillIndex++;
+    slot.appendChild(box);
+    return slot;
+  }
+
+  function fillRail(rail) {
+    if (!rail) { return; }
+    var guard = 0;
+    while (guard < 30) {
+      var last = rail.lastElementChild;
+      if (!last) { break; }
+      var free = rail.getBoundingClientRect().bottom - last.getBoundingClientRect().bottom;
+      if (free < 90) { break; }
+      var sticky = rail.querySelector('.adslot.sticky');
+      var node = makeAdSlot();
+      if (sticky) { rail.insertBefore(node, sticky); } else { rail.appendChild(node); }
+      guard++;
+    }
+  }
+
+  function fillRails() {
+    if (window.innerWidth <= 1100) { return; }
+    fillRail(document.querySelector('.adrail'));
+    fillRail(document.querySelector('.side'));
+  }
+
+  window.setTimeout(fillRails, 250);
+  window.addEventListener('load', function () { window.setTimeout(fillRails, 150); });
+  var fillPending = null;
+  window.addEventListener('resize', function () {
+    if (fillPending) { window.clearTimeout(fillPending); }
+    fillPending = window.setTimeout(fillRails, 350);
+  });
+
+  function adPopup() {
+    if (!popupsOn) { return; }
+    if (document.querySelectorAll('.adwin').length >= 2) { return; }
+    var key = CREA_KEYS[Math.floor(Math.random() * CREA_KEYS.length)];
+    var content = el('div');
+    var card = el('div', 'adbox');
+    card.setAttribute('data-ad-fake', '');
+    card.innerHTML = CREA[key];
+    content.appendChild(card);
+    var box = win({ title: 'Publicité', pos: 'w' + (1 + Math.floor(Math.random() * 5)), content: content });
+    box.classList.add('adwin');
+    content.appendChild(actions([
+      { label: 'Fermer', run: function () { box.remove(); } },
+      { label: 'Non merci', style: 'blue', run: function () { box.remove(); } }
+    ]));
+  }
+  window.setTimeout(adPopup, 14000);
+  window.setInterval(adPopup, 19000);
+
+  document.addEventListener('click', function (event) {
+    var card = event.target.closest('[data-ad-fake]');
+    if (!card) { return; }
+    var content = el('div');
+    content.appendChild(el('p', null, 'Fausse publicité. Ce site n’en diffuse aucune pour de vrai.'));
+    var list = el('ul');
+    [
+      'Dans les années 2000, ces encarts finançaient les sites gratuits.',
+      'Certains servaient à diffuser des logiciels malveillants. On appelle ça le malvertising.',
+      'Pour un recruteur : filtrer le web et bloquer ces encarts fait partie des tâches de l’administrateur sécurité.'
+    ].forEach(function (line) { list.appendChild(el('li', null, line)); });
+    content.appendChild(list);
+    var box = win({ title: 'Ce qu’il fallait voir', pos: 'w' + (1 + Math.floor(Math.random() * 5)), lecon: true, content: content });
+    content.appendChild(actions([{ label: 'Compris !', style: 'blue', run: function () { box.remove(); } }]));
+  });
+
+  /* ============ Gontrand, l'oie de garde ============ */
+  var goose = document.getElementById('goose');
+  var bubble = document.getElementById('gooseBubble');
+  var gooseToggle = document.getElementById('gooseToggle');
+  var gooseOn = true;
+  var gooseTimer = null;
+  var bubbleTimer = null;
+
+  var HONKS = [
+    'HOOONK !! Un mot de passe dit à voix haute en réunion n’est plus un mot de passe.',
+    'Les oies du Capitole ont sauvé Rome en donnant l’alerte. C’est exactement le rôle de la supervision.',
+    'HONK. Demandez au candidat la dernière panne qu’il a gérée, pas la liste de ses outils.',
+    'Une sauvegarde jamais restaurée n’est pas une sauvegarde. HONK.',
+    'Un salarié qui part doit perdre ses accès le jour même. Pas la semaine suivante.',
+    'HOOONK !! Votre session est restée ouverte pendant la pause déjeuner.',
+    'Le pare-feu protège le réseau. Il ne protège pas d’un clic sur une pièce jointe.',
+    'HONK HONK. Une clé USB trouvée sur le parking ne se branche jamais.'
+  ];
+
+  function gooseSay(text) {
+    bubble.textContent = text;
+    bubble.hidden = false;
+    if (bubbleTimer) { window.clearTimeout(bubbleTimer); }
+    bubbleTimer = window.setTimeout(function () { bubble.hidden = true; }, 6000);
+  }
+
+  function dropNote(text) {
+    var notes = document.querySelectorAll('.postit');
+    if (notes.length >= 2) { notes[0].remove(); }
+    var note = el('div', 'postit');
+    note.appendChild(el('b', null, '🪿 Mot de Gontrand'));
+    note.appendChild(el('span', null, text));
+    var close = el('button', null, '✕');
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Retirer le mot');
+    close.addEventListener('click', function () { note.remove(); });
+    note.appendChild(close);
+    note.style.left = Math.round(12 + Math.random() * Math.max(40, window.innerWidth - 210)) + 'px';
+    note.style.top = Math.round(80 + Math.random() * Math.max(60, window.innerHeight - 320)) + 'px';
+    document.body.appendChild(note);
+    window.setTimeout(function () { note.remove(); }, 22000);
+  }
+
+  function gooseStep() {
+    if (!gooseOn) { return; }
+    var max = Math.max(40, window.innerWidth - 90);
+    var current = parseFloat(goose.style.left) || max / 2;
+    var target = Math.round(Math.random() * max);
+    goose.classList.toggle('flip', target < current);
+    goose.style.left = target + 'px';
+    var roll = Math.random();
+    if (roll < 0.4) { gooseSay(HONKS[Math.floor(Math.random() * HONKS.length)]); }
+    else if (roll < 0.58) { dropNote(HONKS[Math.floor(Math.random() * HONKS.length)]); }
+  }
+
+  goose.style.left = Math.round(window.innerWidth * 0.35) + 'px';
+  goose.addEventListener('click', function () {
+    gooseSay(HONKS[Math.floor(Math.random() * HONKS.length)]);
+  });
+  goose.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      gooseSay(HONKS[Math.floor(Math.random() * HONKS.length)]);
+    }
+  });
+
+  function setGoose(state) {
+    gooseOn = state;
+    goose.hidden = !state;
+    gooseToggle.textContent = state ? '🪿 Renvoyer l’oie' : '🪿 Rappeler l’oie';
+    if (state) {
+      if (!gooseTimer) { gooseTimer = window.setInterval(gooseStep, 3400); }
+      window.setTimeout(function () { gooseSay('HONK ! Je garde le périmètre. Cliquez-moi dessus pour un conseil.'); }, 2500);
+    } else {
+      if (gooseTimer) { window.clearInterval(gooseTimer); gooseTimer = null; }
+      bubble.hidden = true;
+      Array.prototype.forEach.call(document.querySelectorAll('.postit'), function (node) { node.remove(); });
+    }
+  }
+  gooseToggle.addEventListener('click', function () { setGoose(!gooseOn); });
+  setGoose(true);
+
+  /* ============ Défi ============ */
+  var TRAPS =['antivirus', 'toolbar', 'cookies', 'phishing', 'support'];
   var LABELS = { antivirus: 'Faux antivirus', toolbar: 'Barre d’outils', cookies: 'Cookies', phishing: 'Hameçonnage', support: 'Faux support' };
   var results = {};
   var order = 0;
@@ -600,8 +1624,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
   function makeJauge(host) {
     host.textContent = '';
     TRAPS.forEach(function (id, i) {
-      var cell = document.createElement('span');
-      cell.className = 'pastille' + (results[id] === 'evite' ? ' ok' : results[id] === 'piege' ? ' ko' : '');
+      var cell = el('span', 'pastille' + (results[id] === 'evite' ? ' ok' : results[id] === 'piege' ? ' ko' : ''));
       cell.textContent = results[id] === 'evite' ? '✓' : results[id] === 'piege' ? '✗' : String(i + 1);
       cell.title = LABELS[id];
       host.appendChild(cell);
@@ -620,36 +1643,22 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     if (done === TRAPS.length) { window.setTimeout(showCert, 900); }
   }
 
-  /* ============ Fenêtres ============ */
   function win(options) {
-    var box = document.createElement('div');
-    box.className = 'win ' + (options.pos || 'w6') + (options.lecon ? ' lecon' : '');
-    var bar = document.createElement('div');
-    bar.className = 'tb';
-    var title = document.createElement('span');
-    title.className = 't';
-    title.textContent = options.title;
-    var close = document.createElement('button');
+    var box = el('div', 'win ' + (options.pos || 'w6') + (options.lecon ? ' lecon' : ''));
+    var bar = el('div', 'tb');
+    var title = el('span', 't', options.title);
+    var close = el('button', null, 'X');
     close.type = 'button';
-    close.textContent = 'X';
     close.setAttribute('aria-label', 'Fermer');
     close.addEventListener('click', function () { box.remove(); if (options.onClose) { options.onClose(); } });
     bar.appendChild(title);
     bar.appendChild(close);
-    var body = document.createElement('div');
-    body.className = 'ct';
+    var body = el('div', 'ct');
     body.appendChild(options.content);
     box.appendChild(bar);
     box.appendChild(body);
     document.body.appendChild(box);
     return box;
-  }
-
-  function el(tag, cls, text) {
-    var node = document.createElement(tag);
-    if (cls) { node.className = cls; }
-    if (text) { node.textContent = text; }
-    return node;
   }
 
   function actions(pairs) {
@@ -663,30 +1672,29 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     return wrapper;
   }
 
-  /* ============ Leçons ============ */
   var LESSONS = {
     antivirus: {
       title: 'Faux antivirus (scareware)',
       points: [
-        'Aucune page web ne peut analyser votre ordinateur. Le chiffre de virus est inventé.',
-        'La bonne réaction tient en un geste : fermer l’onglet, sans cliquer dans la fenêtre.',
-        'Pour un recruteur : un administrateur sécurité passe une part de son temps à former les salariés à ce réflexe.'
+        'Aucune page web ne peut analyser votre ordinateur. Le nombre de virus est inventé.',
+        'Le bon geste : fermer l’onglet. Ne cliquez jamais dans la fenêtre, même sur « Non merci ».',
+        'Pour un recruteur : former les salariés à ce réflexe fait partie du poste d’administrateur sécurité.'
       ]
     },
     toolbar: {
       title: 'Logiciel indésirable',
       points: [
-        'Ces programmes arrivent en même temps qu’un autre, via une case cochée par défaut.',
+        'Ces programmes arrivent avec un autre, via une case cochée d’avance.',
         'Sur un poste d’entreprise, l’utilisateur ne doit pas pouvoir installer seul un logiciel.',
-        'Pour un recruteur : « gestion des droits locaux » dans un CV désigne exactement cette prévention.'
+        'Pour un recruteur : « gestion des droits locaux » sur un CV désigne exactement cette prévention.'
       ]
     },
     cookies: {
       title: 'Consentement et données',
       points: [
         'Accepter sans lire ouvre le partage de vos données à des centaines de sociétés.',
-        'Le refus doit être aussi simple que l’acceptation. C’est une obligation légale en France.',
-        'Pour un recruteur : ce sujet relève du délégué à la protection des données, un profil souvent confondu avec l’administrateur sécurité.'
+        'Refuser doit être aussi simple qu’accepter. C’est une obligation légale en France.',
+        'Pour un recruteur : ce sujet relève du délégué à la protection des données, souvent confondu avec l’administrateur sécurité.'
       ]
     },
     phishing: {
@@ -702,7 +1710,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
       points: [
         'Personne ne vous appelle spontanément pour réparer votre machine.',
         'Donner la main à distance revient à ouvrir la porte du réseau de l’entreprise.',
-        'Pour un recruteur : la procédure d’escalade doit être écrite, et le candidat doit savoir qui a le droit d’intervenir.'
+        'Pour un recruteur : la procédure d’escalade doit être écrite. Le candidat doit savoir qui a le droit d’intervenir.'
       ]
     }
   };
@@ -710,7 +1718,9 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
   function resolve(id, outcome) {
     if (results[id]) { return; }
     results[id] = outcome;
+    busy = false;
     refresh();
+    updateTrapButtons();
     var lesson = LESSONS[id];
     var content = el('div');
     content.appendChild(el('p', 'verdict ' + (outcome === 'evite' ? 'ok' : 'ko'),
@@ -720,12 +1730,9 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     lesson.points.forEach(function (point) { list.appendChild(el('li', null, point)); });
     content.appendChild(list);
     var box = win({ title: 'Ce qu’il fallait voir', pos: 'w' + ((order % 5) + 1), lecon: true, content: content });
-    content.appendChild(actions([
-      { label: 'Compris !', style: 'blue', run: function () { box.remove(); next(); } }
-    ]));
+    content.appendChild(actions([{ label: 'Compris !', style: 'blue', run: function () { box.remove(); next(); } }]));
   }
 
-  /* ============ Conséquences ============ */
   function consequenceAntivirus() {
     var over = el('div', 'overlay ov-ranson');
     var inner = el('div', 'inner');
@@ -785,7 +1792,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
       var ad = el('div', 'ad');
       ad.dataset.ad = '1';
       ad.appendChild(el('p', 'blink', ['🎁 VOUS AVEZ GAGNÉ UN PC GAMER !!! 🎁', '💰 PRÊT IMMÉDIAT SANS JUSTIFICATIF !!! 💰', '📱 SONNERIES ILLIMITÉES 3€/SEMAINE !!! 📱'][i]));
-      ad.appendChild(el('p', null, 'Publicité adaptée grâce à vos 847 partenaires.'));
+      ad.appendChild(el('p', null, 'Publicité choisie grâce à vos 847 partenaires.'));
       host.insertBefore(ad, host.firstChild);
     });
     var banner = el('div', 'ad');
@@ -804,6 +1811,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     banner.appendChild(remove);
     var main = document.querySelector('.main');
     main.insertBefore(banner, main.firstChild);
+    banner.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
   }
 
   function consequencePhishing(box) {
@@ -822,7 +1830,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
         window.clearInterval(tick);
         body.textContent = '';
         body.appendChild(el('p', null, 'Identifiants transmis à un serveur inconnu.'));
-        body.appendChild(el('p', 'note', 'Rien n’a réellement été envoyé. Les identifiants affichés étaient fictifs, et cette page ne collecte aucune donnée.'));
+        body.appendChild(el('p', 'note', 'Rien n’a réellement été envoyé. Les identifiants affichés étaient fictifs. Cette page ne collecte aucune donnée.'));
         body.appendChild(actions([{ label: 'Voir la leçon', style: 'blue', run: function () { box.remove(); resolve('phishing', 'piege'); } }]));
       }
     }, 420);
@@ -836,13 +1844,11 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     inner.appendChild(log);
     over.appendChild(inner);
     document.body.appendChild(over);
-
     var cursor = el('div', 'fakecursor', '🖱️');
     cursor.setAttribute('aria-hidden', 'true');
     cursor.style.left = '30%';
     cursor.style.top = '40%';
     document.body.appendChild(cursor);
-
     var lines = [
       'Connexion établie avec le technicien...',
       'Lecture du carnet d’adresses...',
@@ -868,14 +1874,13 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     }, 850);
   }
 
-  /* ============ Les 5 pièges ============ */
   function trapAntivirus() {
     var content = el('div');
     var head = el('p');
     head.appendChild(el('span', 'ico', '☣️'));
     head.appendChild(document.createTextNode('ANALYSE TERMINÉE : votre ordinateur contient '));
     head.appendChild(el('strong', 'blink', '7 VIRUS'));
-    head.appendChild(document.createTextNode(' !!! Nettoyage immédiat recommandé !!'));
+    head.appendChild(document.createTextNode(' !!! Nettoyez tout de suite !!'));
     content.appendChild(head);
     var box = win({ title: '⚠ ALERTE SÉCURITÉE ⚠', pos: 'w1', content: content, onClose: function () { resolve('antivirus', 'evite'); } });
     content.appendChild(actions([
@@ -893,7 +1898,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     var box = win({ title: 'SuperBarre 2003 — Installation', pos: 'w2', content: content, onClose: function () { resolve('toolbar', 'evite'); } });
     content.appendChild(actions([
       { label: 'INSTALLER (7,2 Mo)', style: 'red', run: function () { box.remove(); consequenceToolbar(); } },
-      { label: 'Refuser l’installation', run: function () { box.remove(); resolve('toolbar', 'evite'); } }
+      { label: 'Refuser', run: function () { box.remove(); resolve('toolbar', 'evite'); } }
     ]));
   }
 
@@ -914,12 +1919,12 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     var content = el('div');
     content.appendChild(el('p', null, 'Objet : URGENT votre session intranet expire dans 2 minutes'));
     content.appendChild(el('p', 'note', 'De : service.informatique@intranet-secure-login.ru'));
-    content.appendChild(el('p', null, 'Identifiant : j.martin  ·  Mot de passe : ••••••••'));
+    content.appendChild(el('p', null, 'Identifiant : j.martin · Mot de passe : ••••••••'));
     content.appendChild(el('p', 'note', 'Champs pré-remplis avec des valeurs fictives. N’entrez jamais un vrai mot de passe sur ce genre de page.'));
     var box = win({ title: 'Intranet Sécuriz’Pro — reconnexion', pos: 'w4', content: content, onClose: function () { resolve('phishing', 'evite'); } });
     content.appendChild(actions([
       { label: 'SE CONNECTER', style: 'red', run: function () { consequencePhishing(box); } },
-      { label: 'Vérifier l’expéditeur d’abord', run: function () { box.remove(); resolve('phishing', 'evite'); } }
+      { label: 'Vérifier l’expéditeur', run: function () { box.remove(); resolve('phishing', 'evite'); } }
     ]));
   }
 
@@ -936,46 +1941,75 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     ]));
   }
 
-  var RUNNERS = [trapAntivirus, trapToolbar, trapCookies, trapPhishing, trapSupport];
-
-  function next() {
-    if (!popupsOn || order >= RUNNERS.length) { return; }
-    var run = RUNNERS[order];
-    order++;
-    pending = window.setTimeout(run, 500);
-  }
-
+  var RUNNERS = {
+    antivirus: trapAntivirus,
+    toolbar: trapToolbar,
+    cookies: trapCookies,
+    phishing: trapPhishing,
+    support: trapSupport
+  };
+  var busy = false;
+  var started = false;
   var startBtn = document.getElementById('startBtn');
   var skipBtn = document.getElementById('skipBtn');
-  startBtn.addEventListener('click', function () {
-    if (order === 0) { next(); }
-    startBtn.textContent = '▶ PIÈGE SUIVANT !!';
-  });
-  skipBtn.addEventListener('click', next);
-  window.setTimeout(function () { if (order === 0) { next(); } }, 9000);
 
-  /* ============ Interrupteurs ============ */
-  function sayState() {
-    optState.textContent = (popupsOn ? 'Pop-up activées' : 'Pop-up coupées') + ', ' + (fxOn ? 'émojis activés.' : 'émojis coupés.');
+  function pendingTrap() {
+    for (var i = 0; i < TRAPS.length; i++) {
+      if (!results[TRAPS[i]]) { return TRAPS[i]; }
+    }
+    return null;
   }
+
+  function updateTrapButtons() {
+    var left = pendingTrap();
+    startBtn.disabled = !popupsOn || busy || !left;
+    skipBtn.disabled = !popupsOn || busy || !left;
+    if (!left) {
+      startBtn.textContent = '✔ LES 5 PIÈGES SONT FAITS';
+      skipBtn.textContent = 'défi terminé';
+      return;
+    }
+    startBtn.textContent = started ? '▶ PIÈGE SUIVANT !!' : '▶ LANCER LE PREMIER PIÈGE !!';
+    skipBtn.textContent = busy ? 'fenêtre déjà ouverte' : 'piège suivant';
+  }
+
+  function next() {
+    var id = pendingTrap();
+    if (!popupsOn || busy || !id) { updateTrapButtons(); return; }
+    busy = true;
+    started = true;
+    order++;
+    updateTrapButtons();
+    pending = window.setTimeout(function () { RUNNERS[id](); }, 450);
+  }
+
+  startBtn.addEventListener('click', next);
+  skipBtn.addEventListener('click', next);
+  window.setTimeout(function () { if (!started) { next(); } }, 12000);
+
+  /* ============ Réglages ============ */
+  var optState = document.getElementById('optState');
+  var fxToggle = document.getElementById('fxToggle');
+  function stateText() {
+    return (popupsOn ? 'Pop-up activées' : 'Pop-up coupées') + ', ' + (fxOn ? 'émojis activés.' : 'émojis coupés.');
+  }
+  function sayState() { optState.textContent = stateText(); }
 
   function setPopups(state) {
     popupsOn = state;
     var label = state ? '🚫 Couper les pop-up' : '▶ Réactiver les pop-up';
     document.getElementById('popToggle').textContent = label;
     document.getElementById('popToggle2').textContent = label;
-    startBtn.disabled = !state;
-    skipBtn.disabled = !state;
     if (!state) {
       if (pending) { window.clearTimeout(pending); pending = null; }
+      busy = false;
       Array.prototype.forEach.call(document.querySelectorAll('.win,.overlay,.fakecursor'), function (node) { node.remove(); });
     }
+    updateTrapButtons();
     sayState();
   }
-
   document.getElementById('popToggle').addEventListener('click', function () { setPopups(!popupsOn); });
   document.getElementById('popToggle2').addEventListener('click', function () { setPopups(!popupsOn); });
-
   fxToggle.addEventListener('click', function () {
     fxOn = !fxOn;
     fxToggle.textContent = fxOn ? '✨ Couper les émojis' : '✨ Remettre les émojis';
@@ -990,7 +2024,6 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     if (document.getElementById('cert')) { return; }
     var good = TRAPS.filter(function (id) { return results[id] === 'evite'; }).length;
     var mention = good >= 5 ? 'Vigilance exemplaire' : good >= 3 ? 'Bonne vigilance' : good >= 1 ? 'Vigilance à renforcer' : 'Tout cliqué, comme 9 salariés sur 10';
-
     var card = el('div', 'cert');
     card.id = 'cert';
     card.setAttribute('role', 'dialog');
@@ -1000,7 +2033,6 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     var intro = el('p', null, 'Décerné au visiteur n° ' + String(n).padStart(6, '0') + ' · pièges évités : ' + good + ' sur 5 · mention : ' + mention + '.');
     intro.style.textAlign = 'center';
     card.appendChild(intro);
-
     var wrapTable = el('div', 'tbl-wrap');
     var table = el('table', 'retro');
     var thead = el('thead');
@@ -1019,9 +2051,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     table.appendChild(tbody);
     wrapTable.appendChild(table);
     card.appendChild(wrapTable);
-
-    card.appendChild(el('p', null, 'Ces cinq réflexes font partie du travail quotidien d’un administrateur sécurité. Les lui demander en entretien vaut mieux que de compter ses sigles.'));
-
+    card.appendChild(el('p', null, 'Ces cinq réflexes font partie du quotidien d’un administrateur sécurité. Demandez-les en entretien. C’est plus utile que de compter les sigles.'));
     var close = el('button', 'btn big close', 'Fermer le certificat');
     close.type = 'button';
     close.addEventListener('click', function () { card.remove(); });
@@ -1029,7 +2059,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
     document.body.appendChild(card);
   }
 
-  /* ============ Panneau de score ============ */
+  /* ============ Score ============ */
   var scoreBody = document.getElementById('scoreBody');
   var scoreToggle = document.getElementById('scoreToggle');
   scoreToggle.addEventListener('click', function () {
@@ -1040,6 +2070,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:var(--f-comic);font-weight:7
   });
 
   refresh();
+  updateTrapButtons();
 }());
 </script>
 
