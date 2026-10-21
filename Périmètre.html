@@ -1,0 +1,397 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Périmètre</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+<style>
+/* Layout : colonne éditoriale alignée à gauche, encadrée par un filet continu (le périmètre),
+   sections séparées par des règles pleine largeur, pas de centrage décoratif. */
+:root{
+  --paper:#F4F3EF;
+  --surface:#FFFFFF;
+  --ink:#14181A;
+  --muted:#5A6166;
+  --line:#D7D3C9;
+  --rule:#B9B4A8;
+  --accent:#1C4F46;
+  --accent-soft:#E2EAE6;
+  --chip:#ECE9E0;
+  --font-display:'Newsreader',Georgia,'Times New Roman',serif;
+  --font-body:'Libre Franklin',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121517;
+    --surface:#191D20;
+    --ink:#ECEAE4;
+    --muted:#9BA4A8;
+    --line:#2B3135;
+    --rule:#3A4247;
+    --accent:#7CC0B0;
+    --accent-soft:#1A2A27;
+    --chip:#20262A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121517;
+  --surface:#191D20;
+  --ink:#ECEAE4;
+  --muted:#9BA4A8;
+  --line:#2B3135;
+  --rule:#3A4247;
+  --accent:#7CC0B0;
+  --accent-soft:#1A2A27;
+  --chip:#20262A;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+p{margin:0}
+a{color:inherit}
+
+.wrap{
+  max-width:1060px;
+  margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.frame{border-left:1px solid var(--line);border-right:1px solid var(--line)}
+@media(max-width:1092px){.frame{border-left:0;border-right:0}}
+
+/* ---------- bandeau supérieur ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--paper)}
+.masthead{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:30;
+  background:var(--paper);border-bottom:1px solid var(--rule);
+}
+.masthead .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;padding-block:12px}
+.wordmark{font-family:var(--font-display);font-size:21px;font-weight:600;letter-spacing:-.01em;text-decoration:none}
+.wordmark .dot{color:var(--accent)}
+.masthead nav{margin-left:auto}
+.masthead ul{display:flex;flex-wrap:wrap;gap:4px 20px;list-style:none;margin:0;padding:0}
+.masthead a{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;padding-block:3px;border-bottom:1px solid transparent;
+}
+.masthead a:hover{color:var(--ink);border-bottom-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ---------- une ---------- */
+.hero{padding-block:52px 40px;border-bottom:1px solid var(--rule)}
+.eyebrow{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);
+}
+.hero h1{
+  font-family:var(--font-display);font-weight:500;letter-spacing:-.018em;line-height:1.08;
+  font-size:clamp(33px,5.6vw,58px);margin:16px 0 0;max-width:19ch;text-wrap:balance;
+}
+.hero .dek{margin-top:20px;max-width:58ch;font-size:19px;color:var(--muted);line-height:1.55}
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:1px;
+  margin-top:38px;background:var(--line);border:1px solid var(--line);
+}
+.facts div{background:var(--paper);padding:14px 16px;min-width:0}
+.facts dt{font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:6px 0 0;font-size:15px;font-weight:500}
+
+/* ---------- sections ---------- */
+section{padding-block:46px;border-bottom:1px solid var(--rule)}
+.sec-head{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;margin-bottom:26px}
+h2{
+  font-family:var(--font-display);font-weight:600;font-size:clamp(23px,3.3vw,31px);
+  letter-spacing:-.012em;line-height:1.15;margin:0;text-wrap:balance;
+}
+h3{font-family:var(--font-display);font-weight:600;font-size:19px;line-height:1.25;margin:0;letter-spacing:-.008em}
+.prose{max-width:64ch;display:grid;gap:15px}
+.prose p{font-size:17px}
+.lede{font-size:19px !important;font-family:var(--font-display);line-height:1.5}
+
+/* ---------- article ---------- */
+.article-title{
+  font-family:var(--font-display);font-weight:500;font-size:clamp(26px,4.1vw,40px);
+  line-height:1.14;letter-spacing:-.016em;margin:0 0 18px;max-width:22ch;text-wrap:balance;
+}
+.byline{
+  font-family:var(--font-mono);font-size:12px;color:var(--muted);letter-spacing:.03em;
+  padding-bottom:18px;margin-bottom:22px;border-bottom:1px solid var(--line);
+}
+.article-body{max-width:64ch;display:grid;gap:17px;font-family:var(--font-display);font-size:19px;line-height:1.62}
+.article-body p:first-of-type::first-letter{
+  float:left;font-size:58px;line-height:.82;padding:4px 9px 0 0;font-weight:600;color:var(--accent);
+}
+.glossaire{
+  margin-top:30px;max-width:64ch;background:var(--surface);border:1px solid var(--line);
+  border-top:3px solid var(--accent);padding:20px;
+}
+.glossaire h3{font-size:16px;margin-bottom:12px}
+.glossaire dl{margin:0;display:grid;gap:11px}
+.glossaire dt{font-weight:600;font-size:15px}
+.glossaire dd{margin:2px 0 0;font-size:15px;color:var(--muted)}
+
+/* ---------- rubriques ---------- */
+.rubriques{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);grid-template-columns:repeat(auto-fit,minmax(252px,1fr))}
+.rubrique{background:var(--surface);padding:22px 20px 20px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.rubrique .num{font-family:var(--font-mono);font-size:12px;color:var(--muted);letter-spacing:.06em}
+.rubrique p{font-size:15px;color:var(--muted)}
+.chip{
+  align-self:flex-start;margin-top:auto;font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;
+  text-transform:uppercase;background:var(--chip);color:var(--muted);padding:4px 9px;
+}
+
+/* ---------- plan éditorial ---------- */
+.plan{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.plan li{
+  display:grid;grid-template-columns:52px 1fr;gap:4px 18px;align-items:start;
+  padding-block:18px;border-bottom:1px solid var(--line);
+}
+.plan .idx{
+  font-family:var(--font-mono);font-size:13px;color:var(--accent);padding-top:4px;
+  font-variant-numeric:tabular-nums;
+}
+.plan p{font-size:15px;color:var(--muted);max-width:62ch;margin-top:5px}
+@media(max-width:520px){
+  .plan li{grid-template-columns:1fr;gap:6px}
+  .plan .idx{padding-top:0}
+}
+
+/* ---------- ligne éditoriale ---------- */
+.ligne{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.ligne .row{background:var(--surface);display:grid;grid-template-columns:200px 1fr;gap:4px 24px;padding:16px 20px;min-width:0}
+.ligne dt{font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.ligne dd{margin:0;font-size:16px;min-width:0}
+.ligne ol{margin:0;padding-left:20px;display:grid;gap:4px;font-size:16px}
+@media(max-width:620px){.ligne .row{grid-template-columns:1fr}}
+
+/* ---------- pied ---------- */
+footer{padding-block:34px 44px}
+footer .wrap{display:grid;gap:14px}
+footer p{font-size:14px;color:var(--muted);max-width:62ch}
+footer .fm{font-family:var(--font-display);font-size:19px;font-weight:600;color:var(--ink)}
+</style>
+
+<div class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="#haut">Périmètre<span class="dot">.</span></a>
+    <nav aria-label="Sections du site">
+      <ul>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#article">L'article</a></li>
+        <li><a href="#rubriques">Rubriques</a></li>
+        <li><a href="#paraitre">À paraître</a></li>
+        <li><a href="#ligne">Ligne éditoriale</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="frame">
+<div class="wrap">
+
+  <header class="hero" id="haut">
+    <p class="eyebrow">Site média · Sécurité des infrastructures</p>
+    <h1>La sécurité des infrastructures, traduite pour celles et ceux qui recrutent.</h1>
+    <p class="dek">Périmètre explique les métiers de la sécurité des infrastructures aux professionnels des ressources humaines qui recrutent ces profils.</p>
+    <dl class="facts">
+      <div><dt>Public</dt><dd>DRH et chargés de recrutement</dd></div>
+      <div><dt>Thématique</dt><dd>Sécurité des infrastructures</dd></div>
+      <div><dt>Rythme</dt><dd>Un article par semaine</dd></div>
+      <div><dt>Promesse</dt><dd>Aucun sigle sans traduction</dd></div>
+    </dl>
+  </header>
+
+  <section id="apropos">
+    <div class="sec-head">
+      <p class="eyebrow">À propos</p>
+      <h2>Pourquoi ce site existe</h2>
+    </div>
+    <div class="prose">
+      <p class="lede">Périmètre s'adresse aux responsables des ressources humaines et aux chargés de recrutement. Vous recrutez des profils en sécurité des infrastructures. Vous lisez des fiches de poste remplies de sigles. Vous hésitez entre deux candidats dont vous ne mesurez pas l'écart réel.</p>
+      <p>Ce site traduit. Nous expliquons les métiers, les compétences et les certifications du domaine, en français courant. Chaque terme technique reçoit sa définition dès sa première apparition.</p>
+      <p>Nous ne formons pas des experts en sécurité. Nous donnons aux RH de quoi rédiger une annonce juste, mener un entretien utile et comprendre un parcours.</p>
+      <p>L'équipe réunit des profils techniques et des profils recrutement. Un relecteur de chaque côté valide le contenu avant publication. Nous publions un nouvel article chaque semaine.</p>
+    </div>
+  </section>
+
+  <section id="article">
+    <div class="sec-head">
+      <p class="eyebrow">Article de présentation</p>
+    </div>
+    <h2 class="article-title">Six jours d'arrêt, et un poste que personne n'avait ouvert</h2>
+    <p class="byline">Publié le 21 octobre 2026 · Lecture : 2 minutes</p>
+
+    <div class="article-body">
+      <p>Un lundi matin, une petite entreprise de quarante salariés ne peut plus ouvrir un seul fichier. Un message réclame une rançon. L'activité redémarre six jours plus tard. Personne, au service des ressources humaines, n'avait entendu parler du poste qui aurait pu éviter cela.</p>
+
+      <p>La sécurité des infrastructures protège les machines et les réseaux qui font tourner une entreprise. Elle couvre les serveurs, les postes de travail, les liaisons internet et les sauvegardes. Elle poursuit trois objectifs simples. Les données restent accessibles, exactes et confidentielles.</p>
+
+      <p>Les attaques visent aujourd'hui toutes les tailles d'entreprise. Un rançongiciel chiffre les fichiers d'une société, puis réclame un paiement pour les rendre. Il frappe une PME de quarante personnes comme un groupe de dix mille. Les profils capables d'anticiper ces incidents manquent sur le marché. Les recruteurs les cherchent donc avec des annonces qu'ils maîtrisent mal.</p>
+
+      <p>Prenons une formulation courante : « administrateur sécurité, maîtrise du SIEM exigée ». Ce sigle désigne un système de gestion des informations et des événements de sécurité. L'outil rassemble les journaux techniques de tout le parc, puis signale les comportements anormaux. Un candidat peut l'avoir utilisé trois ans sans jamais l'avoir installé. Les deux profils ne couvrent pas les mêmes besoins. Une seule question en entretien suffit à les distinguer.</p>
+
+      <p>Périmètre publie des fiches métier, des repères de salaires et des explications sur les certifications. Chaque article part d'une situation de recrutement réelle. Nous proposons aussi des grilles de questions à poser en entretien. Vous repartez avec de quoi arbitrer, pas avec un cours technique.</p>
+    </div>
+
+    <aside class="glossaire">
+      <h3>Trois mots lus dans les annonces</h3>
+      <dl>
+        <dt>Rançongiciel</dt>
+        <dd>Programme qui chiffre les fichiers d'une entreprise et exige un paiement pour les restituer.</dd>
+        <dt>Durcissement</dt>
+        <dd>Travail de configuration qui réduit les possibilités d'entrée sur une machine ou un service.</dd>
+        <dt>Moindre privilège</dt>
+        <dd>Règle qui accorde à chaque personne les seuls accès nécessaires à son travail.</dd>
+      </dl>
+    </aside>
+  </section>
+
+  <section id="rubriques">
+    <div class="sec-head">
+      <p class="eyebrow">Rubriques</p>
+      <h2>Cinq entrées, une par question de recrutement</h2>
+    </div>
+    <div class="rubriques">
+      <article class="rubrique">
+        <p class="num">01</p>
+        <h3>Les métiers décryptés</h3>
+        <p>Une fiche par poste : missions réelles, niveau d'entrée, place dans l'organisation.</p>
+        <span class="chip">À venir</span>
+      </article>
+      <article class="rubrique">
+        <p class="num">02</p>
+        <h3>Bien recruter un profil sécurité</h3>
+        <p>Rédiger l'annonce, lire un parcours, conduire l'entretien sans être technique.</p>
+        <span class="chip">À venir</span>
+      </article>
+      <article class="rubrique">
+        <p class="num">03</p>
+        <h3>Compétences et certifications</h3>
+        <p>Ce que chaque certification valide, et ce qu'elle ne garantit pas.</p>
+        <span class="chip">À venir</span>
+      </article>
+      <article class="rubrique">
+        <p class="num">04</p>
+        <h3>Salaires et marché de l'emploi</h3>
+        <p>Fourchettes par niveau, tensions du marché, délais de recrutement observés.</p>
+        <span class="chip">À venir</span>
+      </article>
+      <article class="rubrique">
+        <p class="num">05</p>
+        <h3>Former et fidéliser</h3>
+        <p>Faire monter une équipe en compétences et limiter les départs.</p>
+        <span class="chip">À venir</span>
+      </article>
+    </div>
+  </section>
+
+  <section id="paraitre">
+    <div class="sec-head">
+      <p class="eyebrow">Plan éditorial</p>
+      <h2>Les six prochains articles</h2>
+    </div>
+    <ol class="plan">
+      <li>
+        <span class="idx">01</span>
+        <div>
+          <h3>Responsable sécurité, administrateur, testeur d'intrusion : qui fait quoi ?</h3>
+          <p>Trois postes que les annonces confondent, avec leurs missions et leur niveau d'entrée.</p>
+        </div>
+      </li>
+      <li>
+        <span class="idx">02</span>
+        <div>
+          <h3>Lire une fiche de poste en sécurité sans se tromper</h3>
+          <p>Les sigles les plus fréquents dans les annonces, traduits un par un.</p>
+        </div>
+      </li>
+      <li>
+        <span class="idx">03</span>
+        <div>
+          <h3>Cinq questions à poser quand on n'est pas technique</h3>
+          <p>Des questions ouvertes qui révèlent l'expérience réelle, et les réponses qui doivent alerter.</p>
+        </div>
+      </li>
+      <li>
+        <span class="idx">04</span>
+        <div>
+          <h3>Certifications : lesquelles comptent vraiment ?</h3>
+          <p>Ce que valide chaque certification du domaine, et ce qu'elle ne prouve pas.</p>
+        </div>
+      </li>
+      <li>
+        <span class="idx">05</span>
+        <div>
+          <h3>Ce que coûte un profil sécurité</h3>
+          <p>Les fourchettes par niveau et par région, et les écarts entre PME et grands comptes.</p>
+        </div>
+      </li>
+      <li>
+        <span class="idx">06</span>
+        <div>
+          <h3>Garder un expert sécurité plus de trois ans</h3>
+          <p>Les raisons de départ les plus citées, et les leviers qui ne passent pas par le salaire.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="ligne">
+    <div class="sec-head">
+      <p class="eyebrow">Ligne éditoriale</p>
+      <h2>Notre cadre de travail</h2>
+    </div>
+    <dl class="ligne">
+      <div class="row">
+        <dt>Public cible</dt>
+        <dd>Des DRH et des chargés de recrutement de PME et d'entreprises de taille intermédiaire. Ils recrutent des profils en sécurité des infrastructures sans en maîtriser le vocabulaire.</dd>
+      </div>
+      <div class="row">
+        <dt>Thématique</dt>
+        <dd>La sécurité des infrastructures : pare-feu, durcissement, gestion des accès, sauvegardes, métiers d'administrateur sécurité et de responsable de la sécurité des systèmes d'information.</dd>
+      </div>
+      <div class="row">
+        <dt>Promesse</dt>
+        <dd>Périmètre explique les métiers de la sécurité des infrastructures aux professionnels des ressources humaines qui recrutent ces profils.</dd>
+      </div>
+      <div class="row">
+        <dt>Ton</dt>
+        <dd>Professionnel et pédagogique. Voix active, phrases courtes, aucun sigle employé sans sa traduction.</dd>
+      </div>
+      <div class="row">
+        <dt>Rubriques</dt>
+        <dd>
+          <ol>
+            <li>Les métiers décryptés</li>
+            <li>Bien recruter un profil sécurité</li>
+            <li>Compétences et certifications</li>
+            <li>Salaires et marché de l'emploi</li>
+            <li>Former et fidéliser</li>
+          </ol>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="fm">Périmètre<span style="color:var(--accent)">.</span></p>
+    <p>Site média de vulgarisation consacré à la sécurité des infrastructures. Les contenus s'adressent aux professionnels du recrutement.</p>
+    <p>Contact rédaction : remplacez-ceci@par-votre-email.fr</p>
+  </div>
+</footer>
+
+</body></html>
